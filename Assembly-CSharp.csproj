@@ -63,7 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\HM_Movement.cs" />
+    <Compile Include="Assets\Scripts\HerbMan\HM_Movement.cs" />
+    <Compile Include="Assets\Scripts\HerbMan\Player.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Item.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ItemAssets.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ItemWorld.cs" />
+    <Compile Include="Assets\Scripts\Inventory\UI_Inventory.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Users/steven/Desktop/UnityProgramming/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
