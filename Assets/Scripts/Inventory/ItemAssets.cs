@@ -10,6 +10,9 @@ public class ItemAssets : MonoBehaviour
     {
         Instance = this;
     }
+
+    public Transform pfItemWorld;
+
     //Tools
     public Sprite StonePickaxe;
     public Sprite IronPickaxe;
