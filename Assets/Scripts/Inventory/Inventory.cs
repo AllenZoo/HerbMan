@@ -6,21 +6,37 @@ using UnityEngine;
 public class Inventory
 {
     private List<Item> itemList;
+    private Action<Item> useItemAction;
 
     public event EventHandler OnItemListChanged;
 
-    public Inventory()
+    public Inventory(Action<Item> useItemAction)
     {
+        this.useItemAction = useItemAction;
         itemList = new List<Item>();
-
-        AddItem(new Item { itemType = Item.ItemType.IronAxe, count = 3 });
-        AddItem(new Item { itemType = Item.ItemType.StonePickaxe, count = 1 });
-
-        
     }
     public void AddItem(Item item)
     {
-        itemList.Add(item);
+        if (item.IsStackable())
+        {
+            bool itemAlreadyInInventory = false;
+            foreach (Item inventoryItem in itemList)
+            {
+                if (inventoryItem.itemType == item.itemType)
+                {
+                    inventoryItem.count += item.count;
+                    itemAlreadyInInventory = true;
+                }
+            }
+            if (!itemAlreadyInInventory)
+                itemList.Add(item);
+            
+        }
+        else
+        {
+            itemList.Add(item);
+        }
+        
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
     public List<Item> GetItemList()
@@ -31,5 +47,9 @@ public class Inventory
     public void Disable()
     {
 
+    }
+    public void UseItem(Item item)
+    {
+        useItemAction(item);
     }
 }

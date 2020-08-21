@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,6 +52,23 @@ public class UI_Inventory : MonoBehaviour
 
             Image itemImage = itemSlotRectTransform.Find("ItemUI").GetComponent<Image>();
             itemImage.sprite = item.GetSprite();
+
+            TextMeshProUGUI countText = itemSlotRectTransform.Find("CountText").GetComponent<TextMeshProUGUI>();
+            if (item.count > 1)
+            {
+                countText.SetText(item.count.ToString());
+            }
+            else
+            {
+                countText.SetText("");
+            }
+
+            TextMeshProUGUI useText = itemSlotRectTransform.Find("AccessButton").Find("UseButton").Find("UseText").GetComponent<TextMeshProUGUI>();
+            if (item.IsTool())
+            {
+                useText.SetText("Equip");
+            }
+
 
             x++;
             if(x > 5)

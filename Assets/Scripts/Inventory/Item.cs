@@ -71,4 +71,21 @@ public class Item
             case ItemType.AmatiteSickle:return false;
         }
     }
+
+    public Boolean IsTool()
+    {
+        switch (itemType)
+        {
+            default: return false;
+            case ItemType.StonePickaxe:
+            case ItemType.IronPickaxe:
+            case ItemType.AmatitePickaxe:
+            case ItemType.StoneAxe:
+            case ItemType.IronAxe:
+            case ItemType.AmatiteAxe:
+            case ItemType.StoneSickle:
+            case ItemType.IronSickle:
+            case ItemType.AmatiteSickle: return true;
+        }
+    }
 }

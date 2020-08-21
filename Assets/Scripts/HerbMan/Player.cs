@@ -8,15 +8,12 @@ public class Player : MonoBehaviour
     [SerializeField] UI_Inventory uiInventory;
     private Inventory inventory;
 
+
     private void Awake()
     {
         Instance = this;
-        inventory = new Inventory();
+        inventory = new Inventory(UseItem);
         uiInventory.SetInventory(inventory);
-
-        ItemWorld.SpawnItemWorld(new Vector3(1, 2), new Item { itemType = Item.ItemType.AmatitePickaxe, count = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(2, 1), new Item { itemType = Item.ItemType.AmatiteAxe, count = 1 });
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -33,4 +30,13 @@ public class Player : MonoBehaviour
     {
         return uiInventory;
     }
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            default:
+                return;
+        }
+    }
+
 }
