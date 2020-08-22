@@ -88,4 +88,28 @@ public class Item
             case ItemType.AmatiteSickle: return true;
         }
     }
+
+    public Boolean IsMaterial()
+    {
+        switch (itemType)
+        {
+            default: return false;
+
+            //Herbs
+            case ItemType.Sparkle_Weed:
+            case ItemType.Water_Herb:
+            case ItemType.Mellow_Mint:
+
+            //Ores
+            case ItemType.Stone:
+            case ItemType.IronOre:
+            case ItemType.AmatiteOre:
+
+            //Trees
+            case ItemType.Oak:
+            case ItemType.Pine:
+            case ItemType.Redwood:
+                return true;
+        }
+    }
 }
