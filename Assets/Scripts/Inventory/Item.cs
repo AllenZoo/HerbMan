@@ -20,7 +20,7 @@ public class Item
         AmatiteSickle,
 
         //Herbs
-        Sparkle_Weed,
+        Melom,
         Water_Herb,
         Mellow_Mint,
 
@@ -40,6 +40,11 @@ public class Item
 
     public Sprite GetSprite()
     {
+        return GetSprite(itemType);
+    }
+
+    public static Sprite GetSprite(ItemType itemType)
+    {
         switch (itemType)
         {
             default:
@@ -55,7 +60,12 @@ public class Item
         }
     }
 
-    public Boolean IsStackable()
+    public bool IsStackable()
+    {
+        return IsStackable(itemType);
+    }
+
+    public static bool IsStackable(ItemType itemType)
     {
         switch (itemType)
         {
@@ -96,7 +106,7 @@ public class Item
             default: return false;
 
             //Herbs
-            case ItemType.Sparkle_Weed:
+            case ItemType.Melom:
             case ItemType.Water_Herb:
             case ItemType.Mellow_Mint:
 

@@ -8,13 +8,24 @@ public class ItemWorldSpawner : MonoBehaviour
     public Item item;
 
     [SerializeField] private bool isRespawnable;
-
+    [SerializeField] private bool isVein;
     private void Start()
     {
-        ItemWorld.SpawnItemWorld(transform.position, item);
-        if (!isRespawnable)
-            Destroy(gameObject);
-        else
-            gameObject.SetActive(false);
+        if (!isVein)
+        {
+            ItemWorld.SpawnItemWorld(transform.position, item);
+            if (!isRespawnable)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        if (isVein)
+        {
+
+        }
     }
 }

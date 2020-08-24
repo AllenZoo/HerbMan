@@ -13,11 +13,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        inventory = new Inventory(UseItem);
-        uiInventory.SetInventory(inventory);
-        uiInventory.SetPlayer(this);
+        inventory = new Inventory(UseItem, 20);
+        //uiInventory.SetInventory(inventory);
+        //uiInventory.SetPlayer(this);
 
-        inventory.AddItem(new Item { itemType = Item.ItemType.IronAxe, count = 1 });
+ 
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -55,6 +55,11 @@ public class Player : MonoBehaviour
                 default: break;
             }
         }
+    }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
     }
 
     public Vector3 GetPosition()

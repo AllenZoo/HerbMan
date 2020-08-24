@@ -25,7 +25,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite AmatiteSickle;
 
     //Herbs
-    public Sprite Sparkle_Weed;
+    public Sprite Melom;
     public Sprite Water_Herb;
     public Sprite Mellow_Mint;
 
