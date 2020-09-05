@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,33 +7,53 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
-    [SerializeField] UI_Inventory uiInventory;
-    private Inventory inventory;
 
+    private Inventory inventory;
+    public event EventHandler OnEquipChanged;
+    public event EventHandler OnCollisionVein;
 
     private void Awake()
     {
         Instance = this;
         inventory = new Inventory(UseItem, 20);
-        //uiInventory.SetInventory(inventory);
-        //uiInventory.SetPlayer(this);
-
- 
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+        ItemWorldVein itemWorldVein = collider.GetComponent<ItemWorldVein>();
+
         if(itemWorld != null)
         {
-            inventory.AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
+            if (itemWorldVein != null)
+            {
+                //If is Vein
+                return;
+            }
+            else
+            {
+                //If is item
+                inventory.AddItem(itemWorld.GetItem());
+                itemWorld.DestroySelf();
+            }
         }
     }
 
-    public UI_Inventory GetUIInventory()
-    {
-        return uiInventory;
+    private void OnTriggerStay2D(Collider2D collider)
+    { 
+        ItemWorldVein itemWorldVein = collider.GetComponent<ItemWorldVein>();
+
+        if (itemWorldVein != null)
+        {
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                //OnCollisionVein?.Invoke(this, EventArgs.Empty);
+                if (itemWorldVein.CanHarvest())
+                {
+                    inventory.AddItem(itemWorldVein.Harvest());
+                }
+            }
+        }
     }
     private void UseItem(Item item)
     {
@@ -65,5 +86,18 @@ public class Player : MonoBehaviour
     public Vector3 GetPosition()
     {
         return this.transform.position;
+    }
+    
+    public void SetEquipment(Item item)
+    {
+        SetEquipment(item.itemType);
+    }
+    public void SetEquipment(Item.ItemType itemType)
+    {
+        switch (itemType)
+        {
+            default: break;
+        }
+        OnEquipChanged?.Invoke(this, EventArgs.Empty);
     }
 }

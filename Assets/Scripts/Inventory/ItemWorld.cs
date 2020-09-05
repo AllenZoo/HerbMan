@@ -16,6 +16,15 @@ public class ItemWorld : MonoBehaviour
 
         return itemWorld;
     }
+    public static ItemWorld SpawnItemVein(Vector3 position, ItemVein itemVein)
+    {
+        Transform transform = Instantiate(ItemAssets.Instance.pfItemVein, position, Quaternion.identity);
+
+        ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
+        itemWorld.SetItemVein(itemVein);
+
+        return itemWorld;
+    }
     public static ItemWorld DropItem(Vector3 dropPosition, Item item)
     {
         Vector3 randomDir = UtilsClass.GetRandomDir();
@@ -25,6 +34,7 @@ public class ItemWorld : MonoBehaviour
     }
 
     private Item item;
+    private ItemVein itemVein;
     private SpriteRenderer spriteRenderer;
 
     private void Awake()
@@ -37,10 +47,18 @@ public class ItemWorld : MonoBehaviour
         this.item = item;
         spriteRenderer.sprite = item.GetSprite();
     }
-
+    public void SetItemVein(ItemVein itemVein)
+    {
+        this.itemVein = itemVein;
+        spriteRenderer.sprite = itemVein.GetSprite();
+    }
     public Item GetItem()
     {
         return item;
+    }
+    public ItemVein GetItemVein()
+    {
+        return itemVein; 
     }
 
    

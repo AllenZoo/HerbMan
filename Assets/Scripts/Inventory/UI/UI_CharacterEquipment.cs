@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+
 
 public class UI_CharacterEquipment : MonoBehaviour
 {
@@ -20,9 +20,21 @@ public class UI_CharacterEquipment : MonoBehaviour
         sickleSlot = transform.Find("sickleSlot").GetComponent<UI_CharacterEquipmentSlot>();
 
         pickaxeSlot.OnItemDropped += PickaxeSlot_OnItemDropped;
+        axeSlot.OnItemDropped += AxeSlot_OnItemDropped;
+        sickleSlot.OnItemDropped += SickleSlot_OnItemDropped;
     }
 
-    private void PickaxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItmDroppedEventArgs e)
+    private void SickleSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void AxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void PickaxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
         //Item dropped in Pickaxe Slot
         Debug.Log("Equip pickaxe: " + e.item);
@@ -54,6 +66,8 @@ public class UI_CharacterEquipment : MonoBehaviour
         {
             Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
             uiItemTransform.GetComponent<RectTransform>().anchoredPosition = pickaxeSlot.GetComponent<RectTransform>().anchoredPosition;
+            uiItemTransform.localScale = Vector3.one * 1.5f;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
             ItemUI uiItem = uiItemTransform.GetComponent<ItemUI>();
             uiItem.SetItem(pickaxeItem);
             pickaxeSlot.transform.Find("emptyImage").gameObject.SetActive(false);

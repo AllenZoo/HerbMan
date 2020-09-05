@@ -97,7 +97,10 @@
     <Compile Include="Assets\Scripts\Inventory\UI\UI_CharacterEquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Manager.cs" />
-    <Compile Include="Assets\Testing.cs" />
+    <Compile Include="Assets\Scripts\ItemVein.cs" />
+    <Compile Include="Assets\Scripts\ItemVeinSpawner.cs" />
+    <Compile Include="Assets\Scripts\ItemWorldVein.cs" />
+    <Compile Include="Assets\Scripts\Testing.cs" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

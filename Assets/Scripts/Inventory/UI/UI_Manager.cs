@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class UI_Manager : MonoBehaviour
 {
-    [SerializeField] private UI_Inventory uiInventory;
+    [SerializeField] private Transform uiInventory;
+    [SerializeField] private Transform hiddenArea;
+    [SerializeField] private Transform visibleArea;
+    private void Start()
+    {
+        visibleArea.transform.position = uiInventory.transform.position;
+    }
 
     public void CloseInventory()
     {
-        uiInventory.gameObject.SetActive(false);
+        uiInventory.transform.position = hiddenArea.transform.position;
     }
     public void OpenInventory()
     {
-        uiInventory.gameObject.SetActive(true);
+        uiInventory.transform.position = visibleArea.transform.position;
     }
 
 }

@@ -34,16 +34,19 @@ public class CharacterEquipment : MonoBehaviour
     public void SetPickAxeItem(Item pickaxeItem)
     {
         this.pickaxeItem = pickaxeItem;
+        player.SetEquipment(pickaxeItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
     public void SetAxeItem(Item axeItem)
     {
         this.axeItem = axeItem;
+        player.SetEquipment(axeItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
     public void SetSickleItem(Item sickleItem)
     {
         this.sickleItem = sickleItem;
+        player.SetEquipment(sickleItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
 }

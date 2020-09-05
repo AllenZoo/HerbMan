@@ -21,8 +21,8 @@ public class Item
 
         //Herbs
         Melom,
-        Water_Herb,
-        Mellow_Mint,
+        WaterHerb,
+        MellowMint,
 
         //Ores
         Stone,
@@ -79,6 +79,17 @@ public class Item
             case ItemType.StoneSickle:
             case ItemType.IronSickle:
             case ItemType.AmatiteSickle:return false;
+
+            //Materials
+            case ItemType.Melom:
+            case ItemType.MellowMint:
+            case ItemType.WaterHerb:
+            case ItemType.Stone:
+            case ItemType.IronOre:
+            case ItemType.AmatiteOre:
+            case ItemType.Oak:
+            case ItemType.Pine:
+            case ItemType.Redwood:return true;
         }
     }
 
@@ -107,8 +118,8 @@ public class Item
 
             //Herbs
             case ItemType.Melom:
-            case ItemType.Water_Herb:
-            case ItemType.Mellow_Mint:
+            case ItemType.WaterHerb:
+            case ItemType.MellowMint:
 
             //Ores
             case ItemType.Stone:
@@ -121,5 +132,10 @@ public class Item
             case ItemType.Redwood:
                 return true;
         }
+    }
+
+    public String ToStringG()
+    {
+        return itemType.ToString();
     }
 }

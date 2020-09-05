@@ -55,6 +55,7 @@ public class Inventory
 
     public void AddItem(Item item)
     {
+        Debug.Log(item.itemType.ToString());
         if (item.IsStackable())
         {
             bool itemAlreadyInInventory = false;

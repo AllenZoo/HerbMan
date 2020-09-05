@@ -7,14 +7,14 @@ using UnityEngine.EventSystems;
 public class UI_CharacterEquipmentSlot : MonoBehaviour, IDropHandler
 {
 
-    public event EventHandler<OnItmDroppedEventArgs> OnItemDropped;
-    public class OnItmDroppedEventArgs : EventArgs
+    public event EventHandler<OnItemDroppedEventArgs> OnItemDropped;
+    public class OnItemDroppedEventArgs : EventArgs
     {
         public Item item;
     }
     public void OnDrop(PointerEventData eventData)
     {
         Item item = ItemDragUI.Instance.GetItem();
-        OnItemDropped?.Invoke(this, new OnItmDroppedEventArgs { item = item });
+        OnItemDropped?.Invoke(this, new OnItemDroppedEventArgs { item = item });
     }
 }

@@ -11,8 +11,11 @@ public class ItemAssets : MonoBehaviour
         Instance = this;
     }
 
+    [Header("Prefabs")]
     public Transform pfItemWorld;
+    public Transform pfItemVein;
 
+    [Header("Tools")]
     //Tools
     public Sprite StonePickaxe;
     public Sprite IronPickaxe;
@@ -24,19 +27,35 @@ public class ItemAssets : MonoBehaviour
     public Sprite IronSickle;
     public Sprite AmatiteSickle;
 
+    [Header("Materials")]
     //Herbs
     public Sprite Melom;
-    public Sprite Water_Herb;
-    public Sprite Mellow_Mint;
+    public Sprite WaterHerb;
+    public Sprite MellowMint;
 
     //Ores
     public Sprite Stone;
     public Sprite IronOre;
     public Sprite AmatiteOre;
 
-    //Trees
+    //Wood
     public Sprite Oak;
     public Sprite Pine;
     public Sprite Redwood;
 
+    [Header("Veins")]
+    //Herbs
+    public Sprite MelomVein;
+    public Sprite WaterHerbVein;
+    public Sprite MellowMintVein;
+
+    //Ores
+    public Sprite StoneVein;
+    public Sprite IronOreVein;
+    public Sprite AmatiteOreVein;
+
+    //Wood
+    public Sprite OakVein;
+    public Sprite PineVein;
+    public Sprite RedwoodVein;
 }
