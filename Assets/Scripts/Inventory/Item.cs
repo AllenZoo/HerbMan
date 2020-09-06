@@ -77,6 +77,56 @@ public class Item
         }
     }
 
+    public CharacterEquipment.EquipSlot GetEquipSlot()
+    {
+        switch (itemType)
+        {
+            default:
+                return CharacterEquipment.EquipSlot.UnEquipable;
+            case ItemType.StonePickaxe:
+            case ItemType.IronPickaxe:
+            case ItemType.AmatitePickaxe:
+                return CharacterEquipment.EquipSlot.Pickaxe;
+            case ItemType.StoneAxe:
+            case ItemType.IronAxe:
+            case ItemType.AmatiteAxe:
+                return CharacterEquipment.EquipSlot.Axe;
+            case ItemType.StoneSickle:
+            case ItemType.IronSickle:
+            case ItemType.AmatiteSickle:
+                return CharacterEquipment.EquipSlot.Sickle;
+
+        }
+    }
+
+    public float GetTier()
+    {
+        return GetTier(itemType);
+    }
+    public static float GetTier(ItemType itemType)
+    {
+        //Higher tiers = higher level
+        switch (itemType)
+        {
+            default:
+            case ItemType.StonePickaxe:
+            case ItemType.StoneAxe:
+            case ItemType.StoneSickle:
+            case ItemType.Melom:
+                return 1;
+            case ItemType.IronPickaxe:
+            case ItemType.IronAxe:
+            case ItemType.IronSickle:
+            case ItemType.MellowMint:
+                return 2;
+            case ItemType.AmatitePickaxe:
+            case ItemType.AmatiteAxe:
+            case ItemType.AmatiteSickle:
+            case ItemType.WaterHerb:
+                return 3;
+        }
+    }
+
     public bool IsStackable()
     {
         return IsStackable(itemType);
@@ -131,7 +181,8 @@ public class Item
     {
         switch (itemType)
         {
-            default: return false;
+            default: 
+                return false;
 
             //Herbs
             case ItemType.Melom:
@@ -151,31 +202,49 @@ public class Item
         }
     }
 
+    public Boolean IsHerb()
+    {
+        switch (itemType)
+        {
+            default: 
+                return false;
+            case ItemType.Melom:
+            case ItemType.WaterHerb:
+            case ItemType.MellowMint:
+                return true;
+        }
+    }
+    public Boolean IsOre()
+    {
+        switch (itemType)
+        {
+            default: 
+                return false;
+
+            case ItemType.Stone:
+            case ItemType.IronOre:
+            case ItemType.AmatiteOre:
+                return true;
+        }
+    }
+    public Boolean IsWood()
+    {
+        switch (itemType)
+        {
+            default:
+                return false;
+
+            case ItemType.Oak:
+            case ItemType.Pine:
+            case ItemType.Redwood:
+                return true;
+        }
+    }
     public override string ToString()
     {
         return itemType.ToString();
     }
 
-    public CharacterEquipment.EquipSlot GetEquipSlot()
-    {
-        switch (itemType)
-        {
-            default:
-                return CharacterEquipment.EquipSlot.UnEquipable;
-            case ItemType.StonePickaxe:
-            case ItemType.IronPickaxe:
-            case ItemType.AmatitePickaxe:
-                return CharacterEquipment.EquipSlot.Pickaxe;
-            case ItemType.StoneAxe: 
-            case ItemType.IronAxe: 
-            case ItemType.AmatiteAxe:
-                return CharacterEquipment.EquipSlot.Axe;
-            case ItemType.StoneSickle: 
-            case ItemType.IronSickle: 
-            case ItemType.AmatiteSickle:
-                return CharacterEquipment.EquipSlot.Sickle;
-
-        }
-    }
+    
 
 }

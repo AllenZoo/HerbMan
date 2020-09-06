@@ -12,6 +12,13 @@ public class ItemWorldVein : MonoBehaviour
     private int phases;
     private int curPhase;
 
+    private CharacterEquipment characterEquipment;
+
+    private void OnTriggerEnter2D(Collider2D player)
+    {
+        characterEquipment = player.GetComponent<CharacterEquipment>();
+    }
+
     private void Start()
     {
         
@@ -26,7 +33,52 @@ public class ItemWorldVein : MonoBehaviour
     
     public bool CanHarvest()
     {
-        return curPhase <= phases;
+        if(curPhase <= phases)
+        {
+            //There are more phases, continue screening
+            if (item.IsOre())
+            {
+                //Item is ore type
+                if (item.GetTier() <= characterEquipment.GetPickaxeItem().GetTier())
+                {
+                    return true;
+                }
+                else
+                {
+                    //Pickaxe is not high enough tier
+                    return false;
+                }
+
+            }
+            else if (item.IsWood())
+            {
+                //Item is wood type
+                if(item.GetTier() <= characterEquipment.GetAxeItem().GetTier())
+                {
+                    return false;
+                }
+                else
+                {
+                    //axe is not high enough tier
+                    return false;
+                }
+            }
+            else if (item.IsHerb())
+            {
+                //Item is herb type
+                if (item.GetTier() <= characterEquipment.GetSickleItem().GetTier())
+                {
+                    return true;
+                }
+                else
+                {
+                    //Sickle is not high enough tier
+                    return false;
+                }
+
+            }
+        }
+        return false;
     }
     public Item Harvest()
     {

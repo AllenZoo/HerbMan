@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Testing : MonoBehaviour
+public class Initializer : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private UI_Inventory uiInventory;
