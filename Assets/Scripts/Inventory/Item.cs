@@ -48,6 +48,7 @@ public class Item
         switch (itemType)
         {
             default:
+                //Tools
             case ItemType.StonePickaxe:return ItemAssets.Instance.StonePickaxe;
             case ItemType.IronPickaxe:return ItemAssets.Instance.IronPickaxe;
             case ItemType.AmatitePickaxe:return ItemAssets.Instance.AmatitePickaxe;
@@ -57,6 +58,22 @@ public class Item
             case ItemType.StoneSickle:return ItemAssets.Instance.StoneSickle;
             case ItemType.IronSickle:return ItemAssets.Instance.IronSickle;
             case ItemType.AmatiteSickle: return ItemAssets.Instance.AmatiteSickle;
+                //Materials
+
+                //Herbs
+            case ItemType.Melom: return ItemAssets.Instance.Melom;
+            case ItemType.MellowMint: return ItemAssets.Instance.MellowMint;
+            case ItemType.WaterHerb: return ItemAssets.Instance.WaterHerb;
+
+                //Ores
+            case ItemType.Stone: return ItemAssets.Instance.Stone;
+            case ItemType.IronOre: return ItemAssets.Instance.IronOre;
+            case ItemType.AmatiteOre: return ItemAssets.Instance.AmatiteOre;
+
+                //Wood
+            case ItemType.Oak: return ItemAssets.Instance.Oak;
+            case ItemType.Pine: return ItemAssets.Instance.Pine;
+            case ItemType.Redwood: return ItemAssets.Instance.Redwood;
         }
     }
 

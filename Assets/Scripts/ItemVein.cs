@@ -28,7 +28,7 @@ public class ItemVein
     public ItemType itemType;
     public float harvestTime;
 
-    public Animator animator;
+    public RuntimeAnimatorController rtAnimatorController;
 
     public Sprite GetSprite()
     {
@@ -80,11 +80,9 @@ public class ItemVein
     {
         return item;
     }
-    public Animator GetAnimator()
+    public RuntimeAnimatorController GetRuntimeAnimatorController()
     {
-        //Debug.Log("Animation/Controllers" + GetVeinName(itemType) + ".controller");
-        //animator.runtimeAnimatorController = Resources.Load("Animation/Controllers" + GetVeinName(itemType)) as RuntimeAnimatorController;
-        return animator;
+        return rtAnimatorController;
     }
 }
 

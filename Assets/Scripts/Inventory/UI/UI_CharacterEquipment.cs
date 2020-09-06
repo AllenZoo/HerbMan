@@ -37,7 +37,7 @@ public class UI_CharacterEquipment : MonoBehaviour
     private void PickaxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
         //Item dropped in Pickaxe Slot
-        Debug.Log("Equip pickaxe: " + e.item);
+        Debug.Log("Equip pickaxe: " + e.item.itemType.ToString());
         characterEquipment.SetPickAxeItem(e.item);
     }
 

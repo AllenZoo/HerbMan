@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2697884988847546204}
   - component: {fileID: 4254915838504405154}
   - component: {fileID: -580656148342110293}
+  - component: {fileID: 5768688030485140835}
   m_Layer: 0
   m_Name: pfItemWorldVein
   m_TagString: Untagged
@@ -157,3 +158,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8dfc0c8d327f4946b04534f77d0d3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5768688030485140835}
+--- !u!95 &5768688030485140835
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5732735045537284789}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
