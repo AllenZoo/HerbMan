@@ -7,6 +7,13 @@ public class CharacterEquipment : MonoBehaviour
 {
     public event EventHandler OnEquipmentChanged;
 
+    public enum EquipSlot
+    {
+        UnEquipable,
+        Pickaxe,
+        Axe,
+        Sickle,
+    }
     private Player player;
 
     private Item pickaxeItem;
@@ -31,22 +38,37 @@ public class CharacterEquipment : MonoBehaviour
         return sickleItem;
     }
 
-    public void SetPickAxeItem(Item pickaxeItem)
+    private void SetPickaxeItem(Item pickaxeItem)
     {
         this.pickaxeItem = pickaxeItem;
         player.SetEquipment(pickaxeItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    public void SetAxeItem(Item axeItem)
+    private void SetAxeItem(Item axeItem)
     {
         this.axeItem = axeItem;
         player.SetEquipment(axeItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    public void SetSickleItem(Item sickleItem)
+    private void SetSickleItem(Item sickleItem)
     {
         this.sickleItem = sickleItem;
         player.SetEquipment(sickleItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void TryEquipItem(EquipSlot equipSlot, Item item)
+    {
+        if(equipSlot == item.GetEquipSlot())
+        {
+            //Item matches equipment slot
+            switch (equipSlot)
+            {
+                default:
+                case EquipSlot.Pickaxe: SetPickaxeItem(item); break;
+                case EquipSlot.Axe: SetAxeItem(item); break;
+                case EquipSlot.Sickle: SetSickleItem(item); break;
+            }
+        }
     }
 }

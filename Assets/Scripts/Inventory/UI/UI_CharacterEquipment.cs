@@ -23,22 +23,22 @@ public class UI_CharacterEquipment : MonoBehaviour
         axeSlot.OnItemDropped += AxeSlot_OnItemDropped;
         sickleSlot.OnItemDropped += SickleSlot_OnItemDropped;
     }
-
-    private void SickleSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
+    private void PickaxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        //Item dropped in Pickaxe Slot
+        characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Pickaxe, e.item);
     }
 
     private void AxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        //Item dropped in Axe Slot
+        characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Axe, e.item);
     }
 
-    private void PickaxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
+    private void SickleSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        //Item dropped in Pickaxe Slot
-        Debug.Log("Equip pickaxe: " + e.item.itemType.ToString());
-        characterEquipment.SetPickAxeItem(e.item);
+        //Item dropped in Sickle Slot
+        characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Sickle, e.item);
     }
 
     public void SetCharacterEquipment(CharacterEquipment characterEquipment)
@@ -62,11 +62,14 @@ public class UI_CharacterEquipment : MonoBehaviour
         }
 
         Item pickaxeItem = characterEquipment.GetPickaxeItem();
+        Item axeItem = characterEquipment.GetAxeItem();
+        Item sickleItem = characterEquipment.GetSickleItem();
+
         if(pickaxeItem != null)
         {
             Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
             uiItemTransform.GetComponent<RectTransform>().anchoredPosition = pickaxeSlot.GetComponent<RectTransform>().anchoredPosition;
-            uiItemTransform.localScale = Vector3.one * 1.5f;
+            uiItemTransform.localScale = Vector3.one * 1f;
             uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
             ItemUI uiItem = uiItemTransform.GetComponent<ItemUI>();
             uiItem.SetItem(pickaxeItem);
@@ -75,6 +78,36 @@ public class UI_CharacterEquipment : MonoBehaviour
         else
         {
             pickaxeSlot.transform.Find("emptyImage").gameObject.SetActive(true);
+        }
+
+        if(axeItem != null)
+        {
+            Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
+            uiItemTransform.GetComponent<RectTransform>().anchoredPosition = axeSlot.GetComponent<RectTransform>().anchoredPosition;
+            uiItemTransform.localScale = Vector3.one * 1f;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            ItemUI uiItem = uiItemTransform.GetComponent<ItemUI>();
+            uiItem.SetItem(axeItem);
+            axeSlot.transform.Find("emptyImage").gameObject.SetActive(false);
+        }
+        else
+        {
+            axeSlot.transform.Find("emptyImage").gameObject.SetActive(true);
+        }
+
+        if (sickleItem != null)
+        {
+            Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
+            uiItemTransform.GetComponent<RectTransform>().anchoredPosition = sickleSlot.GetComponent<RectTransform>().anchoredPosition;
+            uiItemTransform.localScale = Vector3.one * 1f;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            ItemUI uiItem = uiItemTransform.GetComponent<ItemUI>();
+            uiItem.SetItem(sickleItem);
+            sickleSlot.transform.Find("emptyImage").gameObject.SetActive(false);
+        }
+        else
+        {
+            sickleSlot.transform.Find("emptyImage").gameObject.SetActive(true);
         }
     }
 }

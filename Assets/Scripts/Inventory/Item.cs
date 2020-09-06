@@ -151,8 +151,31 @@ public class Item
         }
     }
 
-    public String ToStringG()
+    public override string ToString()
     {
         return itemType.ToString();
     }
+
+    public CharacterEquipment.EquipSlot GetEquipSlot()
+    {
+        switch (itemType)
+        {
+            default:
+                return CharacterEquipment.EquipSlot.UnEquipable;
+            case ItemType.StonePickaxe:
+            case ItemType.IronPickaxe:
+            case ItemType.AmatitePickaxe:
+                return CharacterEquipment.EquipSlot.Pickaxe;
+            case ItemType.StoneAxe: 
+            case ItemType.IronAxe: 
+            case ItemType.AmatiteAxe:
+                return CharacterEquipment.EquipSlot.Axe;
+            case ItemType.StoneSickle: 
+            case ItemType.IronSickle: 
+            case ItemType.AmatiteSickle:
+                return CharacterEquipment.EquipSlot.Sickle;
+
+        }
+    }
+
 }
