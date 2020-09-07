@@ -27,6 +27,7 @@ public class ItemVein
     public Item item;
     public ItemType itemType;
     public float harvestTime;
+    public int animPhase;
 
     public RuntimeAnimatorController rtAnimatorController;
 
@@ -60,9 +61,10 @@ public class ItemVein
         }
     }
 
-    public int GetCount()
+    public int GetAnimPhases()
     {
-        return item.count;
+        //Phases starts at 0
+        return animPhase - 1;
     }
     public void DecreaseCount(int amount)
     {

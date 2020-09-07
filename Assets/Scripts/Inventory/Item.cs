@@ -8,6 +8,7 @@ public class Item
 {
     public enum ItemType
     {
+
         //Tools
         StonePickaxe,
         IronPickaxe,
@@ -109,6 +110,7 @@ public class Item
         switch (itemType)
         {
             default:
+                return 0;
             case ItemType.StonePickaxe:
             case ItemType.StoneAxe:
             case ItemType.StoneSickle:

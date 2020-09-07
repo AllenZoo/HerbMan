@@ -71,7 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 2622827160072410584, guid: 4c47232a63a07d14d9af0df5ef727fea,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &776249287343390429
@@ -97,8 +98,9 @@ MonoBehaviour:
   itemVein:
     item:
       itemType: 11
-      count: 2
+      count: 1
     itemType: 2
     harvestTime: 0
-    rtAnimatorController: {fileID: 9100000, guid: 918e07b3dcf985d47b2c56beb4306ec0,
+    animPhase: 3
+    rtAnimatorController: {fileID: 9100000, guid: f8c918d5f7eed9a4e8f0d980eed927e5,
       type: 2}

@@ -66,7 +66,8 @@ MonoBehaviour:
     type: 3}
   Melom: {fileID: 6772649740255942334, guid: 6f573f5bd8325c1498218651d819bd81, type: 3}
   WaterHerb: {fileID: 0}
-  MellowMint: {fileID: 0}
+  MellowMint: {fileID: 2320024426623625899, guid: 4c47232a63a07d14d9af0df5ef727fea,
+    type: 3}
   Stone: {fileID: 0}
   IronOre: {fileID: 0}
   AmatiteOre: {fileID: 0}

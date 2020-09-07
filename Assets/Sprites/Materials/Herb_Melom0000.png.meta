@@ -4,13 +4,13 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -4575148567865465488
-    second: Herb_Melom0000_0
+    second: EmptyMelomHerb
   - first:
       213: -189053693183986825
-    second: Herb_Melom0000_1
+    second: RipeMelomHerb
   - first:
       213: 6772649740255942334
-    second: Herb_Melom0000_2
+    second: MelomItem
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -108,7 +108,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Herb_Melom0000_0
+      name: EmptyMelomHerb
       rect:
         serializedVersion: 2
         x: 0
@@ -116,7 +116,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,7 +129,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Herb_Melom0000_1
+      name: RipeMelomHerb
       rect:
         serializedVersion: 2
         x: 16
@@ -137,7 +137,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,7 +150,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Herb_Melom0000_2
+      name: MelomItem
       rect:
         serializedVersion: 2
         x: 32
@@ -158,7 +158,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

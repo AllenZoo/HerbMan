@@ -24,7 +24,7 @@ public class ItemWorldVein : MonoBehaviour
         
         itemVein = GetComponent<ItemWorld>().GetItemVein();
         item = itemVein.GetItem();
-        phases = itemVein.GetCount();
+        phases = itemVein.GetAnimPhases();
         curPhase = 0;
 
         animator = this.GetComponent<Animator>();

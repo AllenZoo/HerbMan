@@ -25,7 +25,7 @@ public class Inventory
         
         AddItem(new Item { itemType = Item.ItemType.IronPickaxe, count = 1 });
         AddItem(new Item { itemType = Item.ItemType.IronAxe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.IronAxe, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.IronSickle, count = 1 });
     }
 
     public InventorySlot GetEmptyInventorySlot()
