@@ -44,6 +44,7 @@ public class ItemUI : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
 
     public void OnPointerDown(PointerEventData eventData)
     {
+
     }
 
     public void SetSprite(Sprite sprite)

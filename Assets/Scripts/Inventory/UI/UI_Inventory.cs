@@ -48,7 +48,7 @@ public class UI_Inventory : MonoBehaviour
 
         int x = 0;
         int y = 0;
-        float itemSlotCellSize = 105f;
+        float itemSlotCellSize = 125f;
 
 
         foreach (Inventory.InventorySlot inventorySlot in inventory.GetInventorySlotArray())
@@ -95,15 +95,15 @@ public class UI_Inventory : MonoBehaviour
             //Image itemImage = itemSlotRectTransform.Find("ItemUI").GetComponent<Image>();
             //itemImage.sprite = item.GetSprite();
 
-            //TextMeshProUGUI countText = itemSlotRectTransform.Find("CountText").GetComponent<TextMeshProUGUI>();
-            //if (item.count > 1)
-            //{
-            //    countText.SetText(item.count.ToString());
-            //}
-            //else
-            //{
-            //    countText.SetText("");
-            //}
+            TextMeshProUGUI countText = itemSlotRectTransform.Find("CountText").GetComponent<TextMeshProUGUI>();
+            if (inventorySlot.GetCount() > 1)
+            {
+                countText.SetText("x" + inventorySlot.GetCount().ToString());
+            }
+            else
+            {
+                countText.SetText("");
+            }
 
             //TextMeshProUGUI useText = itemSlotRectTransform.Find("AccessButton").Find("UseButton").Find("UseText").GetComponent<TextMeshProUGUI>();
             //if (item.IsTool())

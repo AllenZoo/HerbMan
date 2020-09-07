@@ -26,6 +26,10 @@ public class Inventory
         AddItem(new Item { itemType = Item.ItemType.IronPickaxe, count = 1 });
         AddItem(new Item { itemType = Item.ItemType.IronAxe, count = 1 });
         AddItem(new Item { itemType = Item.ItemType.IronSickle, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.AmatiteAxe, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.AmatitePickaxe, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.AmatiteSickle, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.MellowMint, count = 3 });
     }
 
     public InventorySlot GetEmptyInventorySlot()
@@ -160,6 +164,22 @@ public class Inventory
         public void RemoveItem()
         {
             item = null;
+        }
+
+        public int GetCount()
+        {
+            if (item != null)
+            {
+                return item.count;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public void SetCount(int count)
+        {
+            item.count = count;
         }
 
         public bool IsEmpty()

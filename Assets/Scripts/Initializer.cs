@@ -16,6 +16,7 @@ public class Initializer : MonoBehaviour
         uiInventory.SetInventory(player.GetInventory());
 
         uiCharacterEquipment.SetCharacterEquipment(characterEquipment);
+        uiCharacterEquipment.SetInventory(player.GetInventory());
     }
 
 }

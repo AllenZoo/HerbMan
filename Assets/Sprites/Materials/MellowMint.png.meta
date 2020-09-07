@@ -177,10 +177,10 @@ TextureImporter:
       name: MellowMint_Item
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 16
-        width: 16
-        height: 16
+        width: 14
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

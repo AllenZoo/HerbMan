@@ -23,6 +23,7 @@ public class CharacterEquipment : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        
     }
 
     public Item GetPickaxeItem()
@@ -70,5 +71,9 @@ public class CharacterEquipment : MonoBehaviour
                 case EquipSlot.Sickle: SetSickleItem(item); break;
             }
         }
+    }
+    public bool IsSuitableSlot(EquipSlot equipSlot, Item item)
+    {
+        return equipSlot == item.GetEquipSlot();
     }
 }
