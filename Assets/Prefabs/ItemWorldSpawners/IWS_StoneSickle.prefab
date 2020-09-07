@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4786800266645963258}
   - component: {fileID: 4786800266645963257}
   m_Layer: 0
-  m_Name: ITS_StoneSickle
+  m_Name: IWS_StoneSickle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
     itemType: 6
     count: 1
   isRespawnable: 0
+  isVein: 0
 --- !u!212 &4786800266645963257
 SpriteRenderer:
   m_ObjectHideFlags: 0

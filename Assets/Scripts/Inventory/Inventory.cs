@@ -84,6 +84,10 @@ public class Inventory
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
+    public void AddItem(Item item , int count)
+    {
+
+    }
     public void RemoveItemAmount(Item.ItemType itemType, int count)
     {
         RemoveItem(new Item { itemType = itemType, count = count });
@@ -106,7 +110,6 @@ public class Inventory
                 GetInventorySlotWithItem(itemInInventory).RemoveItem();
                 itemList.Remove(itemInInventory);
             }
-
         }
         else
         {
@@ -118,10 +121,14 @@ public class Inventory
     }
     public void AddItem(Item item, InventorySlot inventorySlot)
     {
+        int tempCount = item.count;
+
         RemoveItem(item);
 
-        itemList.Add(item);
         inventorySlot.SetItem(item);
+        inventorySlot.SetCount(tempCount);
+
+        itemList.Add(item);
 
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }

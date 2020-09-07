@@ -9,5 +9,6 @@ public class ItemVeinSpawner : MonoBehaviour
     private void Start()
     {
         ItemWorld.SpawnItemVein(transform.position, itemVein);
+        Destroy(gameObject);
     }
 }
