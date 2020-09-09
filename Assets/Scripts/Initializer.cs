@@ -10,6 +10,9 @@ public class Initializer : MonoBehaviour
     [SerializeField] private UI_CharacterEquipment uiCharacterEquipment;
     [SerializeField] private CharacterEquipment characterEquipment;
 
+    [SerializeField] private UI_CraftingSystem uiCraftingSystem;
+    [SerializeField] private CraftingSystem craftingSystem;
+
     private void Start()
     {
         uiInventory.SetPlayer(player);
@@ -17,6 +20,9 @@ public class Initializer : MonoBehaviour
 
         uiCharacterEquipment.SetCharacterEquipment(characterEquipment);
         uiCharacterEquipment.SetInventory(player.GetInventory());
+
+        uiCraftingSystem.SetCraftingSystem(craftingSystem);
+        uiCraftingSystem.SetInventory(player.GetInventory());
     }
 
 }

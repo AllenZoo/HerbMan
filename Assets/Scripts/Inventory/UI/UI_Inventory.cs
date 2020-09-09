@@ -57,7 +57,7 @@ public class UI_Inventory : MonoBehaviour
 
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
-
+            
             itemSlotRectTransform.Find("AccessButton").Find("UseButton").GetComponent<Button_UI>().ClickFunc = () =>
             {
                 //Use Item

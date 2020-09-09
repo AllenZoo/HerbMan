@@ -59,7 +59,7 @@ public class Inventory
 
     public void AddItem(Item item)
     {
-        Debug.Log(item.itemType.ToString());
+        //Debug.Log(item.itemType.ToString());
         if (item.IsStackable())
         {
             bool itemAlreadyInInventory = false;
@@ -83,10 +83,6 @@ public class Inventory
             GetEmptyInventorySlot().SetItem(item);
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
-    }
-    public void AddItem(Item item , int count)
-    {
-
     }
     public void RemoveItemAmount(Item.ItemType itemType, int count)
     {

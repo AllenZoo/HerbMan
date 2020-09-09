@@ -36,7 +36,7 @@ public class ColliderEngine : MonoBehaviour
     {
         if (itemWorldVein != null)
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 //OnCollisionVein?.Invoke(this, EventArgs.Empty);
                 if (itemWorldVein.CanHarvest())
