@@ -71,7 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 1485721731
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cf9d452c65bb23e4e97282bbdda3fae7, type: 3}
+  m_Sprite: {fileID: -4390639603833135218, guid: 72da23c705223c342beb60bced7dcfbd,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,5 +102,5 @@ MonoBehaviour:
     itemType: 1
     harvestTime: 0
     animPhase: 1
-    rtAnimatorController: {fileID: 9100000, guid: 918e07b3dcf985d47b2c56beb4306ec0,
+    rtAnimatorController: {fileID: 9100000, guid: b6be97e8cc0522349953a49606cee823,
       type: 2}

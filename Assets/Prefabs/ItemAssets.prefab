@@ -64,19 +64,25 @@ MonoBehaviour:
     type: 3}
   AmatiteSickle: {fileID: 8565364738274122156, guid: a599568e98faa6347965064b40011b2c,
     type: 3}
+  Hemm: {fileID: 21300000, guid: 94f905bd5e4e1684c898848c9f07494f, type: 3}
   Melom: {fileID: 6772649740255942334, guid: 6f573f5bd8325c1498218651d819bd81, type: 3}
-  WaterHerb: {fileID: 0}
   MellowMint: {fileID: 21300000, guid: 2ed2d824b989b3a408345715ba29f516, type: 3}
+  WaterHerb: {fileID: -6863170747963377554, guid: 72da23c705223c342beb60bced7dcfbd,
+    type: 3}
+  Flint: {fileID: 21300000, guid: 17a309ad9275ddb41a3283fbaad9a1df, type: 3}
   Stone: {fileID: 0}
   IronOre: {fileID: 0}
   AmatiteOre: {fileID: 0}
+  Stick: {fileID: 21300000, guid: 697bb48252007974ebb345fa6e0cdf7c, type: 3}
   Oak: {fileID: 0}
   Pine: {fileID: 0}
   Redwood: {fileID: 0}
   MelomVein: {fileID: -189053693183986825, guid: 6f573f5bd8325c1498218651d819bd81,
     type: 3}
-  WaterHerbVein: {fileID: 0}
-  MellowMintVein: {fileID: 0}
+  WaterHerbVein: {fileID: -4390639603833135218, guid: 72da23c705223c342beb60bced7dcfbd,
+    type: 3}
+  MellowMintVein: {fileID: 2622827160072410584, guid: 4c47232a63a07d14d9af0df5ef727fea,
+    type: 3}
   StoneVein: {fileID: 0}
   IronOreVein: {fileID: 0}
   AmatiteOreVein: {fileID: 0}

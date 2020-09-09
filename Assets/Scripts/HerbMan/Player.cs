@@ -10,51 +10,27 @@ public class Player : MonoBehaviour
 
     private Inventory inventory;
     public event EventHandler OnEquipChanged;
-    public event EventHandler OnCollisionVein;
+
+    private ColliderEngine colliderEngine;
 
     private void Awake()
     {
         Instance = this;
         inventory = new Inventory(UseItem, 20);
+        colliderEngine = GetComponent<ColliderEngine>();
+        colliderEngine.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-        ItemWorldVein itemWorldVein = collider.GetComponent<ItemWorldVein>();
-
-        if(itemWorld != null)
-        {
-            if (itemWorldVein != null)
-            {
-                //If is Vein
-                return;
-            }
-            else
-            {
-                //If is item
-                inventory.AddItem(itemWorld.GetItem());
-                itemWorld.DestroySelf();
-            }
-        }
+        colliderEngine.enabled = true;
     }
 
-    private void OnTriggerStay2D(Collider2D collider)
-    { 
-        ItemWorldVein itemWorldVein = collider.GetComponent<ItemWorldVein>();
-
-        if (itemWorldVein != null)
-        {
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                //OnCollisionVein?.Invoke(this, EventArgs.Empty);
-                if (itemWorldVein.CanHarvest())
-                {
-                    inventory.AddItem(itemWorldVein.Harvest());
-                }
-            }
-        }
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        colliderEngine.enabled = false;
     }
+
     private void UseItem(Item item)
     {
         if (item.IsTool())
