@@ -96,9 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemVein:
     item:
-      itemType: 14
+      itemType: 16
       count: 2
     itemType: 5
     harvestTime: 0
+    animPhase: 0
     rtAnimatorController: {fileID: 9100000, guid: 918e07b3dcf985d47b2c56beb4306ec0,
       type: 2}

@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Manager : MonoBehaviour
-{
-    [SerializeField] private Transform uiInventory;
+{ 
     [SerializeField] private Transform hiddenArea;
-    [SerializeField] private Transform visibleArea;
+
+    [Header("Crafting System")]
+    [SerializeField] private Transform uiCraftingSystem;
+    [SerializeField] private Transform uiCraftingArea;
+
+    [Header("Equipment Slots")]
+    [SerializeField] private Transform uiEquipmentSlots;
+    [SerializeField] private Transform uiEquipmentSlotArea;
+
+    [Header("Inventory")]
+    [SerializeField] private Transform uiInventory;
+    [SerializeField] private Transform uiInventoryArea;
+
     private void Start()
     {
-        visibleArea.transform.position = uiInventory.transform.position;
+        uiInventoryArea.transform.position = uiInventory.transform.position;
+        uiCraftingArea.transform.position = uiCraftingSystem.transform.position;
+        uiEquipmentSlotArea.transform.position = uiEquipmentSlots.transform.position;
     }
 
     public void CloseInventory()
@@ -18,7 +31,23 @@ public class UI_Manager : MonoBehaviour
     }
     public void OpenInventory()
     {
-        uiInventory.transform.position = visibleArea.transform.position;
+        uiInventory.transform.position = uiInventoryArea.transform.position;
     }
 
+    public void CloseCraftingSystem()
+    {
+        uiCraftingSystem.transform.position = hiddenArea.transform.position;
+    }
+    public void OpenCraftingSystem()
+    {
+        uiCraftingSystem.transform.position = uiCraftingArea.transform.position;
+    }
+    public void CloseEquipmentSlots()
+    {
+        uiEquipmentSlots.transform.position = hiddenArea.transform.position;
+    }
+    public void OpenEquipmentSlots()
+    {
+        uiEquipmentSlots.transform.position = uiEquipmentSlotArea.transform.position;
+    }
 }
