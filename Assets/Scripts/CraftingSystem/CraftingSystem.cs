@@ -6,6 +6,7 @@ using UnityEngine;
 public class CraftingSystem: MonoBehaviour
 {
     public EventHandler OnMaterialChanged;
+    public EventHandler OnItemCrafted;
 
     private Player player;
     private Recipe recipe;
@@ -36,12 +37,16 @@ public class CraftingSystem: MonoBehaviour
         if(herb != null && ore != null && wood != null)
         {
             Debug.Log("H: " + herb.ToString() + " O: " + ore.ToString() + " W: " + wood.ToString());
+            if(CraftRecipeItem(herb, ore, wood).itemType != Item.ItemType.Null)
+            {
+                OnItemCrafted?.Invoke(this, EventArgs.Empty);
+            }
             return CraftRecipeItem(herb, ore, wood);
         }
         return null;
     }
     public Item CraftRecipeItem(Item herb, Item ore, Item wood) {
-        Item craftedItem = null;
+        Item craftedItem = new Item { itemType = Item.ItemType.Null, count = 1};
 
         if (herb.itemType == Item.ItemType.Hemm
         && ore.itemType == Item.ItemType.Flint

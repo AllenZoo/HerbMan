@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 6
+    itemType: 7
     count: 1
   isRespawnable: 0
   isVein: 0

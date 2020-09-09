@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7030210983222753024}
   - component: {fileID: 7030210983222753025}
   m_Layer: 0
-  m_Name: ITS_AmatiteSickle
+  m_Name: IWS_AmatiteSickle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 8
+    itemType: 9
     count: 1
   isRespawnable: 0
+  isVein: 0
 --- !u!212 &7030210983222753025
 SpriteRenderer:
   m_ObjectHideFlags: 0

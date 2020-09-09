@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6785166724805517458}
   - component: {fileID: 6785166724805517459}
   m_Layer: 0
-  m_Name: ITS_IronPickaxe
+  m_Name: IWS_IronPickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 1
+    itemType: 2
     count: 1
   isRespawnable: 0
+  isVein: 0
 --- !u!212 &6785166724805517459
 SpriteRenderer:
   m_ObjectHideFlags: 0

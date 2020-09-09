@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4569808845106458368}
   - component: {fileID: 4569808845106458375}
   m_Layer: 0
-  m_Name: ITS_IronSickle
+  m_Name: IWS_IronSickle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 7
+    itemType: 8
     count: 1
   isRespawnable: 0
+  isVein: 0
 --- !u!212 &4569808845106458375
 SpriteRenderer:
   m_ObjectHideFlags: 0

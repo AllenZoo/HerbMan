@@ -21,10 +21,12 @@ public class Item
      * -IsHerb(), IsOre(), IsWood()
      * 
      * -Add Sprites to ItemAssets Prefab
+     * 
+     * IMPORTANT! ADD NEW ITEMTYPES TO BOTTOM OF LIST
      * **/
     public enum ItemType
     {
-
+        Null,
         //Tools
         StonePickaxe,
         IronPickaxe,
@@ -53,6 +55,7 @@ public class Item
         Oak,
         Pine,
         Redwood,
+
     }
 
     public ItemType itemType;

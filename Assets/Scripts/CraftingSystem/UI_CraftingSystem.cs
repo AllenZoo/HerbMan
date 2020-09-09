@@ -50,7 +50,7 @@ public class UI_CraftingSystem : MonoBehaviour
 
     public void Craft()
     {
-        inventory.AddItem(craftingSystem.Craft());
+        outputSlot.SetOutputItem(craftingSystem.Craft());
         Debug.Log("Crafted: " + craftingSystem.Craft().ToString());
     }
 

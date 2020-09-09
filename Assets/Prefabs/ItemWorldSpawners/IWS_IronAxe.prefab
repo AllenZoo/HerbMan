@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8365171090085678505}
   - component: {fileID: 8365171090085678504}
   m_Layer: 0
-  m_Name: ITS_IronAxe
+  m_Name: IWS_IronAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 4
+    itemType: 5
     count: 1
   isRespawnable: 0
+  isVein: 0
 --- !u!212 &8365171090085678504
 SpriteRenderer:
   m_ObjectHideFlags: 0

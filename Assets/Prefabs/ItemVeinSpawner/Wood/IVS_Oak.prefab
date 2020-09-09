@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemVein:
     item:
-      itemType: 18
+      itemType: 19
       count: 2
     itemType: 6
     harvestTime: 0
