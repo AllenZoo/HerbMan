@@ -72,6 +72,42 @@ public class CharacterEquipment : MonoBehaviour
             }
         }
     }
+    public Item GetSlotItem(EquipSlot equipSlot)
+    {
+        switch (equipSlot) 
+        {
+            case EquipSlot.UnEquipable:
+                return null;
+            case EquipSlot.Pickaxe:
+                return GetPickaxeItem();
+            case EquipSlot.Axe:
+                return GetAxeItem();
+            case EquipSlot.Sickle:
+                return GetSickleItem();
+
+        }
+
+        return null;
+    }
+    public void SetSlotItem(EquipSlot equipSlot, Item item)
+    {
+        //failproof to check if item and slot are suitable
+        if(equipSlot == item.GetEquipSlot())
+        {
+            switch (equipSlot)
+            {
+                case EquipSlot.Pickaxe:
+                    SetPickaxeItem(item);
+                    break;
+                case EquipSlot.Axe:
+                    SetAxeItem(item);
+                    break;
+                case EquipSlot.Sickle:
+                    SetSickleItem(item);
+                    break;
+            }
+        }
+    }
     public bool IsSuitableSlot(EquipSlot equipSlot, Item item)
     {
         return equipSlot == item.GetEquipSlot();

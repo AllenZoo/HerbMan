@@ -122,6 +122,29 @@ public class Item
         }
     }
 
+    public CraftingSystem.MaterialSlot GetMaterialSlot()
+    {
+        switch (itemType)
+        {
+            default:
+                return CraftingSystem.MaterialSlot.NonCraftable;
+            case ItemType.Hemm:
+            case ItemType.Melom:
+            case ItemType.MellowMint:
+            case ItemType.WaterHerb:
+                return CraftingSystem.MaterialSlot.Herb;
+            case ItemType.Flint:
+            case ItemType.Stone:
+            case ItemType.IronOre:
+            case ItemType.AmatiteOre:
+                return CraftingSystem.MaterialSlot.Ore;
+            case ItemType.Stick:
+            case ItemType.Oak:
+            case ItemType.Pine:
+            case ItemType.Redwood:
+                return CraftingSystem.MaterialSlot.Wood;
+        }
+    }
     public float GetTier()
     {
         return GetTier(itemType);

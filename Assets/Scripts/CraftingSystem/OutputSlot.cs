@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class OutputSlot : MonoBehaviour
 {
+    public static OutputSlot Instance { get; private set; }
+
     private Transform outputSlotImage;
     private Item output;
 

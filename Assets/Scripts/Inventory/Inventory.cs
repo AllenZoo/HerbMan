@@ -29,7 +29,9 @@ public class Inventory
         AddItem(new Item { itemType = Item.ItemType.AmatiteAxe, count = 1 });
         AddItem(new Item { itemType = Item.ItemType.AmatitePickaxe, count = 1 });
         AddItem(new Item { itemType = Item.ItemType.AmatiteSickle, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.MellowMint, count = 3 });
+        AddItem(new Item { itemType = Item.ItemType.Hemm, count = 3 });
+        AddItem(new Item { itemType = Item.ItemType.Flint, count = 3 });
+        AddItem(new Item { itemType = Item.ItemType.Stick, count = 3 });
     }
 
     public InventorySlot GetEmptyInventorySlot()

@@ -48,6 +48,12 @@ public class UI_CraftingSystem : MonoBehaviour
         this.inventory = inventory;
     }
 
+    public void Craft()
+    {
+        inventory.AddItem(craftingSystem.Craft());
+        Debug.Log("Crafted: " + craftingSystem.Craft().ToString());
+    }
+
     private void CraftingSystem_OnMaterialChanged(object sender, EventArgs e)
     {
         UpdateVisual();
@@ -55,21 +61,19 @@ public class UI_CraftingSystem : MonoBehaviour
 
     private void HerbSlot_OnItemDropped(object sender, CraftingSlot.OnItemDroppedEventArgs e)
     {
-        Debug.Log("dropped on herb slot!");
-        craftingSystem.SetHerbItem(e.item);
+        TryDropMaterialInSlot(CraftingSystem.MaterialSlot.Herb, e.item);
     }
     private void OreSlot_OnItemDropped(object sender, CraftingSlot.OnItemDroppedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        TryDropMaterialInSlot(CraftingSystem.MaterialSlot.Ore, e.item);
     }
     private void WoodSlot_OnItemDropped(object sender, CraftingSlot.OnItemDroppedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        TryDropMaterialInSlot(CraftingSystem.MaterialSlot.Wood, e.item);
     }
-
     private void EnergyShardSlot_OnItemDropped(object sender, CraftingSlot.OnItemDroppedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        TryDropMaterialInSlot(CraftingSystem.MaterialSlot.EnergyShard, e.item);
     }
 
     private void UpdateVisual()
@@ -84,24 +88,55 @@ public class UI_CraftingSystem : MonoBehaviour
         Item woodItem = craftingSystem.GetWoodItem();
         Item energyShardItem = craftingSystem.GetEnergyShardItem();
 
-        if(herbItem != null)
-        {
-            Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
-            uiItemTransform.GetComponent<RectTransform>().anchoredPosition = herbSlot.GetComponent<RectTransform>().anchoredPosition;
-            uiItemTransform.localScale = Vector3.one * 1f;
-            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
-            ItemUI uiItem = uiItemTransform.GetComponent<ItemUI>();
-            uiItem.SetItem(herbItem);
-
-            herbSlot.transform.Find("itemSlot").gameObject.SetActive(false);
-        }
-        else
-        {
-            herbSlot.transform.Find("itemSlot").gameObject.SetActive(true);
-        }
+        RefreshCraftingSlot(herbSlot, herbItem);
+        RefreshCraftingSlot(oreSlot, oreItem);
+        RefreshCraftingSlot(woodSlot, woodItem);
+        RefreshCraftingSlot(energyShardSlot, energyShardItem);
 
     }
     
+    private void RefreshCraftingSlot(CraftingSlot craftingSlot, Item item)
+    {
+        if(item != null)
+        {
+            Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
+            uiItemTransform.GetComponent<RectTransform>().anchoredPosition = craftingSlot.GetComponent<RectTransform>().anchoredPosition;
+            uiItemTransform.localScale = Vector3.one * 1f;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            ItemUI uiItem = uiItemTransform.GetComponent<ItemUI>();
+            uiItem.SetItem(item);
 
-    
+            craftingSlot.transform.Find("itemSlot").gameObject.SetActive(false);
+        }
+        else
+        {
+            craftingSlot.transform.Find("itemSlot").gameObject.SetActive(true);
+        }
+    }
+
+    private void TryDropMaterialInSlot(CraftingSystem.MaterialSlot materialSlot, Item item)
+    {
+        //Item dropped into material slot, check if slot and item are suitble.
+        if(craftingSystem.IsSuitableSlot(materialSlot, item))
+        {
+            //Check if slot is empty
+            if(craftingSystem.GetSlotItem(materialSlot) == null)
+            {
+                //Move item from inventory to slot
+                craftingSystem.SetSlotItem(materialSlot, item);
+                inventory.RemoveItem(item);
+                ItemDragUI.Instance.Hide();
+            }
+            else
+            {
+                //Item is present in slot, therefore switch items
+                Item tempItem = craftingSystem.GetSlotItem(materialSlot);
+                craftingSystem.SetSlotItem(materialSlot, item);
+                inventory.RemoveItem(item);
+                inventory.AddItem(tempItem);
+                ItemDragUI.Instance.Hide();
+            }
+        }
+        ItemDragUI.Instance.Hide();
+    }
 }

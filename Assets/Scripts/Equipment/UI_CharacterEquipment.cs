@@ -35,87 +35,23 @@ public class UI_CharacterEquipment : MonoBehaviour
 
     private void PickaxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        //Item dropped in Pickaxe Slot, check if slot and item are suitable
-        if (characterEquipment.IsSuitableSlot(CharacterEquipment.EquipSlot.Pickaxe, e.item))
-        {
-            //Check if pickaxe equipment slot is empty
-            if (characterEquipment.GetPickaxeItem() == null)
-            {
-                //Store item into equipment slot by removing from inventory
-                characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Pickaxe, e.item);
-                inventory.RemoveItem(e.item);
-                ItemDragUI.Instance.Hide();
-            }
-            else
-            {
-                //Equipment is present in pickaxe slot, therefore add the item into inventory and equip dropped item
-                Item tempItem = characterEquipment.GetPickaxeItem();
-                characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Pickaxe, e.item);
-                inventory.RemoveItem(e.item);
-                inventory.AddItem(tempItem);
-                ItemDragUI.Instance.Hide();
-            }
-        }
-        ItemDragUI.Instance.Hide();
+        TryDropMaterialInSlot(CharacterEquipment.EquipSlot.Pickaxe, e.item);
     }
 
     private void AxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        //Item dropped in Axe Slot, check if slot is suitable to item dropped
-        if (characterEquipment.IsSuitableSlot(CharacterEquipment.EquipSlot.Axe, e.item))
-        {
-            //Check if pickaxe equipment slot is empty
-            if (characterEquipment.GetAxeItem() == null)
-            {
-                //Store item into equipment slot by removing from inventory
-                characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Axe, e.item);
-                inventory.RemoveItem(e.item);
-                ItemDragUI.Instance.Hide();
-            }
-            else
-            {
-                //Equipment is present in pickaxe slot, therefore add the item into inventory and equip dropped item
-                Item tempItem = characterEquipment.GetAxeItem();
-                characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Axe, e.item);
-                inventory.RemoveItem(e.item);
-                inventory.AddItem(tempItem);
-                ItemDragUI.Instance.Hide();
-            }
-        }
-        ItemDragUI.Instance.Hide();
+        TryDropMaterialInSlot(CharacterEquipment.EquipSlot.Axe, e.item);
     }
 
     private void SickleSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        //Item dropped in Pickaxe Slot, check if slot is suitable for item dropped
-        if (characterEquipment.IsSuitableSlot(CharacterEquipment.EquipSlot.Sickle, e.item))
-        {
-            //Check if pickaxe equipment slot is empty
-            if (characterEquipment.GetSickleItem() == null)
-            {
-                //Store item into equipment slot by removing from inventory
-                characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Sickle, e.item);
-                inventory.RemoveItem(e.item);
-                ItemDragUI.Instance.Hide();
-            }
-            else
-            {
-                //Equipment is present in pickaxe slot, therefore add the item into inventory and equip dropped item
-                Item tempItem = characterEquipment.GetSickleItem();
-                characterEquipment.TryEquipItem(CharacterEquipment.EquipSlot.Sickle, e.item);
-                inventory.RemoveItem(e.item);
-                inventory.AddItem(tempItem);
-                ItemDragUI.Instance.Hide();
-            }
-        }
-        ItemDragUI.Instance.Hide();
+        TryDropMaterialInSlot(CharacterEquipment.EquipSlot.Sickle, e.item);
     }
 
     private void CharacterEquipment_OnEquipmentChanged(object sender, System.EventArgs e)
     {
         UpdateVisual();
     }
-
     private void UpdateVisual()
     {
         foreach(Transform child in itemContainer)
@@ -175,5 +111,30 @@ public class UI_CharacterEquipment : MonoBehaviour
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
+    }
+    private void TryDropMaterialInSlot(CharacterEquipment.EquipSlot equipSlot, Item item)
+    {
+        //Item dropped into material slot, check if slot and item are suitble.
+        if (characterEquipment.IsSuitableSlot(equipSlot, item))
+        {
+            //Check if slot is empty
+            if (characterEquipment.GetSlotItem(equipSlot) == null)
+            {
+                //Move item from inventory to slot
+                characterEquipment.SetSlotItem(equipSlot, item);
+                inventory.RemoveItem(item);
+                ItemDragUI.Instance.Hide();
+            }
+            else
+            {
+                //Item is present in slot, therefore switch items
+                Item tempItem = characterEquipment.GetSlotItem(equipSlot);
+                characterEquipment.SetSlotItem(equipSlot, item);
+                inventory.RemoveItem(item);
+                inventory.AddItem(tempItem);
+                ItemDragUI.Instance.Hide();
+            }
+        }
+        ItemDragUI.Instance.Hide();
     }
 }

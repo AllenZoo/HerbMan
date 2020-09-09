@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\OutputSlot.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\Recipe.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\Equipment\CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
