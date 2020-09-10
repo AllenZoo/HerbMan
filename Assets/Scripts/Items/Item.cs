@@ -67,8 +67,15 @@ public class Item
         Iron_Sickle_Recipe,
         Amatite_Sickle_Recipe,
     }
+    public enum SystemType
+    {
+        inventory,
+        equipment,
+        crafting,
+    }
 
     public ItemType itemType;
+    public SystemType system;
     public int count;
     public float durability;
 
@@ -146,7 +153,6 @@ public class Item
 
         }
     }
-
     public CraftingSystem.MaterialSlot GetMaterialSlot()
     {
         switch (itemType)
@@ -248,7 +254,8 @@ public class Item
     {
         switch (itemType)
         {
-            default: return false;
+            default:
+                return false;
             case ItemType.Stone_Pickaxe:
             case ItemType.Iron_Pickaxe:
             case ItemType.Amatite_Pickaxe:
@@ -257,7 +264,44 @@ public class Item
             case ItemType.Amatite_Axe:
             case ItemType.Stone_Sickle:
             case ItemType.Iron_Sickle:
-            case ItemType.Amatite_Sickle: return true;
+            case ItemType.Amatite_Sickle: 
+                return true;
+        }
+    }
+    public Boolean IsPickaxe()
+    {
+        switch (itemType)
+        {
+            default:
+                return false;
+            case ItemType.Stone_Pickaxe:
+            case ItemType.Iron_Pickaxe:
+            case ItemType.Amatite_Pickaxe:
+                return true;
+        }
+    }
+    public Boolean IsAxe()
+    {
+        switch (itemType)
+        {
+            default:
+                return false;
+            case ItemType.Stone_Axe:
+            case ItemType.Iron_Axe:
+            case ItemType.Amatite_Axe:
+                return true;
+        }
+    }
+    public Boolean IsSickle()
+    {
+        switch (itemType)
+        {
+            default:
+                return false;
+            case ItemType.Stone_Sickle:
+            case ItemType.Iron_Sickle:
+            case ItemType.Amatite_Sickle:
+                return true;
         }
     }
 
@@ -288,7 +332,6 @@ public class Item
                 return true;
         }
     }
-
     public Boolean IsHerb()
     {
         switch (itemType)

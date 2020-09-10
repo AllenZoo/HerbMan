@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     
     public void SetEquipment(Item item)
     {
-        SetEquipment(item.itemType);
+        //SetEquipment(item.itemType);
     }
     public void SetEquipment(Item.ItemType itemType)
     {

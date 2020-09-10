@@ -23,15 +23,15 @@ public class Inventory
             inventorySlotArray[i] = new InventorySlot(i);
         }
         
-        AddItem(new Item { itemType = Item.ItemType.Iron_Pickaxe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Iron_Axe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Iron_Sickle, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Amatite_Axe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Amatite_Pickaxe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Amatite_Sickle, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Hemm, count = 3 });
-        AddItem(new Item { itemType = Item.ItemType.Flint, count = 3 });
-        AddItem(new Item { itemType = Item.ItemType.Stick, count = 3 });
+        AddItem(new Item { itemType = Item.ItemType.Iron_Pickaxe, count = 1, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Iron_Axe, count = 1, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Iron_Sickle, count = 1, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Amatite_Axe, count = 1, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Amatite_Pickaxe, count = 1, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Amatite_Sickle, count = 1, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Hemm, count = 3, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Flint, count = 3, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Stick, count = 3, system = Item.SystemType.inventory });
     }
 
     public InventorySlot GetEmptyInventorySlot()
@@ -75,14 +75,20 @@ public class Inventory
             }
             if (!itemAlreadyInInventory)
             {
-                itemList.Add(item);
-                GetEmptyInventorySlot().SetItem(item);
+                Item tempItem = item;
+                tempItem.system = Item.SystemType.inventory;
+
+                itemList.Add(tempItem);
+                GetEmptyInventorySlot().SetItem(tempItem);
             }
         }
         else
         {
-            itemList.Add(item);
-            GetEmptyInventorySlot().SetItem(item);
+            Item tempItem = item;
+            tempItem.system = Item.SystemType.inventory;
+
+            itemList.Add(tempItem);
+            GetEmptyInventorySlot().SetItem(tempItem);
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -125,6 +131,19 @@ public class Inventory
 
         inventorySlot.SetItem(item);
         inventorySlot.SetCount(tempCount);
+        inventorySlot.SetSystemType(Item.SystemType.inventory);
+
+        itemList.Add(item);
+
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+    }
+    public void AddItemFromEquipmentSlot(Item item, InventorySlot inventorySlot)
+    {
+        int tempCount = item.count;
+
+        inventorySlot.SetItem(item);
+        inventorySlot.SetCount(tempCount);
+        inventorySlot.SetSystemType(Item.SystemType.inventory);
 
         itemList.Add(item);
 
@@ -164,6 +183,7 @@ public class Inventory
         public void SetItem(Item item)
         {
             this.item = item;
+            item.system = Item.SystemType.inventory;
         }
 
         public void RemoveItem()
@@ -186,7 +206,14 @@ public class Inventory
         {
             item.count = count;
         }
-
+        public Item.SystemType GetSystemType()
+        {
+            return item.system;
+        }
+        public void SetSystemType(Item.SystemType systemType)
+        {
+            item.system = systemType;
+        }
         public bool IsEmpty()
         {
             return item == null;

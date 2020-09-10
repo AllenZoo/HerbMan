@@ -39,28 +39,10 @@ public class CharacterEquipment : MonoBehaviour
         return sickleItem;
     }
 
-    private void SetPickaxeItem(Item pickaxeItem)
-    {
-        this.pickaxeItem = pickaxeItem;
-        player.SetEquipment(pickaxeItem);
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
-    }
-    private void SetAxeItem(Item axeItem)
-    {
-        this.axeItem = axeItem;
-        player.SetEquipment(axeItem);
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
-    }
-    private void SetSickleItem(Item sickleItem)
-    {
-        this.sickleItem = sickleItem;
-        player.SetEquipment(sickleItem);
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
-    }
-
+   
     public void TryEquipItem(EquipSlot equipSlot, Item item)
     {
-        if(equipSlot == item.GetEquipSlot())
+        if (equipSlot == item.GetEquipSlot())
         {
             //Item matches equipment slot
             switch (equipSlot)
@@ -74,7 +56,7 @@ public class CharacterEquipment : MonoBehaviour
     }
     public Item GetSlotItem(EquipSlot equipSlot)
     {
-        switch (equipSlot) 
+        switch (equipSlot)
         {
             case EquipSlot.UnEquipable:
                 return null;
@@ -92,7 +74,7 @@ public class CharacterEquipment : MonoBehaviour
     public void SetSlotItem(EquipSlot equipSlot, Item item)
     {
         //failproof to check if item and slot are suitable
-        if(equipSlot == item.GetEquipSlot())
+        if (item == null || equipSlot == item.GetEquipSlot())
         {
             switch (equipSlot)
             {
@@ -112,4 +94,24 @@ public class CharacterEquipment : MonoBehaviour
     {
         return equipSlot == item.GetEquipSlot();
     }
+    private void SetPickaxeItem(Item pickaxeItem)
+    {
+        this.pickaxeItem = pickaxeItem;
+        //player.SetEquipment(pickaxeItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void SetAxeItem(Item axeItem)
+    {
+        this.axeItem = axeItem;
+        //player.SetEquipment(axeItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void SetSickleItem(Item sickleItem)
+    {
+        this.sickleItem = sickleItem;
+        //player.SetEquipment(sickleItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+
 }

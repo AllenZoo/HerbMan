@@ -147,7 +147,7 @@ public class CraftingSystem: MonoBehaviour
     public void SetSlotItem(MaterialSlot materialSlot, Item item)
     {
         //failproof to check it slot and items are suitable
-        if (materialSlot == item.GetMaterialSlot())
+        if (item == null || materialSlot == item.GetMaterialSlot())
         {
             //if consistent would use switch(item.ItemType) but this is easier
             switch (materialSlot)

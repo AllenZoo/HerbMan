@@ -9,9 +9,11 @@ public class UI_CharacterEquipment : MonoBehaviour
 
     private Inventory inventory;
     private Transform itemContainer;
+
     private UI_CharacterEquipmentSlot pickaxeSlot;
     private UI_CharacterEquipmentSlot axeSlot;
     private UI_CharacterEquipmentSlot sickleSlot;
+
     private CharacterEquipment characterEquipment;
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class UI_CharacterEquipment : MonoBehaviour
         pickaxeSlot.OnItemDropped += PickaxeSlot_OnItemDropped;
         axeSlot.OnItemDropped += AxeSlot_OnItemDropped;
         sickleSlot.OnItemDropped += SickleSlot_OnItemDropped;
+
     }
 
     public void SetCharacterEquipment(CharacterEquipment characterEquipment)
@@ -78,7 +81,7 @@ public class UI_CharacterEquipment : MonoBehaviour
             Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
             uiItemTransform.GetComponent<RectTransform>().anchoredPosition = characterEquipmentSlot.GetComponent<RectTransform>().anchoredPosition;
             uiItemTransform.localScale = Vector3.one * 1f;
-            //uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
             UI_Item uiItem = uiItemTransform.GetComponent<UI_Item>();
             uiItem.SetItem(item);
@@ -101,7 +104,7 @@ public class UI_CharacterEquipment : MonoBehaviour
             if (characterEquipment.GetSlotItem(equipSlot) == null)
             {
                 //Move item from inventory to slot
-                Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability };
+                Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment};
                 characterEquipment.SetSlotItem(equipSlot, tempItem);
                 inventory.RemoveItem(item);
                 UI_ItemDrag.Instance.Hide();
@@ -110,10 +113,13 @@ public class UI_CharacterEquipment : MonoBehaviour
             {
                 //Item is present in slot, therefore switch items
                 Item tempItemInCharacterEquipment = characterEquipment.GetSlotItem(equipSlot);
+                Item tempItemForCharacterEquipmentSlot = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment };
 
-                Item tempItemForCharacterEquipmentSlot = new Item { itemType = item.itemType, count = item.count, durability = item.durability };
+                //Move item from inventory to equipment slot
                 characterEquipment.SetSlotItem(equipSlot, tempItemForCharacterEquipmentSlot);
                 inventory.RemoveItem(item);
+
+                //Move item from equipment slot to inventory
                 inventory.AddItem(tempItemInCharacterEquipment);
                 UI_ItemDrag.Instance.Hide();
             }

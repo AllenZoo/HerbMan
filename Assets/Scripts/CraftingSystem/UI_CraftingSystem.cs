@@ -112,7 +112,7 @@ public class UI_CraftingSystem : MonoBehaviour
             Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
             uiItemTransform.GetComponent<RectTransform>().anchoredPosition = craftingSlot.GetComponent<RectTransform>().anchoredPosition;
             uiItemTransform.localScale = Vector3.one * 1f;
-            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
             UI_Item uiItem = uiItemTransform.GetComponent<UI_Item>();
             uiItem.SetItem(item);
@@ -136,7 +136,7 @@ public class UI_CraftingSystem : MonoBehaviour
             if(craftingSystem.GetSlotItem(materialSlot) == null)
             {
                 //Move item from inventory to slot
-                Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability };
+                Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.crafting };
                 craftingSystem.SetSlotItem(materialSlot, tempItem);
                 inventory.RemoveItem(item);
                 UI_ItemDrag.Instance.Hide();
@@ -145,10 +145,13 @@ public class UI_CraftingSystem : MonoBehaviour
             {
                 //Item is present in slot, therefore switch items
                 Item tempItemInCraftingSlot = craftingSystem.GetSlotItem(materialSlot);
+                Item tempItemForCraftingSlot = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.crafting };
 
-                Item tempItemForCraftingSlot = new Item { itemType = item.itemType, count = item.count, durability = item.durability };
+                //Move item from inventory to crafting slot
                 craftingSystem.SetSlotItem(materialSlot, tempItemForCraftingSlot);
                 inventory.RemoveItem(item);
+
+                //Move item from crafting slot to inventory
                 inventory.AddItem(tempItemInCraftingSlot);
                 UI_ItemDrag.Instance.Hide();
             }

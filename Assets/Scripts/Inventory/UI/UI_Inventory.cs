@@ -10,6 +10,9 @@ public class UI_Inventory : MonoBehaviour
 {
     [SerializeField] private Transform pfItemUI;
 
+    private CraftingSystem craftingSystem;
+    private CharacterEquipment characterEquipment;
+
     private Inventory inventory;
     private Transform itemSlotContainer;
     private Transform itemSlotTemplate;
@@ -25,6 +28,14 @@ public class UI_Inventory : MonoBehaviour
     {
         this.player = player;
     }
+    public void SetCraftingSystem(CraftingSystem craftingSystem)
+    {
+        this.craftingSystem = craftingSystem;
+    }
+    public void SetCharacterEquipment(CharacterEquipment characterEquipment)
+    {
+        this.characterEquipment = characterEquipment;
+    }
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
@@ -33,6 +44,7 @@ public class UI_Inventory : MonoBehaviour
 
         RefreshInventoryItems();
     }
+
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
     {
         RefreshInventoryItems();
@@ -89,7 +101,20 @@ public class UI_Inventory : MonoBehaviour
             uiItemSlot.SetOnDropAction(() => {
                 // Dropped on this UI Item Slot
                 Item draggedItem = UI_ItemDrag.Instance.GetItem();
-                inventory.AddItem(draggedItem, tmpInventorySlot);
+                if (draggedItem.system == Item.SystemType.equipment)
+                {
+                    inventory.AddItemFromEquipmentSlot(draggedItem, tmpInventorySlot);
+                    characterEquipment.SetSlotItem(draggedItem.GetEquipSlot(), null);
+                }
+                else if (draggedItem.system == Item.SystemType.crafting)
+                {
+                    inventory.AddItem(draggedItem, tmpInventorySlot);
+                    craftingSystem.SetSlotItem(draggedItem.GetMaterialSlot(), null);
+                }
+                else if (draggedItem.system == Item.SystemType.inventory)
+                {
+                    inventory.AddItem(draggedItem, tmpInventorySlot);
+                }
             });
 
             //Image itemImage = itemSlotRectTransform.Find("ItemUI").GetComponent<Image>();

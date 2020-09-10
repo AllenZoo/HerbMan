@@ -16,7 +16,10 @@ public class Initializer : MonoBehaviour
     private void Start()
     {
         uiInventory.SetPlayer(player);
+        uiInventory.SetCharacterEquipment(characterEquipment);
+        uiInventory.SetCraftingSystem(craftingSystem);
         uiInventory.SetInventory(player.GetInventory());
+
 
         uiCharacterEquipment.SetCharacterEquipment(characterEquipment);
         uiCharacterEquipment.SetInventory(player.GetInventory());
