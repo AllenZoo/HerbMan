@@ -78,17 +78,17 @@ public class UI_Inventory : MonoBehaviour
                 //Not Empty, has Item
                 Transform uiItemTransform = Instantiate(pfItemUI, itemSlotContainer);
                 uiItemTransform.GetComponent<RectTransform>().anchoredPosition = itemSlotRectTransform.anchoredPosition;
-                ItemUI uiItem = uiItemTransform.GetComponent<ItemUI>();
+                UI_Item uiItem = uiItemTransform.GetComponent<UI_Item>();
                 uiItem.SetItem(item);
                 uiItem.SetSprite(item.GetSprite());
             }
 
             Inventory.InventorySlot tmpInventorySlot = inventorySlot;
 
-            ItemSlotUI uiItemSlot = itemSlotRectTransform.GetComponent<ItemSlotUI>();
+            UI_ItemSlot uiItemSlot = itemSlotRectTransform.GetComponent<UI_ItemSlot>();
             uiItemSlot.SetOnDropAction(() => {
                 // Dropped on this UI Item Slot
-                Item draggedItem = ItemDragUI.Instance.GetItem();
+                Item draggedItem = UI_ItemDrag.Instance.GetItem();
                 inventory.AddItem(draggedItem, tmpInventorySlot);
             });
 

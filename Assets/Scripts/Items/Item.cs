@@ -28,15 +28,15 @@ public class Item
     {
         Null,
         //Tools
-        StonePickaxe,
-        IronPickaxe,
-        AmatitePickaxe,
-        StoneAxe,
-        IronAxe,
-        AmatiteAxe,
-        StoneSickle,
-        IronSickle,
-        AmatiteSickle,
+        Stone_Pickaxe,
+        Iron_Pickaxe,
+        Amatite_Pickaxe,
+        Stone_Axe,
+        Iron_Axe,
+        Amatite_Axe,
+        Stone_Sickle,
+        Iron_Sickle,
+        Amatite_Sickle,
 
         //Herbs
         Hemm,
@@ -56,10 +56,21 @@ public class Item
         Pine,
         Redwood,
 
+        //Recipes
+        Stone_Pickaxe_Recipe,
+        Iron_Pickaxe_Recipe,
+        Amatite_Pickaxe_Recipe,
+        Stone_Axe_Recipe,
+        Iron_Axe_Recipe,
+        Amatite_Axe_Recipe,
+        Stone_Sickle_Recipe,
+        Iron_Sickle_Recipe,
+        Amatite_Sickle_Recipe,
     }
 
     public ItemType itemType;
     public int count;
+    public float durability;
 
     public Sprite GetSprite()
     {
@@ -72,15 +83,15 @@ public class Item
         {
             default:
                 //Tools
-            case ItemType.StonePickaxe:return ItemAssets.Instance.StonePickaxe;
-            case ItemType.IronPickaxe:return ItemAssets.Instance.IronPickaxe;
-            case ItemType.AmatitePickaxe:return ItemAssets.Instance.AmatitePickaxe;
-            case ItemType.StoneAxe:return ItemAssets.Instance.StoneAxe;
-            case ItemType.IronAxe:return ItemAssets.Instance.IronAxe;
-            case ItemType.AmatiteAxe:return ItemAssets.Instance.AmatiteAxe;
-            case ItemType.StoneSickle:return ItemAssets.Instance.StoneSickle;
-            case ItemType.IronSickle:return ItemAssets.Instance.IronSickle;
-            case ItemType.AmatiteSickle: return ItemAssets.Instance.AmatiteSickle;
+            case ItemType.Stone_Pickaxe:return ItemAssets.Instance.StonePickaxe;
+            case ItemType.Iron_Pickaxe:return ItemAssets.Instance.IronPickaxe;
+            case ItemType.Amatite_Pickaxe:return ItemAssets.Instance.AmatitePickaxe;
+            case ItemType.Stone_Axe:return ItemAssets.Instance.StoneAxe;
+            case ItemType.Iron_Axe:return ItemAssets.Instance.IronAxe;
+            case ItemType.Amatite_Axe:return ItemAssets.Instance.AmatiteAxe;
+            case ItemType.Stone_Sickle:return ItemAssets.Instance.StoneSickle;
+            case ItemType.Iron_Sickle:return ItemAssets.Instance.IronSickle;
+            case ItemType.Amatite_Sickle: return ItemAssets.Instance.AmatiteSickle;
             //Materials
 
             //Herbs
@@ -100,6 +111,17 @@ public class Item
             case ItemType.Oak: return ItemAssets.Instance.Oak;
             case ItemType.Pine: return ItemAssets.Instance.Pine;
             case ItemType.Redwood: return ItemAssets.Instance.Redwood;
+
+            //Recipes
+            case ItemType.Stone_Pickaxe_Recipe: return ItemAssets.Instance.StonePickaxeRecipe;
+            case ItemType.Iron_Pickaxe_Recipe: return ItemAssets.Instance.IronPickaxeRecipe;
+            case ItemType.Amatite_Pickaxe_Recipe: return ItemAssets.Instance.AmatitePickaxeRecipe;
+            case ItemType.Stone_Axe_Recipe: return ItemAssets.Instance.StoneAxeRecipe;
+            case ItemType.Iron_Axe_Recipe: return ItemAssets.Instance.IronAxeRecipe;
+            case ItemType.Amatite_Axe_Recipe: return ItemAssets.Instance.AmatiteAxeRecipe;
+            case ItemType.Stone_Sickle_Recipe: return ItemAssets.Instance.StoneSickleRecipe;
+            case ItemType.Iron_Sickle_Recipe: return ItemAssets.Instance.IronSickleRecipe;
+            case ItemType.Amatite_Sickle_Recipe: return ItemAssets.Instance.AmatiteSickleRecipe;
         }
     }
 
@@ -109,17 +131,17 @@ public class Item
         {
             default:
                 return CharacterEquipment.EquipSlot.UnEquipable;
-            case ItemType.StonePickaxe:
-            case ItemType.IronPickaxe:
-            case ItemType.AmatitePickaxe:
+            case ItemType.Stone_Pickaxe:
+            case ItemType.Iron_Pickaxe:
+            case ItemType.Amatite_Pickaxe:
                 return CharacterEquipment.EquipSlot.Pickaxe;
-            case ItemType.StoneAxe:
-            case ItemType.IronAxe:
-            case ItemType.AmatiteAxe:
+            case ItemType.Stone_Axe:
+            case ItemType.Iron_Axe:
+            case ItemType.Amatite_Axe:
                 return CharacterEquipment.EquipSlot.Axe;
-            case ItemType.StoneSickle:
-            case ItemType.IronSickle:
-            case ItemType.AmatiteSickle:
+            case ItemType.Stone_Sickle:
+            case ItemType.Iron_Sickle:
+            case ItemType.Amatite_Sickle:
                 return CharacterEquipment.EquipSlot.Sickle;
 
         }
@@ -162,19 +184,19 @@ public class Item
             case ItemType.Flint:
             case ItemType.Hemm:
                 return 0;
-            case ItemType.StonePickaxe:
-            case ItemType.StoneAxe:
-            case ItemType.StoneSickle:
+            case ItemType.Stone_Pickaxe:
+            case ItemType.Stone_Axe:
+            case ItemType.Stone_Sickle:
             case ItemType.Melom:
                 return 1;
-            case ItemType.IronPickaxe:
-            case ItemType.IronAxe:
-            case ItemType.IronSickle:
+            case ItemType.Iron_Pickaxe:
+            case ItemType.Iron_Axe:
+            case ItemType.Iron_Sickle:
             case ItemType.MellowMint:
                 return 2;
-            case ItemType.AmatitePickaxe:
-            case ItemType.AmatiteAxe:
-            case ItemType.AmatiteSickle:
+            case ItemType.Amatite_Pickaxe:
+            case ItemType.Amatite_Axe:
+            case ItemType.Amatite_Sickle:
             case ItemType.WaterHerb:
                 return 3;
         }
@@ -190,15 +212,15 @@ public class Item
         switch (itemType)
         {
             default:
-            case ItemType.StonePickaxe:
-            case ItemType.IronPickaxe:
-            case ItemType.AmatitePickaxe:
-            case ItemType.StoneAxe:
-            case ItemType.IronAxe:
-            case ItemType.AmatiteAxe:
-            case ItemType.StoneSickle:
-            case ItemType.IronSickle:
-            case ItemType.AmatiteSickle:return false;
+            case ItemType.Stone_Pickaxe:
+            case ItemType.Iron_Pickaxe:
+            case ItemType.Amatite_Pickaxe:
+            case ItemType.Stone_Axe:
+            case ItemType.Iron_Axe:
+            case ItemType.Amatite_Axe:
+            case ItemType.Stone_Sickle:
+            case ItemType.Iron_Sickle:
+            case ItemType.Amatite_Sickle:return false;
 
             //Materials
 
@@ -227,15 +249,15 @@ public class Item
         switch (itemType)
         {
             default: return false;
-            case ItemType.StonePickaxe:
-            case ItemType.IronPickaxe:
-            case ItemType.AmatitePickaxe:
-            case ItemType.StoneAxe:
-            case ItemType.IronAxe:
-            case ItemType.AmatiteAxe:
-            case ItemType.StoneSickle:
-            case ItemType.IronSickle:
-            case ItemType.AmatiteSickle: return true;
+            case ItemType.Stone_Pickaxe:
+            case ItemType.Iron_Pickaxe:
+            case ItemType.Amatite_Pickaxe:
+            case ItemType.Stone_Axe:
+            case ItemType.Iron_Axe:
+            case ItemType.Amatite_Axe:
+            case ItemType.Stone_Sickle:
+            case ItemType.Iron_Sickle:
+            case ItemType.Amatite_Sickle: return true;
         }
     }
 

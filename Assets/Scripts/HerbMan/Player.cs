@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
             switch (item.itemType)
             {
                 default: break;
-                case Item.ItemType.StonePickaxe: break;
+                case Item.ItemType.Stone_Pickaxe: break;
 
             }
         }

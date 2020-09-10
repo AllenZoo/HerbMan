@@ -23,12 +23,12 @@ public class Inventory
             inventorySlotArray[i] = new InventorySlot(i);
         }
         
-        AddItem(new Item { itemType = Item.ItemType.IronPickaxe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.IronAxe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.IronSickle, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.AmatiteAxe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.AmatitePickaxe, count = 1 });
-        AddItem(new Item { itemType = Item.ItemType.AmatiteSickle, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Iron_Pickaxe, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Iron_Axe, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Iron_Sickle, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Amatite_Axe, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Amatite_Pickaxe, count = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Amatite_Sickle, count = 1 });
         AddItem(new Item { itemType = Item.ItemType.Hemm, count = 3 });
         AddItem(new Item { itemType = Item.ItemType.Flint, count = 3 });
         AddItem(new Item { itemType = Item.ItemType.Stick, count = 3 });

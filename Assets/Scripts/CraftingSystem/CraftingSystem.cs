@@ -9,12 +9,12 @@ public class CraftingSystem: MonoBehaviour
     public EventHandler OnItemCrafted;
 
     private Player player;
-    private Recipe recipe;
 
     private Item herb;
     private Item ore;
     private Item wood;
     private Item energyShard;
+    private Item recipe;
 
     private OutputSlot outputSlot;
     public enum MaterialSlot 
@@ -24,12 +24,12 @@ public class CraftingSystem: MonoBehaviour
         Ore,
         Wood,
         EnergyShard,
+        Recipe,
     }
 
     private void Awake()
     {
         player = GetComponent<Player>();
-        recipe = GetComponent<Recipe>();
     }
     public Item Craft()
     {
@@ -53,28 +53,28 @@ public class CraftingSystem: MonoBehaviour
         && wood.itemType == Item.ItemType.Stick)
         {
             //Maybe add in future a "TOME" which contains crafting options for Stone tools and etc.
-            craftedItem.itemType = Item.ItemType.StoneSickle;
+            craftedItem.itemType = Item.ItemType.Stone_Sickle;
         }
 
         else if (herb.itemType == Item.ItemType.Melom
         && ore.itemType == Item.ItemType.Stone
         && wood.itemType == Item.ItemType.Oak)
         {
-            craftedItem.itemType = Item.ItemType.IronSickle;
+            craftedItem.itemType = Item.ItemType.Iron_Sickle;
         }
 
         else if (herb.itemType == Item.ItemType.MellowMint
         && ore.itemType == Item.ItemType.IronOre
         && wood.itemType == Item.ItemType.Pine)
         {
-            craftedItem.itemType = Item.ItemType.AmatiteSickle;
+            craftedItem.itemType = Item.ItemType.Amatite_Sickle;
         }
 
         else if (herb.itemType == Item.ItemType.WaterHerb
             && ore.itemType == Item.ItemType.AmatiteOre
             && wood.itemType == Item.ItemType.Redwood)
         {
-            craftedItem.itemType = Item.ItemType.StoneAxe;
+            craftedItem.itemType = Item.ItemType.Stone_Axe;
         }
         return craftedItem;
     }
@@ -93,6 +93,10 @@ public class CraftingSystem: MonoBehaviour
     public Item GetEnergyShardItem()
     {
         return energyShard;
+    }
+    public Item GetRecipeItem()
+    {
+        return recipe;
     }
     public void SetHerbItem(Item herb)
     {
@@ -114,6 +118,11 @@ public class CraftingSystem: MonoBehaviour
         this.energyShard = energyShard;
         OnMaterialChanged?.Invoke(this, EventArgs.Empty);
     }
+    public void SetRecipeItem(Item recipeItem)
+    {
+        recipe = recipeItem;
+        OnMaterialChanged?.Invoke(this, EventArgs.Empty);
+    }
     public void SetOutput(Item output)
     {
         outputSlot.SetOutputItem(output);
@@ -130,6 +139,8 @@ public class CraftingSystem: MonoBehaviour
                 return GetWoodItem();
             case MaterialSlot.EnergyShard:
                 return GetEnergyShardItem();
+            case MaterialSlot.Recipe:
+                return GetRecipeItem();
         }
         return null;
     }
@@ -152,6 +163,9 @@ public class CraftingSystem: MonoBehaviour
                     break;
                 case MaterialSlot.EnergyShard:
                     SetEnergyShardItem(item);
+                    break;
+                case MaterialSlot.Recipe:
+                    SetRecipeItem(item);
                     break;
             }
         }

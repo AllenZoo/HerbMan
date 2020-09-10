@@ -46,6 +46,19 @@ public class ItemAssets : MonoBehaviour
     public Sprite Pine;
     public Sprite Redwood;
 
+    //Energy Shards
+
+    //Recipes
+    public Sprite StonePickaxeRecipe;
+    public Sprite IronPickaxeRecipe;
+    public Sprite AmatitePickaxeRecipe;
+    public Sprite StoneAxeRecipe;
+    public Sprite IronAxeRecipe;
+    public Sprite AmatiteAxeRecipe;
+    public Sprite StoneSickleRecipe;
+    public Sprite IronSickleRecipe;
+    public Sprite AmatiteSickleRecipe;
+
     [Header("Veins")]
     //Herbs
     public Sprite MelomVein;

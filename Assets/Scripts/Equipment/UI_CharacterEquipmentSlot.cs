@@ -14,7 +14,7 @@ public class UI_CharacterEquipmentSlot : MonoBehaviour, IDropHandler
     }
     public void OnDrop(PointerEventData eventData)
     {
-        Item item = ItemDragUI.Instance.GetItem();
+        Item item = UI_ItemDrag.Instance.GetItem();
         OnItemDropped?.Invoke(this, new OnItemDroppedEventArgs { item = item });
     }
 }

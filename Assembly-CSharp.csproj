@@ -82,10 +82,9 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\CraftingSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\OutputSlot.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Recipe.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\Equipment\CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
@@ -95,10 +94,10 @@
     <Compile Include="Assets\Scripts\HerbMan\Player.cs" />
     <Compile Include="Assets\Scripts\Initializer.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Inventory\UI\ItemDragUI.cs" />
-    <Compile Include="Assets\Scripts\Inventory\UI\ItemSlotUI.cs" />
-    <Compile Include="Assets\Scripts\Inventory\UI\ItemUI.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Inventory.cs" />
+    <Compile Include="Assets\Scripts\Inventory\UI\UI_Item.cs" />
+    <Compile Include="Assets\Scripts\Inventory\UI\UI_ItemDrag.cs" />
+    <Compile Include="Assets\Scripts\Inventory\UI\UI_ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Manager.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\ItemAssets.cs" />
