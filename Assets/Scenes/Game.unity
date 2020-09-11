@@ -11627,7 +11627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1685318770654700795, guid: df377912aab2dab4fa1870a54e171352,
+  m_Sprite: {fileID: 7154021030834267725, guid: 9d7f1e2f1f668f649adfbc8b384bcada,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -12193,7 +12193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5631524747709452169, guid: df377912aab2dab4fa1870a54e171352,
+  m_Sprite: {fileID: -6410611194464380287, guid: 9d7f1e2f1f668f649adfbc8b384bcada,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -15639,6 +15639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d44b3038866d7742bb24c0093025bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uI_Manager: {fileID: 231600452}
   moveSpeed: 5
   rb: {fileID: 1901155505}
   animator: {fileID: 1901155503}

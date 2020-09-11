@@ -77,6 +77,24 @@ MonoBehaviour:
   Oak: {fileID: 0}
   Pine: {fileID: 0}
   Redwood: {fileID: 0}
+  StonePickaxeRecipe: {fileID: 6418453570513081338, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  IronPickaxeRecipe: {fileID: 5697835288562378436, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  AmatitePickaxeRecipe: {fileID: -8239856656203076947, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  StoneAxeRecipe: {fileID: -5301932358400286443, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  IronAxeRecipe: {fileID: -1966157368536838582, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  AmatiteAxeRecipe: {fileID: 5112671075945102622, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  StoneSickleRecipe: {fileID: -7593274340499129432, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  IronSickleRecipe: {fileID: 7664695845204919035, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
+  AmatiteSickleRecipe: {fileID: 2118608793164616936, guid: 91b8ebaa953765044b5201d7732eaa14,
+    type: 3}
   MelomVein: {fileID: -189053693183986825, guid: 6f573f5bd8325c1498218651d819bd81,
     type: 3}
   WaterHerbVein: {fileID: -4390639603833135218, guid: 72da23c705223c342beb60bced7dcfbd,
