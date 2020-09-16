@@ -33,6 +33,7 @@ public class Inventory
         AddItem(new Item { itemType = Item.ItemType.Flint, count = 3, system = Item.SystemType.inventory });
         AddItem(new Item { itemType = Item.ItemType.Stick, count = 3, system = Item.SystemType.inventory });
         AddItem(new Item { itemType = Item.ItemType.Stone_Pickaxe_Recipe, count = 1, system = Item.SystemType.inventory });
+        AddItem(new Item { itemType = Item.ItemType.Iron_Pickaxe_Recipe, count = 1, system = Item.SystemType.inventory });
     }
 
     public InventorySlot GetEmptyInventorySlot()

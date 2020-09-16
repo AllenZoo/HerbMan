@@ -256,7 +256,19 @@ public class Item
             case ItemType.Stick:
             case ItemType.Oak:
             case ItemType.Pine:
-            case ItemType.Redwood:return true;
+            case ItemType.Redwood:
+
+            //Recipe
+            case ItemType.Stone_Pickaxe_Recipe:
+            case ItemType.Iron_Pickaxe_Recipe: 
+            case ItemType.Amatite_Pickaxe_Recipe:
+            case ItemType.Stone_Axe_Recipe: 
+            case ItemType.Iron_Axe_Recipe:
+            case ItemType.Amatite_Axe_Recipe: 
+            case ItemType.Stone_Sickle_Recipe: 
+            case ItemType.Iron_Sickle_Recipe: 
+            case ItemType.Amatite_Sickle_Recipe:
+                return true;
         }
     }
 

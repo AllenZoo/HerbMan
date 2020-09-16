@@ -95,6 +95,7 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
 
     public void SetItem(Item item)
     {
+
         this.item = item;
         
         SetSprite(Item.GetSprite(item.itemType));

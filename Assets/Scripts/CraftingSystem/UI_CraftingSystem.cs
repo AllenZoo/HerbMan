@@ -15,7 +15,9 @@ public class UI_CraftingSystem : MonoBehaviour
     private UI_CraftingSlot energyShardSlot;
     private UI_CraftingSlot recipeSlot;
 
-    private OutputSlot outputSlot;
+    private Item[] materialList;
+
+    private UI_OutputSlot outputSlot;
 
     private CraftingSystem craftingSystem;
     private Inventory inventory;
@@ -30,13 +32,16 @@ public class UI_CraftingSystem : MonoBehaviour
         energyShardSlot = transform.Find("energyShardSlot").GetComponent<UI_CraftingSlot>();
         recipeSlot = transform.Find("recipeSlot").GetComponent<UI_CraftingSlot>();
 
-        outputSlot = transform.Find("outputSlot").GetComponent<OutputSlot>();
+        outputSlot = transform.Find("outputSlot").GetComponent<UI_OutputSlot>();
 
         herbSlot.OnItemDropped += HerbSlot_OnItemDropped;
         oreSlot.OnItemDropped += OreSlot_OnItemDropped;
         woodSlot.OnItemDropped += WoodSlot_OnItemDropped;
         energyShardSlot.OnItemDropped += EnergyShardSlot_OnItemDropped;
         recipeSlot.OnItemDropped += RecipeSlot_OnItemDropped;
+
+        outputSlot.OnItemCrafted += OutputSlot_OnItemCrafted;
+
     }
 
     
@@ -55,8 +60,32 @@ public class UI_CraftingSystem : MonoBehaviour
 
     public void Craft()
     {
-        outputSlot.SetOutputItem(craftingSystem.Craft());
-        Debug.Log("Crafted: " + craftingSystem.Craft().ToString());
+        Item herb = craftingSystem.GetHerbItem();
+        Item ore = craftingSystem.GetOreItem();
+        Item wood = craftingSystem.GetWoodItem();
+        Item recipe = craftingSystem.GetRecipeItem();
+        Item energyShard = craftingSystem.GetEnergyShardItem();
+
+        //Check if crafting slots are filled up
+        if (herb != null && ore != null && wood != null)
+        {
+            Debug.Log("H: " + herb.ToString() + " O: " + ore.ToString() + " W: " + wood.ToString() + " R:" + recipe.ToString());
+            if (craftingSystem.CraftRecipeItem(herb, ore, wood, recipe).itemType != Item.ItemType.Null)
+            {
+                Item item = craftingSystem.CraftRecipeItem(herb, ore, wood, recipe);
+                craftingSystem.SetOutput(item);
+                outputSlot.OnItemCrafted?.Invoke(this, new UI_OutputSlot.OnItemCraftedEventArgs { item = item });
+            }
+            else
+            {
+                Debug.Log("Not possible to craft");
+            }
+        }
+        else
+        {
+            Debug.Log("Not possible to craft");
+        }
+        
     }
 
     private void CraftingSystem_OnMaterialChanged(object sender, EventArgs e)
@@ -84,6 +113,12 @@ public class UI_CraftingSystem : MonoBehaviour
     {
         TryDropMaterialInSlot(CraftingSystem.MaterialSlot.Recipe, e.item);
     }
+
+    private void OutputSlot_OnItemCrafted(object sender, UI_OutputSlot.OnItemCraftedEventArgs e)
+    {
+        RefreshOutputSlot();
+    }
+
     private void UpdateVisual()
     {
         foreach(Transform child in itemContainer)
@@ -96,6 +131,27 @@ public class UI_CraftingSystem : MonoBehaviour
         Item woodItem = craftingSystem.GetWoodItem();
         Item energyShardItem = craftingSystem.GetEnergyShardItem();
         Item recipeItem = craftingSystem.GetRecipeItem();
+
+        if (herbItem?.count == 0)
+        {
+            
+            craftingSystem.SetHerbItem(null);
+        }
+        if (oreItem?.count == 0)
+        {
+           
+            craftingSystem.SetOreItem(null);
+        }
+        if (woodItem?.count == 0)
+        {
+           
+            craftingSystem.SetWoodItem(null);
+        }
+        if (recipeItem?.count == 0)
+        {
+            
+            craftingSystem.SetRecipeItem(null);
+        }
 
         RefreshCraftingSlot(herbSlot, herbItem);
         RefreshCraftingSlot(oreSlot, oreItem);
@@ -126,7 +182,54 @@ public class UI_CraftingSystem : MonoBehaviour
             craftingSlot.transform.Find("itemSlot").gameObject.SetActive(true);
         }
     }
+    private void RefreshOutputSlot()
+    {
+        Item item = craftingSystem.GetOutputItem();
+        if (item != null)
+        {
+            Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment };
 
+            Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
+            uiItemTransform.GetComponent<RectTransform>().anchoredPosition = outputSlot.GetComponent<RectTransform>().anchoredPosition;
+            uiItemTransform.localScale = Vector3.one * 1f;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+            UI_Item uiItem = uiItemTransform.GetComponent<UI_Item>();
+            uiItem.SetItem(tempItem);
+            uiItem.SetCount(tempItem.count);
+            uiItem.RefreshCountText();
+
+            outputSlot.transform.Find("itemSlot").gameObject.SetActive(false);
+        }
+        else
+        {
+            outputSlot.transform.Find("itemSlot").gameObject.SetActive(true);
+        }
+    
+    }
+    private void RefreshOutputSlot(Item item)
+    {
+        if(item != null)
+        {
+            Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment };
+
+            Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
+            uiItemTransform.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition;
+            uiItemTransform.localScale = Vector3.one * 1f;
+            uiItemTransform.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+            UI_Item uiItem = uiItemTransform.GetComponent<UI_Item>();
+            uiItem.SetItem(tempItem);
+            uiItem.SetCount(tempItem.count);
+            uiItem.RefreshCountText();
+
+            outputSlot.transform.Find("itemSlot").gameObject.SetActive(false);
+        }
+        else
+        {
+            outputSlot.transform.Find("itemSlot").gameObject.SetActive(true);
+        }
+    }
     private void TryDropMaterialInSlot(CraftingSystem.MaterialSlot materialSlot, Item item)
     {
         //Item dropped into material slot, check if slot and item are suitble.

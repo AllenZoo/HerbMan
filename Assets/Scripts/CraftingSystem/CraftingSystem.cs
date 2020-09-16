@@ -6,7 +6,7 @@ using UnityEngine;
 public class CraftingSystem: MonoBehaviour
 {
     public EventHandler OnMaterialChanged;
-    public EventHandler OnItemCrafted;
+
 
     private Player player;
 
@@ -15,8 +15,7 @@ public class CraftingSystem: MonoBehaviour
     private Item wood;
     private Item energyShard;
     private Item recipe;
-
-    private OutputSlot outputSlot;
+    private Item output;
     public enum MaterialSlot 
     {
         NonCraftable,
@@ -31,51 +30,103 @@ public class CraftingSystem: MonoBehaviour
     {
         player = GetComponent<Player>();
     }
-    public Item Craft()
-    {
-        //Check if crafting slots are filled up
-        if(herb != null && ore != null && wood != null)
-        {
-            Debug.Log("H: " + herb.ToString() + " O: " + ore.ToString() + " W: " + wood.ToString());
-            if(CraftRecipeItem(herb, ore, wood).itemType != Item.ItemType.Null)
-            {
-                OnItemCrafted?.Invoke(this, EventArgs.Empty);
-            }
-            return CraftRecipeItem(herb, ore, wood);
-        }
-        return null;
-    }
-    public Item CraftRecipeItem(Item herb, Item ore, Item wood) {
+    
+    public Item CraftRecipeItem(Item herb, Item ore, Item wood, Item recipe) {
+
         Item craftedItem = new Item { itemType = Item.ItemType.Null, count = 1};
 
-        if (herb.itemType == Item.ItemType.Hemm
-        && ore.itemType == Item.ItemType.Flint
-        && wood.itemType == Item.ItemType.Stick)
+        /** Material Tier list:
+         * (0)Hemm, Flint, Stick
+         * (1)Melom, Stone, Oak
+         * (2)MellowMint, IronOre, Pine
+         * (3)WaterHerb, AmatiteOre, Redwood
+         **/
+        
+        //Stone Pickaxe
+        if (recipe.itemType == Item.ItemType.Stone_Pickaxe_Recipe
+         && herb.GetTier() == 0 && herb.count >= 1
+          && ore.GetTier() == 0 &&  ore.count >= 2
+         && wood.GetTier() == 0 && wood.count >= 1)
         {
-            //Maybe add in future a "TOME" which contains crafting options for Stone tools and etc.
-            craftedItem.itemType = Item.ItemType.Stone_Sickle;
+            craftedItem = new Item { itemType = Item.ItemType.Stone_Pickaxe, count = 1, durability = 100 };
+            DecreaseHerbAmount(1);
+            DecreaseOreAmount(2);
+            DecreaseWoodAmount(1);
+            DecreaseRecipeAmount(1);
+        }
+        //Stone Axe
+        else if (recipe.itemType == Item.ItemType.Stone_Axe_Recipe
+         && herb.GetTier() == 0 && herb.count >= 1
+          && ore.GetTier() == 0 &&  ore.count >= 1
+         && wood.GetTier() == 0 && wood.count >= 1)
+        {
+            craftedItem = new Item { itemType = Item.ItemType.Stone_Axe, count = 1, durability = 100 };
         }
 
-        else if (herb.itemType == Item.ItemType.Melom
-        && ore.itemType == Item.ItemType.Stone
-        && wood.itemType == Item.ItemType.Oak)
+        //Stone Sickle
+        else if (recipe.itemType == Item.ItemType.Stone_Sickle_Recipe
+         && herb.GetTier() == 0 && herb.count >= 1
+          && ore.GetTier() == 0 &&  ore.count >= 1
+         && wood.GetTier() == 0 && wood.count >= 1)
         {
-            craftedItem.itemType = Item.ItemType.Iron_Sickle;
+            craftedItem = new Item { itemType = Item.ItemType.Stone_Sickle, count = 1, durability = 100 };
         }
 
-        else if (herb.itemType == Item.ItemType.MellowMint
-        && ore.itemType == Item.ItemType.IronOre
-        && wood.itemType == Item.ItemType.Pine)
+        //Iron Pickaxe
+        else if (recipe.itemType == Item.ItemType.Iron_Pickaxe_Recipe
+         && herb.GetTier() == 1 && herb.count >= 1
+          && ore.GetTier() == 1 &&  ore.count >= 1
+         && wood.GetTier() == 1 && wood.count >= 1)
         {
-            craftedItem.itemType = Item.ItemType.Amatite_Sickle;
+            craftedItem = new Item { itemType = Item.ItemType.Iron_Pickaxe, count = 1, durability = 100 };
         }
 
-        else if (herb.itemType == Item.ItemType.WaterHerb
-            && ore.itemType == Item.ItemType.AmatiteOre
-            && wood.itemType == Item.ItemType.Redwood)
+        //Iron Axe
+        else if (recipe.itemType == Item.ItemType.Iron_Axe_Recipe
+         && herb.GetTier() == 1 && herb.count >= 1
+          && ore.GetTier() == 1 &&  ore.count >= 1
+         && wood.GetTier() == 1 && wood.count >= 1)
         {
-            craftedItem.itemType = Item.ItemType.Stone_Axe;
+            craftedItem = new Item { itemType = Item.ItemType.Iron_Axe, count = 1, durability = 100 };
         }
+
+        //Iron Sickle
+        else if (recipe.itemType == Item.ItemType.Iron_Sickle_Recipe
+         && herb.GetTier() == 1 && herb.count >= 1
+          && ore.GetTier() == 1 &&  ore.count >= 1
+         && wood.GetTier() == 1 && wood.count >= 1)
+        {
+            craftedItem = new Item { itemType = Item.ItemType.Iron_Sickle, count = 1, durability = 100 };
+        }
+
+        //Amatite Pickaxe
+        else if (recipe.itemType == Item.ItemType.Amatite_Pickaxe_Recipe
+         && herb.GetTier() == 2 && herb.count >= 1
+          && ore.GetTier() == 2 &&  ore.count >= 1
+         && wood.GetTier() == 2 && wood.count >= 1)
+        {
+            craftedItem = new Item { itemType = Item.ItemType.Amatite_Pickaxe, count = 1, durability = 100 };
+        }
+
+        //Amatite Axe
+        else if (recipe.itemType == Item.ItemType.Amatite_Axe_Recipe
+         && herb.GetTier() == 2 && herb.count >= 1
+          && ore.GetTier() == 2 &&  ore.count >= 1
+         && wood.GetTier() == 2 && wood.count >= 1)
+        {
+            craftedItem = new Item { itemType = Item.ItemType.Amatite_Axe, count = 1, durability = 100 };
+        }
+
+        //Amatite Sickle
+        else if (recipe.itemType == Item.ItemType.Amatite_Sickle_Recipe
+         && herb.GetTier() == 2 && herb.count >= 1
+          && ore.GetTier() == 2 &&  ore.count >= 1
+         && wood.GetTier() == 2 && wood.count >= 1)
+        {
+            craftedItem = new Item { itemType = Item.ItemType.Amatite_Sickle, count = 1, durability = 100 };
+        }
+
+
         return craftedItem;
     }
     public Item GetHerbItem()
@@ -97,6 +148,10 @@ public class CraftingSystem: MonoBehaviour
     public Item GetRecipeItem()
     {
         return recipe;
+    }
+    public Item GetOutputItem()
+    {
+        return output;
     }
     public void SetHerbItem(Item herb)
     {
@@ -125,7 +180,33 @@ public class CraftingSystem: MonoBehaviour
     }
     public void SetOutput(Item output)
     {
-        outputSlot.SetOutputItem(output);
+        this.output = output;
+        OnMaterialChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void DecreaseHerbAmount(int count)
+    {
+        herb.count -= count;
+        OnMaterialChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void DecreaseOreAmount(int count)
+    {
+        ore.count -= count;
+        OnMaterialChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void DecreaseWoodAmount(int count)
+    {
+        wood.count -= count;
+        OnMaterialChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void DecreaseEnergyShardAmount(int count)
+    {
+        energyShard.count -= count;
+        OnMaterialChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void DecreaseRecipeAmount(int count)
+    {
+        recipe.count -= count;
+        OnMaterialChanged?.Invoke(this, EventArgs.Empty);
     }
     public Item GetSlotItem(MaterialSlot materialSlot)
     {

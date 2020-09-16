@@ -99,20 +99,25 @@ public class UI_Inventory : MonoBehaviour
 
             UI_ItemSlot uiItemSlot = itemSlotRectTransform.GetComponent<UI_ItemSlot>();
             uiItemSlot.SetOnDropAction(() => {
+                Debug.Log("item dropped onto inventory slot");
                 // Dropped on this UI Item Slot
                 Item draggedItem = UI_ItemDrag.Instance.GetItem();
                 if (draggedItem.system == Item.SystemType.equipment)
                 {
+                    Debug.Log("Equipment item dropped into inventory slot");
                     inventory.AddItemFromEquipmentSlot(draggedItem, tmpInventorySlot);
                     characterEquipment.SetSlotItem(draggedItem.GetEquipSlot(), null);
+                    craftingSystem.SetOutput(null);
                 }
                 else if (draggedItem.system == Item.SystemType.crafting)
                 {
+                    Debug.Log("Crafting item dropped into inventory slot");
                     inventory.AddItem(draggedItem, tmpInventorySlot);
                     craftingSystem.SetSlotItem(draggedItem.GetMaterialSlot(), null);
                 }
                 else if (draggedItem.system == Item.SystemType.inventory)
                 {
+                    Debug.Log("Inventory item dropped into inventory slot");
                     inventory.AddItem(draggedItem, tmpInventorySlot);
                 }
             });

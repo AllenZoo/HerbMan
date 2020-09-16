@@ -83,9 +83,9 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\OutputSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\UI_OutputSlot.cs" />
     <Compile Include="Assets\Scripts\Equipment\CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipmentSlot.cs" />
