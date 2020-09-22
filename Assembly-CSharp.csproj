@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\HerbMan\ColliderEngine.cs" />
+    <Compile Include="Assets\Scripts\HerbMan\OrbitController.cs" />
     <Compile Include="Assets\Scripts\HerbMan\Player.cs" />
     <Compile Include="Assets\Scripts\HerbMan\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Initializer.cs" />
