@@ -89,10 +89,6 @@
     <Compile Include="Assets\Scripts\Equipment\CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipmentSlot.cs" />
-    <Compile Include="Assets\Scripts\HerbMan\ColliderEngine.cs" />
-    <Compile Include="Assets\Scripts\HerbMan\OrbitController.cs" />
-    <Compile Include="Assets\Scripts\HerbMan\Player.cs" />
-    <Compile Include="Assets\Scripts\HerbMan\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Initializer.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Inventory.cs" />
@@ -107,6 +103,11 @@
     <Compile Include="Assets\Scripts\Items\ItemWorld.cs" />
     <Compile Include="Assets\Scripts\Items\ItemWorldSpawner.cs" />
     <Compile Include="Assets\Scripts\Items\ItemWorldVein.cs" />
+    <Compile Include="Assets\Scripts\Player\ColliderEngine.cs" />
+    <Compile Include="Assets\Scripts\Player\OrbitController.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Animation.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

@@ -74,10 +74,14 @@ public class UI_Manager : MonoBehaviour
         if (PlayerCanMove())
         {
             player.GetComponent<Player_Movement>().enabled = true;
+
+            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = true;
         }
         else
         {
             player.GetComponent<Player_Movement>().enabled = false;
+
+            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = false;
         }
     }
 }
