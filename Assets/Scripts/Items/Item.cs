@@ -72,6 +72,7 @@ public class Item
         inventory,
         equipment,
         crafting,
+        craftedItem,
     }
 
     public ItemType itemType;

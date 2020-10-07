@@ -33,7 +33,7 @@ public class CraftingSystem: MonoBehaviour
     
     public Item CraftRecipeItem(Item herb, Item ore, Item wood, Item recipe) {
 
-        Item craftedItem = new Item { itemType = Item.ItemType.Null, count = 1};
+        Item craftedItem = new Item { itemType = Item.ItemType.Null, count = 1, system = Item.SystemType.craftedItem};
 
         /** Material Tier list:
          * (0)Hemm, Flint, Stick
@@ -48,7 +48,7 @@ public class CraftingSystem: MonoBehaviour
           && ore.GetTier() == 0 &&  ore.count >= 2
          && wood.GetTier() == 0 && wood.count >= 1)
         {
-            craftedItem = new Item { itemType = Item.ItemType.Stone_Pickaxe, count = 1, durability = 100 };
+            craftedItem = new Item { itemType = Item.ItemType.Stone_Pickaxe, count = 1, durability = 100, system = Item.SystemType.craftedItem };
             DecreaseHerbAmount(1);
             DecreaseOreAmount(2);
             DecreaseWoodAmount(1);
@@ -126,7 +126,7 @@ public class CraftingSystem: MonoBehaviour
             craftedItem = new Item { itemType = Item.ItemType.Amatite_Sickle, count = 1, durability = 100 };
         }
 
-
+        Debug.Log("craftingSystem.cs : " + craftedItem.itemType.ToString());
         return craftedItem;
     }
     public Item GetHerbItem()

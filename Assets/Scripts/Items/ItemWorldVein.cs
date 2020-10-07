@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemWorldVein : MonoBehaviour
 {
     private Animator animator;
+    private PolygonCollider2D polygonCollider2D;
 
     //public VeinBar veinBar;
     private ItemVein itemVein;
@@ -29,6 +30,9 @@ public class ItemWorldVein : MonoBehaviour
 
         animator = this.GetComponent<Animator>();
         animator.runtimeAnimatorController = itemVein.GetRuntimeAnimatorController();
+
+        polygonCollider2D = gameObject.AddComponent<PolygonCollider2D>();
+        polygonCollider2D.isTrigger = true;
     }
     
     public bool CanHarvest()
@@ -56,7 +60,7 @@ public class ItemWorldVein : MonoBehaviour
                 //Item is wood type
                 if(item.GetTier() <= characterEquipment.GetAxeItem().GetTier())
                 {
-                    return false;
+                    return true;
                 }
                 else
                 {
@@ -87,7 +91,7 @@ public class ItemWorldVein : MonoBehaviour
          animator.SetFloat("Phase", curPhase);
         if (curPhase > phases)
         {
-            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
         }
         return item;
     }

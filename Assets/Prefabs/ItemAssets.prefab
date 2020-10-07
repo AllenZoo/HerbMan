@@ -74,7 +74,7 @@ MonoBehaviour:
   IronOre: {fileID: 0}
   AmatiteOre: {fileID: 0}
   Stick: {fileID: 21300000, guid: 697bb48252007974ebb345fa6e0cdf7c, type: 3}
-  Oak: {fileID: 0}
+  Oak: {fileID: 21300000, guid: 5b796cc51d333c04894f1ef7b8bf2aea, type: 3}
   Pine: {fileID: 0}
   Redwood: {fileID: 0}
   StonePickaxeRecipe: {fileID: 6418453570513081338, guid: 91b8ebaa953765044b5201d7732eaa14,
@@ -104,6 +104,6 @@ MonoBehaviour:
   StoneVein: {fileID: 0}
   IronOreVein: {fileID: 0}
   AmatiteOreVein: {fileID: 0}
-  OakVein: {fileID: 0}
+  OakVein: {fileID: 3786389241983592065, guid: 0c89850d7dd334941b8d7774313bac66, type: 3}
   PineVein: {fileID: 0}
   RedwoodVein: {fileID: 0}

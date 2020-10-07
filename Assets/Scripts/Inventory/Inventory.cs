@@ -89,10 +89,16 @@ public class Inventory
             Item tempItem = item;
             tempItem.system = Item.SystemType.inventory;
 
+            //Debug.Log("Item count:" + item.count);
+            //Debug.Log("tempItem count:" + tempItem.count);
             itemList.Add(tempItem);
             GetEmptyInventorySlot().SetItem(tempItem);
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
+    }
+    public void AddItemAmount(Item item, int count)
+    {
+
     }
     public void RemoveItemAmount(Item.ItemType itemType, int count)
     {
@@ -185,6 +191,7 @@ public class Inventory
         public void SetItem(Item item)
         {
             this.item = item;
+            //this.item.count = item.count;
             item.system = Item.SystemType.inventory;
         }
 

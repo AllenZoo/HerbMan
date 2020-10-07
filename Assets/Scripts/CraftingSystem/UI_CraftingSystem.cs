@@ -15,8 +15,6 @@ public class UI_CraftingSystem : MonoBehaviour
     private UI_CraftingSlot energyShardSlot;
     private UI_CraftingSlot recipeSlot;
 
-    private Item[] materialList;
-
     private UI_OutputSlot outputSlot;
 
     private CraftingSystem craftingSystem;
@@ -69,10 +67,10 @@ public class UI_CraftingSystem : MonoBehaviour
         //Check if crafting slots are filled up
         if (herb != null && ore != null && wood != null)
         {
-            Debug.Log("H: " + herb.ToString() + " O: " + ore.ToString() + " W: " + wood.ToString() + " R:" + recipe.ToString());
-            if (craftingSystem.CraftRecipeItem(herb, ore, wood, recipe).itemType != Item.ItemType.Null)
+            Item item = craftingSystem.CraftRecipeItem(herb, ore, wood, recipe);
+            if (item.itemType != Item.ItemType.Null)
             {
-                Item item = craftingSystem.CraftRecipeItem(herb, ore, wood, recipe);
+                item.system = Item.SystemType.craftedItem;
                 craftingSystem.SetOutput(item);
                 outputSlot.OnItemCrafted?.Invoke(this, new UI_OutputSlot.OnItemCraftedEventArgs { item = item });
             }
@@ -158,6 +156,7 @@ public class UI_CraftingSystem : MonoBehaviour
         RefreshCraftingSlot(woodSlot, woodItem);
         RefreshCraftingSlot(energyShardSlot, energyShardItem);
         RefreshCraftingSlot(recipeSlot, recipeItem);
+        RefreshOutputSlot();
 
     }
     
@@ -187,8 +186,8 @@ public class UI_CraftingSystem : MonoBehaviour
         Item item = craftingSystem.GetOutputItem();
         if (item != null)
         {
-            Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment };
-
+            Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.craftedItem };
+            Debug.Log(tempItem.itemType.ToString());
             Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
             uiItemTransform.GetComponent<RectTransform>().anchoredPosition = outputSlot.GetComponent<RectTransform>().anchoredPosition;
             uiItemTransform.localScale = Vector3.one * 1f;
@@ -197,6 +196,7 @@ public class UI_CraftingSystem : MonoBehaviour
             UI_Item uiItem = uiItemTransform.GetComponent<UI_Item>();
             uiItem.SetItem(tempItem);
             uiItem.SetCount(tempItem.count);
+            
             uiItem.RefreshCountText();
 
             outputSlot.transform.Find("itemSlot").gameObject.SetActive(false);

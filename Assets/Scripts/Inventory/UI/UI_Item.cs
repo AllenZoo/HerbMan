@@ -17,6 +17,7 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
 
     private Item item;
     [SerializeField] private int count;
+    [SerializeField] Item.SystemType systemType;
 
     private void Awake()
     {
@@ -51,10 +52,7 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
     {
 
     }
-    public void SetTag(string tag)
-    {
-        this.gameObject.tag = tag;
-    }
+
     public string GetTag()
     {
         return this.tag;
@@ -63,13 +61,29 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
     {
         return count;
     }
+    public Item.SystemType GetSystemType()
+    {
+        return systemType;
+    }
+    public void SetSprite(Sprite sprite)
+    {
+        image.sprite = sprite;
+    }
+    public void SetTag(string tag)
+    {
+        this.gameObject.tag = tag;
+    }
     public void SetCount(int count)
     {
         this.count = count;
     }
+    public void SetSystemType(Item.SystemType systemType)
+    {
+        this.systemType = systemType;
+    }
     public void RefreshCountText()
     {
-        if(count > 1)
+        if (count > 1)
         {
             countText.SetText("x" + count.ToString());
         }
@@ -78,11 +92,6 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
             countText.SetText("");
         }
     }
-    public void SetSprite(Sprite sprite)
-    {
-        image.sprite = sprite;
-    }
-
     public void Hide()
     {
         gameObject.SetActive(false);

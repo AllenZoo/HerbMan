@@ -68,18 +68,19 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1485721731
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3786389241983592065, guid: 0c89850d7dd334941b8d7774313bac66,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &776249287343390429
@@ -97,9 +98,11 @@ MonoBehaviour:
   itemVein:
     item:
       itemType: 19
-      count: 2
+      system: 0
+      count: 1
+      durability: 0
     itemType: 6
     harvestTime: 0
-    animPhase: 0
-    rtAnimatorController: {fileID: 9100000, guid: 918e07b3dcf985d47b2c56beb4306ec0,
+    animPhase: 1
+    rtAnimatorController: {fileID: 9100000, guid: 507a4f4a780479142ba70ca8e3c7052b,
       type: 2}
