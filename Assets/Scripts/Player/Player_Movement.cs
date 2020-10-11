@@ -6,13 +6,8 @@ public class Player_Movement : MonoBehaviour
 {
     public UI_Manager uI_Manager;
 
-    private const float MOVE_SPEED = 7f;
     private const float ORBIT_DASH_SPEED = 200f;
-
-    private enum State
-    {
-
-    }
+    private float moveSpeed = 7f;
 
     [SerializeField] private LayerMask dashLayerMask;
 
@@ -24,6 +19,7 @@ public class Player_Movement : MonoBehaviour
     private Vector2 movement;
     private Vector2 mouseMovement;
 
+    private bool isSprintButtonDown = false;
     private bool isLongDashButtonDown = false;
     private bool isOrbitDashButtonDown = false;
 
@@ -34,6 +30,30 @@ public class Player_Movement : MonoBehaviour
     {
         return Physics2D.Raycast(transform.position, moveDir, distance).collider == null;
     }
+    private void HandleInput()
+    {
+        //Sprint
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isSprintButtonDown = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isSprintButtonDown = false;
+        }
+
+        //Dash
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isLongDashButtonDown = true;
+        }
+        //Click Dash
+        if (Input.GetMouseButtonDown(0))
+        {
+            isOrbitDashButtonDown = true;
+        }
+    }
+
 
     private void HandleMovement()
     {
@@ -49,6 +69,18 @@ public class Player_Movement : MonoBehaviour
         }
 
         playerAnimation.PlayerMoveAnim(moveDir);
+    }
+    private void HandleSprint()
+    {
+        if (isSprintButtonDown)
+        {
+            moveSpeed = 10;
+        }
+        //if out of stamina, isSprintButtonDown = false;
+        else
+        {
+            moveSpeed = 7;
+        }
     }
     private void HandleLongDash()
     {
@@ -81,18 +113,8 @@ public class Player_Movement : MonoBehaviour
             isOrbitDashButtonDown = false;
         }
     }
+   
 
-    private void HandleInput()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isLongDashButtonDown = true;
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            isOrbitDashButtonDown = true;
-        }
-    }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -108,7 +130,8 @@ public class Player_Movement : MonoBehaviour
     private void FixedUpdate()
     {
         //rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
-        rb.velocity = moveDir * MOVE_SPEED;
+        rb.velocity = moveDir * moveSpeed;
+        HandleSprint();
         HandleLongDash();
         HandleOrbitDash();
 

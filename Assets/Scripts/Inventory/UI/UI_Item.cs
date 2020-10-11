@@ -16,8 +16,8 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
     private TextMeshProUGUI countText;
 
     private Item item;
-    [SerializeField] private int count;
-    [SerializeField] Item.SystemType systemType;
+    private int count;
+    private Item.SystemType systemType;
 
     private void Awake()
     {

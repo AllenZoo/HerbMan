@@ -31,6 +31,10 @@ public class UI_Manager : MonoBehaviour
 
         inCraftingSystem = true;
         inInventory = true;
+
+        //Closeing inventory and crafting system
+        //CloseInventory();
+        //CloseCraftingSystem();
     }
 
     public void CloseInventory()
