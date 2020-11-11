@@ -5,7 +5,10 @@ using UnityEngine;
 public class Player_Animation : MonoBehaviour
 {
     private Animator animator;
-
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void PlayerMoveAnim(Vector3 moveDir)
     {
         animator.SetFloat("Horizontal", moveDir.x);
@@ -24,8 +27,5 @@ public class Player_Animation : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
+    
 }

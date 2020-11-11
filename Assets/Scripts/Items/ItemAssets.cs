@@ -15,6 +15,9 @@ public class ItemAssets : MonoBehaviour
     public Transform pfItemWorld;
     public Transform pfItemVein;
 
+    [Header("Enemies")]
+    public Sprite Stipp;
+
     [Header("Tools")]
     //Tools
     public Sprite StonePickaxe;

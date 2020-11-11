@@ -5,6 +5,9 @@ using UnityEngine;
 public class Enemy_Stipp : MonoBehaviour
 {
     private Animator animator;
+    private Sprite sprite;
+    private SpriteRenderer spriteRenderer;
+
     private float health;
     private float moveSpeed;
 
@@ -13,13 +16,23 @@ public class Enemy_Stipp : MonoBehaviour
 
     private void Awake()
     {
+        //Visual
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        sprite = ItemAssets.Instance.Stipp;
+        spriteRenderer.sprite = sprite;
 
+        //Base (Stores stats)
         enemyBase = GetComponent<Enemy_Base>();
+        RefreshStats();
+    }
+
+
+    
+    private void RefreshStats()
+    {
         health = enemyBase.GetHealth();
         moveSpeed = enemyBase.GetMoveSpeed();
     }
-    
-    
 
 }

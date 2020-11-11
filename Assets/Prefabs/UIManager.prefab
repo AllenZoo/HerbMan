@@ -43,10 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cb177e3e87d504885188f580bae946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   hiddenArea: {fileID: 0}
   uiCraftingSystem: {fileID: 0}
   uiCraftingArea: {fileID: 0}
+  openButtonCrafting: {fileID: 0}
+  closeButtonCrafting: {fileID: 0}
   uiEquipmentSlots: {fileID: 0}
   uiEquipmentSlotArea: {fileID: 0}
   uiInventory: {fileID: 0}
   uiInventoryArea: {fileID: 0}
+  openButtonInventory: {fileID: 0}
+  closeButtonInventory: {fileID: 0}

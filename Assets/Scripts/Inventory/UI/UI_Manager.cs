@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class UI_Manager : MonoBehaviour
     [Header("Crafting System")]
     [SerializeField] private Transform uiCraftingSystem;
     [SerializeField] private Transform uiCraftingArea;
+    [SerializeField] private Button openButtonCrafting;
+    [SerializeField] private Button closeButtonCrafting;
 
     [Header("Equipment Slots")]
     [SerializeField] private Transform uiEquipmentSlots;
@@ -19,6 +22,8 @@ public class UI_Manager : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private Transform uiInventory;
     [SerializeField] private Transform uiInventoryArea;
+    [SerializeField] private Button openButtonInventory;
+    [SerializeField] private Button closeButtonInventory;
 
     private bool inCraftingSystem;
     private bool inInventory;
@@ -33,29 +38,41 @@ public class UI_Manager : MonoBehaviour
         inInventory = true;
 
         //Closeing inventory and crafting system
-        //CloseInventory();
-        //CloseCraftingSystem();
+        CloseInventory();
+        CloseCraftingSystem();
     }
 
     public void CloseInventory()
     {
         uiInventory.transform.position = hiddenArea.transform.position;
+        openButtonInventory.gameObject.SetActive(true);
+        closeButtonInventory.gameObject.SetActive(false);
+
         inInventory = false;
     }
     public void OpenInventory()
     {
         uiInventory.transform.position = uiInventoryArea.transform.position;
+        openButtonInventory.gameObject.SetActive(false);
+        closeButtonInventory.gameObject.SetActive(true);
+
         inInventory = true;
     }
 
     public void CloseCraftingSystem()
     {
         uiCraftingSystem.transform.position = hiddenArea.transform.position;
+        openButtonCrafting.gameObject.SetActive(true);
+        closeButtonCrafting.gameObject.SetActive(false);
+
         inCraftingSystem = false;
     }
     public void OpenCraftingSystem()
     {
         uiCraftingSystem.transform.position = uiCraftingArea.transform.position;
+        openButtonCrafting.gameObject.SetActive(false);
+        closeButtonCrafting.gameObject.SetActive(true);
+
         inCraftingSystem = true;
     }
 
