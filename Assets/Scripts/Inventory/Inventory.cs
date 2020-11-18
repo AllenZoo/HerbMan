@@ -36,6 +36,16 @@ public class Inventory
         AddItem(new Item { itemType = Item.ItemType.Iron_Pickaxe_Recipe, count = 1, system = Item.SystemType.inventory });
     }
 
+    public Inventory(int inventorySlotCount)
+    {
+        itemList = new List<Item>();
+        inventorySlotArray = new InventorySlot[inventorySlotCount];
+        for (int i = 0; i < inventorySlotCount; i++)
+        {
+            inventorySlotArray[i] = new InventorySlot(i);
+        }
+    }
+
     public InventorySlot GetEmptyInventorySlot()
     {
         foreach (InventorySlot inventorySlot in inventorySlotArray)
