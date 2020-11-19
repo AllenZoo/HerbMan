@@ -8,17 +8,15 @@ public class UI_QuestRequestSlot : MonoBehaviour
     private Transform itemDisplay;
     private Transform countDisplay;
     private Transform checkBox;
-    private Transform itemBackground;
 
     private bool isItem;
     private bool isCount;
 
-    private void Start()
+    private void Awake()
     {
         itemDisplay = transform.Find("QRObject");
         countDisplay = transform.Find("QRCount");
         checkBox = transform.Find("CheckBox");
-        itemBackground = transform.Find("QRObjectBackground");
     }
 
     public void SetCount(int count)
@@ -49,7 +47,8 @@ public class UI_QuestRequestSlot : MonoBehaviour
     }
     public void SetQuestObject(Item.ItemType itemType)
     {
-        if (itemType != Item.ItemType.Null) {
+        if (itemType != Item.ItemType.Null)
+        {
             isItem = true;
             itemDisplay.gameObject.GetComponent<Image>().sprite = Item.GetSprite(itemType);
         }
@@ -78,7 +77,7 @@ public class UI_QuestRequestSlot : MonoBehaviour
     }
     private void UpdateVisibility()
     {
-        if(isItem && isCount)
+        if (isItem && isCount)
         {
             Show();
         }
@@ -89,16 +88,10 @@ public class UI_QuestRequestSlot : MonoBehaviour
     }
     private void Hide()
     {
-        //countDisplay.gameObject.SetActive(false);
-        //itemDisplay.GetComponent<Image>().enabled = false;
-        //checkBox.gameObject.SetActive(false);
-        //itemBackground.gameObject.SetActive(false);
+        transform.position = transform.position - new Vector3(1000, 1000, 0);
     }
     private void Show()
     {
-        //countDisplay.gameObject.SetActive(true);
-        //itemDisplay.gameObject.SetActive(true);
-        //checkBox.gameObject.SetActive(true);
-        //itemBackground.gameObject.SetActive(true);
+        transform.position = transform.position + new Vector3(1000, 1000, 0);
     }
 }

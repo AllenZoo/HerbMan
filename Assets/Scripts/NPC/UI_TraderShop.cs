@@ -23,8 +23,6 @@ public class UI_TraderShop : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         quest = GameObject.FindGameObjectWithTag("NPC_Trader").GetComponent<NPC_Trader_Shop>().GetQuest();
 
-        //QuestRequest qrDefault = new QuestRequest(Item.ItemType.Flint, 0);
-
         qrOne = new QuestRequest();
         qrTwo = new QuestRequest();
         qrThree = new QuestRequest();
@@ -38,9 +36,9 @@ public class UI_TraderShop : MonoBehaviour
         OnPlayerOpenQuestSystem();
 
         //TEST AREA
-        
+
     }
-    
+
     private void OnPlayerOpenQuestSystem()
     {
         completionList = CheckInventory();
@@ -62,27 +60,28 @@ public class UI_TraderShop : MonoBehaviour
 
         //Checkbox
         int count = 0;
-        foreach(bool isComplete in completionList)
+        foreach (bool isComplete in completionList)
         {
-            if(count == 0)
+            if (count == 0)
             {
                 qrSlotOne.SetCompletionState(isComplete);
             }
-            else if(count == 1)
+            else if (count == 1)
             {
                 qrSlotTwo.SetCompletionState(isComplete);
             }
-            else if(count == 2)
+            else if (count == 2)
             {
                 qrSlotThree.SetCompletionState(isComplete);
             }
+            count++;
         }
 
     }
     private void InitQuestRequest()
     {
         int count = 0;
-        foreach(QuestRequest qr in quest.GetRequestList())
+        foreach (QuestRequest qr in quest.GetRequestList())
         {
             if (count == 0)
             {
@@ -99,7 +98,7 @@ public class UI_TraderShop : MonoBehaviour
             count++;
         }
 
-       
+
     }
 
     private List<bool> CheckInventory()

@@ -68,13 +68,17 @@ public class NPC_Trader_Shop : MonoBehaviour
     private GameObject player;
     private Quest currentQuest;
 
+
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        QuestRequest qrOne = new QuestRequest(Item.ItemType.Hemm, 5);
+        QuestRequest qrOne = new QuestRequest(Item.ItemType.WaterHerb, 5);
+        QuestRequest qrTwo = new QuestRequest(Item.ItemType.Hemm, 4);
+        QuestRequest qrThree = new QuestRequest(Item.ItemType.Stick, 3);
         currentQuest = new Quest();
-        currentQuest.SetQuest(qrOne);
+        currentQuest.SetQuest(qrOne, qrTwo, qrThree);
     }
     
     public Quest GetQuest()
