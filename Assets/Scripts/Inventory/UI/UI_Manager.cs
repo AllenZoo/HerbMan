@@ -7,44 +7,52 @@ public class UI_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
 
-    [SerializeField] private Transform hiddenArea;
-
     [Header("Crafting System")]
     [SerializeField] private Transform uiCraftingSystem;
-    [SerializeField] private Transform uiCraftingArea;
     [SerializeField] private Button openButtonCrafting;
     [SerializeField] private Button closeButtonCrafting;
 
     [Header("Equipment Slots")]
     [SerializeField] private Transform uiEquipmentSlots;
-    [SerializeField] private Transform uiEquipmentSlotArea;
 
     [Header("Inventory")]
     [SerializeField] private Transform uiInventory;
-    [SerializeField] private Transform uiInventoryArea;
     [SerializeField] private Button openButtonInventory;
     [SerializeField] private Button closeButtonInventory;
+
+    [Header("Trader Quests")]
+    [SerializeField] private Transform uiTraderQuest;
+    [SerializeField] private Button openButtonTQ;
+    [SerializeField] private Button closeButtonTQ;
 
     private bool inCraftingSystem;
     private bool inInventory;
 
     private void Start()
     {
-        uiInventoryArea.transform.position = uiInventory.transform.position;
-        uiCraftingArea.transform.position = uiCraftingSystem.transform.position;
-        uiEquipmentSlotArea.transform.position = uiEquipmentSlots.transform.position;
-
         inCraftingSystem = true;
         inInventory = true;
 
         //Closeing inventory and crafting system
         CloseInventory();
         CloseCraftingSystem();
+
+        //Button Stuff
+        openButtonInventory.onClick.AddListener(OpenInventory);
+        closeButtonInventory.onClick.AddListener(CloseInventory);
+
+        openButtonCrafting.onClick.AddListener(OpenCraftingSystem);
+        closeButtonCrafting.onClick.AddListener(CloseCraftingSystem);
+
+        openButtonTQ.onClick.AddListener(OpenTraderQuestInterface);
+        closeButtonTQ.onClick.AddListener(CloseTraderQuestInterface);
     }
 
     public void CloseInventory()
     {
-        uiInventory.transform.position = hiddenArea.transform.position;
+        uiInventory.transform.position = uiInventory.transform.position - new Vector3(999, 999, 0);
+        CloseEquipmentSlots();
+
         openButtonInventory.gameObject.SetActive(true);
         closeButtonInventory.gameObject.SetActive(false);
 
@@ -52,7 +60,9 @@ public class UI_Manager : MonoBehaviour
     }
     public void OpenInventory()
     {
-        uiInventory.transform.position = uiInventoryArea.transform.position;
+        uiInventory.transform.position = uiInventory.transform.position + new Vector3(999, 999, 0);
+        OpenEquipmentSlots();
+
         openButtonInventory.gameObject.SetActive(false);
         closeButtonInventory.gameObject.SetActive(true);
 
@@ -61,7 +71,7 @@ public class UI_Manager : MonoBehaviour
 
     public void CloseCraftingSystem()
     {
-        uiCraftingSystem.transform.position = hiddenArea.transform.position;
+        uiCraftingSystem.transform.position = uiCraftingSystem.transform.position - new Vector3(999, 999, 0);
         openButtonCrafting.gameObject.SetActive(true);
         closeButtonCrafting.gameObject.SetActive(false);
 
@@ -69,7 +79,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void OpenCraftingSystem()
     {
-        uiCraftingSystem.transform.position = uiCraftingArea.transform.position;
+        uiCraftingSystem.transform.position = uiCraftingSystem.transform.position + new Vector3(999, 999, 0);
         openButtonCrafting.gameObject.SetActive(false);
         closeButtonCrafting.gameObject.SetActive(true);
 
@@ -78,17 +88,34 @@ public class UI_Manager : MonoBehaviour
 
     public void CloseEquipmentSlots()
     {
-        uiEquipmentSlots.transform.position = hiddenArea.transform.position;
+        uiEquipmentSlots.transform.position = uiEquipmentSlots.transform.position - new Vector3(999, 999, 0);
     }
     public void OpenEquipmentSlots()
     {
-        uiEquipmentSlots.transform.position = uiEquipmentSlotArea.transform.position;
+        uiEquipmentSlots.transform.position = uiEquipmentSlots.transform.position + new Vector3(999, 999, 0);
+    }
+
+    public void CloseTraderQuestInterface()
+    {
+        uiTraderQuest.transform.position = uiTraderQuest.transform.position - new Vector3(999, 999, 0);
+
+        openButtonTQ.gameObject.SetActive(true);
+        closeButtonTQ.gameObject.SetActive(false);
+    }
+    public void OpenTraderQuestInterface()
+    {
+        uiTraderQuest.transform.position = uiTraderQuest.transform.position + new Vector3(999, 999, 0);
+
+        openButtonTQ.gameObject.SetActive(false);
+        closeButtonTQ.gameObject.SetActive(true);
     }
 
     public bool PlayerCanMove()
     {
         return !inCraftingSystem && !inInventory;
     }
+
+
 
     private void Update()
     {

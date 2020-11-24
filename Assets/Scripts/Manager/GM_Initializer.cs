@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class GM_Initializer : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    [SerializeField] 
+    private Player player;
     [SerializeField] private UI_Inventory uiInventory;
 
     [SerializeField] private UI_CharacterEquipment uiCharacterEquipment;
-    [SerializeField] private CharacterEquipment characterEquipment;
+    private CharacterEquipment characterEquipment;
 
     [SerializeField] private UI_CraftingSystem uiCraftingSystem;
-    [SerializeField] private CraftingSystem craftingSystem;
+    private CraftingSystem craftingSystem;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        characterEquipment = player.GetComponent<CharacterEquipment>();
+        craftingSystem = player.GetComponent<CraftingSystem>();
+
         uiInventory.SetPlayer(player);
         uiInventory.SetCharacterEquipment(characterEquipment);
         uiInventory.SetCraftingSystem(craftingSystem);
