@@ -21,6 +21,7 @@ public class UI_TraderQuest : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<Player>().GetInventory().OnItemListChanged += UI_TraderQuest_OnItemListChanged;
 
         GetCurQuest();
         InitQuestRequest();
@@ -29,20 +30,35 @@ public class UI_TraderQuest : MonoBehaviour
         qrSlotTwo = transform.Find("QuestRequestSlotTwo").GetComponent<UI_QuestRequestSlot>();
         qrSlotThree = transform.Find("QuestRequestSlotThree").GetComponent<UI_QuestRequestSlot>();
 
-        OnPlayerOpenQuestSystem();
+        RefreshUI();
 
         //TEST AREA
 
     }
 
-    private void OnPlayerOpenQuestSystem()
+    private void UI_TraderQuest_OnItemListChanged(object sender, System.EventArgs e)
     {
-        GetCurQuest();
-        completionList = CheckInventory();
-        RefreshUI();
+        //RefreshUI();
     }
-    private void RefreshUI()
+
+    public bool IsQuestComplete()
     {
+        foreach(bool state in completionList)
+        {
+            if(state == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void RefreshUI()
+    {
+        InitQuestRequest();
+        completionList = CheckInventory();
+
         //Refresh Slot info
         qrSlotOne.SetQuestObject(qrOne);
         qrSlotOne.SetCount(qrOne);

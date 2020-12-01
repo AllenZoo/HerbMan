@@ -33,9 +33,10 @@ public class UI_Manager : MonoBehaviour
         inCraftingSystem = true;
         inInventory = true;
 
-        //Closeing inventory and crafting system
+        //Closing inventory and crafting and quest systems
         CloseInventory();
         CloseCraftingSystem();
+        CloseTraderQuestInterface();
 
         //Button Stuff
         openButtonInventory.onClick.AddListener(OpenInventory);
@@ -50,7 +51,7 @@ public class UI_Manager : MonoBehaviour
 
     public void CloseInventory()
     {
-        uiInventory.transform.position = uiInventory.transform.position - new Vector3(999, 999, 0);
+        uiInventory.transform.position = uiInventory.transform.position - new Vector3(2000, 2000, 0);
         CloseEquipmentSlots();
 
         openButtonInventory.gameObject.SetActive(true);
@@ -60,7 +61,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void OpenInventory()
     {
-        uiInventory.transform.position = uiInventory.transform.position + new Vector3(999, 999, 0);
+        uiInventory.transform.position = uiInventory.transform.position + new Vector3(2000, 2000, 0);
         OpenEquipmentSlots();
 
         openButtonInventory.gameObject.SetActive(false);
@@ -71,7 +72,7 @@ public class UI_Manager : MonoBehaviour
 
     public void CloseCraftingSystem()
     {
-        uiCraftingSystem.transform.position = uiCraftingSystem.transform.position - new Vector3(999, 999, 0);
+        uiCraftingSystem.transform.position = uiCraftingSystem.transform.position - new Vector3(2000, 2000, 0);
         openButtonCrafting.gameObject.SetActive(true);
         closeButtonCrafting.gameObject.SetActive(false);
 
@@ -79,7 +80,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void OpenCraftingSystem()
     {
-        uiCraftingSystem.transform.position = uiCraftingSystem.transform.position + new Vector3(999, 999, 0);
+        uiCraftingSystem.transform.position = uiCraftingSystem.transform.position + new Vector3(2000, 2000, 0);
         openButtonCrafting.gameObject.SetActive(false);
         closeButtonCrafting.gameObject.SetActive(true);
 
@@ -88,23 +89,23 @@ public class UI_Manager : MonoBehaviour
 
     public void CloseEquipmentSlots()
     {
-        uiEquipmentSlots.transform.position = uiEquipmentSlots.transform.position - new Vector3(999, 999, 0);
+        uiEquipmentSlots.transform.position = uiEquipmentSlots.transform.position - new Vector3(2000, 2000, 0);
     }
     public void OpenEquipmentSlots()
     {
-        uiEquipmentSlots.transform.position = uiEquipmentSlots.transform.position + new Vector3(999, 999, 0);
+        uiEquipmentSlots.transform.position = uiEquipmentSlots.transform.position + new Vector3(2000, 2000, 0);
     }
 
     public void CloseTraderQuestInterface()
     {
-        uiTraderQuest.transform.position = uiTraderQuest.transform.position - new Vector3(999, 999, 0);
+        uiTraderQuest.transform.position = uiTraderQuest.transform.position - new Vector3(2000, 2000, 0);
 
         openButtonTQ.gameObject.SetActive(true);
         closeButtonTQ.gameObject.SetActive(false);
     }
     public void OpenTraderQuestInterface()
     {
-        uiTraderQuest.transform.position = uiTraderQuest.transform.position + new Vector3(999, 999, 0);
+        uiTraderQuest.transform.position = uiTraderQuest.transform.position + new Vector3(2000, 2000, 0);
 
         openButtonTQ.gameObject.SetActive(false);
         closeButtonTQ.gameObject.SetActive(true);

@@ -5,12 +5,16 @@ using UnityEngine;
 public class ColliderEngine : MonoBehaviour
 {
     private GameObject player;
+    private bool inTouchWithTrader;
     private Enemy_Base enemy_Base;
     private ItemWorld itemWorld;
     private ItemWorldVein itemWorldVein;
+    private UI_Manager uiManager;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        uiManager = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
     }
 
     private void OnEnable()
@@ -18,6 +22,7 @@ public class ColliderEngine : MonoBehaviour
         enemy_Base = null;
         itemWorld = null;
         itemWorldVein = null;
+        inTouchWithTrader = false;
     }
 
     //Class is turned off when no TriggerCollision
@@ -40,6 +45,10 @@ public class ColliderEngine : MonoBehaviour
             player.GetComponent<Player_Movement>().KnockedBack(enemy_Base.GetKnockbackAmount(), collider.gameObject);
             player.GetComponent<Player>().TakeDamage(enemy_Base.GetCollsionDamage());
         }
+        else if(collider.tag == "NPC_Trader")
+        {
+            inTouchWithTrader = true;
+        }
     }
     void Update()
     {
@@ -52,6 +61,13 @@ public class ColliderEngine : MonoBehaviour
                 {
                     player.GetComponent<Player>().GetInventory().AddItem(itemWorldVein.Harvest());
                 }
+            }
+        }
+        if (inTouchWithTrader)
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                uiManager.OpenTraderQuestInterface();
             }
         }
     }

@@ -82,6 +82,7 @@ public class NPC_Trader_QuestManager : MonoBehaviour
 {
     private GameObject player;
     private NPC_Trader npcTrader;
+    private UI_TraderQuest ui_TQ;
 
     private Quest currentQuest;
     private List<Quest> questList;
@@ -99,6 +100,15 @@ public class NPC_Trader_QuestManager : MonoBehaviour
     {
 
     }
+
+    private void CompleteQuest()
+    {
+        if (ui_TQ.IsQuestComplete())
+        {
+            
+        }
+    }
+
 
     public Quest GetQuest()
     {

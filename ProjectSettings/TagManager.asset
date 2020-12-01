@@ -9,6 +9,8 @@ TagManager:
   - Item Vein
   - NPC_Trader
   - Enemy_Gunner_Bullet
+  - Gunner_Bullet
+  - UI_Manager
   layers:
   - Default
   - TransparentFX
