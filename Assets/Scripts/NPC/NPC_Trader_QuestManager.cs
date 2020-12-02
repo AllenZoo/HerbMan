@@ -6,6 +6,7 @@ using UnityEngine;
 public class Quest
 {
     [SerializeField] private List<QuestRequest> questRequestList;
+    [SerializeField] private float moneyReward;
 
     public Quest()
     {
@@ -55,6 +56,10 @@ public class Quest
     {
         return questRequestList;
     }
+    public float GetMoneyRewardAmount()
+    {
+        return moneyReward;
+    }
 }
 [System.Serializable]
 public class QuestRequest
@@ -80,9 +85,11 @@ public class QuestRequest
 }
 public class NPC_Trader_QuestManager : MonoBehaviour
 {
+    [SerializeField] private UI_TraderQuest ui_TQ;
+
     private GameObject player;
     private NPC_Trader npcTrader;
-    private UI_TraderQuest ui_TQ;
+
 
     private Quest currentQuest;
     private List<Quest> questList;
@@ -101,10 +108,17 @@ public class NPC_Trader_QuestManager : MonoBehaviour
 
     }
 
-    private void CompleteQuest()
+    public void CompleteQuest()
     {
         if (ui_TQ.IsQuestComplete())
         {
+            foreach(QuestRequest qr in currentQuest.GetRequestList())
+            {
+                //Remove items from inventory
+                player.GetComponent<Player>().GetInventory().RemoveItem(new Item { itemType = qr.GetItemType(), count = qr.GetItemCount() });
+            }
+
+            //Give Reward
             
         }
     }

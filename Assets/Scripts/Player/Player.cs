@@ -11,14 +11,14 @@ public class Player : MonoBehaviour
 
     private Inventory inventory;
     private Player_Base player_Base;
-    private ColliderEngine colliderEngine;
+    private Player_ColliderEngine colliderEngine;
 
     private void Awake()
     {
         Instance = this;
         inventory = new Inventory(UseItem, 20);
         player_Base = GetComponent<Player_Base>();
-        colliderEngine = GetComponent<ColliderEngine>();
+        colliderEngine = GetComponent<Player_ColliderEngine>();
         colliderEngine.enabled = false;
     }
     private void OnTriggerEnter2D(Collider2D collider)

@@ -88,10 +88,14 @@ public class UI_QuestRequestSlot : MonoBehaviour
     }
     private void Hide()
     {
-        transform.position = transform.position - new Vector3(1000, 1000, 0);
+        //transform.position = transform.position - new Vector3(1000, 1000, 0);
+        this.gameObject.SetActive(false);
     }
     private void Show()
     {
-        transform.position = transform.position + new Vector3(1000, 1000, 0);
+        //transform.position = transform.position + new Vector3(1000, 1000, 0);
+        this.gameObject.SetActive(true);
     }
+
+
 }

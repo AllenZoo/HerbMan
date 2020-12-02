@@ -38,7 +38,7 @@ public class UI_TraderQuest : MonoBehaviour
 
     private void UI_TraderQuest_OnItemListChanged(object sender, System.EventArgs e)
     {
-        //RefreshUI();
+        RefreshUI();
     }
 
     public bool IsQuestComplete()
@@ -60,12 +60,15 @@ public class UI_TraderQuest : MonoBehaviour
         completionList = CheckInventory();
 
         //Refresh Slot info
+        qrSlotOne.gameObject.SetActive(true);
         qrSlotOne.SetQuestObject(qrOne);
         qrSlotOne.SetCount(qrOne);
 
+        qrSlotTwo.gameObject.SetActive(true);
         qrSlotTwo.SetQuestObject(qrTwo);
         qrSlotTwo.SetCount(qrTwo);
 
+        qrSlotThree.gameObject.SetActive(true);
         qrSlotThree.SetQuestObject(qrThree);
         qrSlotThree.SetCount(qrThree);
 
@@ -146,5 +149,14 @@ public class UI_TraderQuest : MonoBehaviour
             boolList.Add(enoughItem);
         }
         return boolList;
+    }
+
+    //DEBUGGING
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RefreshUI();
+        }
     }
 }

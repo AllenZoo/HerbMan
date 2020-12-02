@@ -120,12 +120,12 @@
     <Compile Include="Assets\Scripts\NPC\UI_CheckBox.cs" />
     <Compile Include="Assets\Scripts\NPC\UI_QuestRequestSlot.cs" />
     <Compile Include="Assets\Scripts\NPC\UI_TraderQuest.cs" />
-    <Compile Include="Assets\Scripts\Player\ColliderEngine.cs" />
     <Compile Include="Assets\Scripts\Player\OrbitController.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Abilities.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Animation.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Base.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_ColliderEngine.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\StatBars\HealthBar.cs" />
