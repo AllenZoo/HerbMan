@@ -5,6 +5,7 @@ using UnityEngine;
 public class UI_TraderQuest : MonoBehaviour
 {
     private GameObject player;
+    private GameObject npcTrader;
 
     private Quest quest;
     private QuestRequest qrOne;
@@ -23,6 +24,9 @@ public class UI_TraderQuest : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<Player>().GetInventory().OnItemListChanged += UI_TraderQuest_OnItemListChanged;
 
+        npcTrader = GameObject.FindGameObjectWithTag("NPC_Trader");
+        npcTrader.GetComponent<NPC_Trader_QuestManager>().OnQuestCompletion += UI_TraderQuest_OnQuestCompletion;
+
         GetCurQuest();
         InitQuestRequest();
 
@@ -34,6 +38,11 @@ public class UI_TraderQuest : MonoBehaviour
 
         //TEST AREA
 
+    }
+
+    private void UI_TraderQuest_OnQuestCompletion(object sender, System.EventArgs e)
+    {
+        RefreshUI();
     }
 
     private void UI_TraderQuest_OnItemListChanged(object sender, System.EventArgs e)

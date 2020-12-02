@@ -6,6 +6,8 @@ public class NPC_Trader : MonoBehaviour
 {
     [SerializeField] 
     private List<Quest> questList;
+
+    private int questNum = 0;
     private void Awake()
     {
         //QuestRequest qrOne = new QuestRequest(Item.ItemType.Melom, 3);
@@ -18,8 +20,8 @@ public class NPC_Trader : MonoBehaviour
     }
     public Quest GetNextQuest()
     {
-        Quest returnQuest = questList[0];
-        questList.RemoveAt(0);
+        Quest returnQuest = questList[questNum];
+        questNum++;
         return returnQuest;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -85,6 +86,10 @@ public class QuestRequest
 }
 public class NPC_Trader_QuestManager : MonoBehaviour
 {
+
+    public static NPC_Trader_QuestManager Instance { get;  set; }
+    public event EventHandler OnQuestCompletion;
+
     [SerializeField] private UI_TraderQuest ui_TQ;
 
     private GameObject player;
@@ -119,7 +124,9 @@ public class NPC_Trader_QuestManager : MonoBehaviour
             }
 
             //Give Reward
-            
+            Player_Base.Instance.AddMoney(currentQuest.GetMoneyRewardAmount());
+            currentQuest = npcTrader.GetNextQuest();
+            OnQuestCompletion?.Invoke(this, EventArgs.Empty);
         }
     }
 

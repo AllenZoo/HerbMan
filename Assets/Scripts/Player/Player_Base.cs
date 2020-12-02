@@ -14,6 +14,8 @@ public class Player_Base : MonoBehaviour
     //For Orb Abilities
     [SerializeField] private float curMana;
 
+    private float money = 0;
+
     private float maxHealth = 100;
     private float maxStamina = 100;
     private float maxMana = 100;
@@ -54,6 +56,22 @@ public class Player_Base : MonoBehaviour
     }
 
   
+    public float GetMoney()
+    {
+        return money;
+    }
+    public void AddMoney(float num)
+    {
+        money += num;
+    }
+    public void SubtractMoney(float num)
+    {
+        money -= num;
+    }
+    public void SetMoney(float num)
+    {
+        money = num;
+    }
 
     public float GetHealth()
     {
