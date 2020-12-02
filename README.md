@@ -1,7 +1,7 @@
 # HerbMan
-Topdown Gathering Game.
+Topdown Gathering Game made in Unity 2D (C#).
 
-Controls:
+Controls
 Movement: AWSD
 Harvest/Gather: F
 Sprint: LeftShift
