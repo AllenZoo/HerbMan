@@ -119,11 +119,11 @@ public class Player_Movement : MonoBehaviour
     }
     private void HandleLongDash()
     {
-        if (isLongDashButtonDown && !isLongDashCD)
+        if (isLongDashButtonDown && !isLongDashCD && playerBase.GetStamina() >= 10)
         {
             float dashAmount = 2f;
             Vector3 dashPosition = transform.position + lastMoveDir * dashAmount;
-
+            playerBase.UseStamina(10);
             RaycastHit2D raycastHid2d = Physics2D.Raycast(transform.position, moveDir, dashAmount, dashLayerMask);
             if (raycastHid2d.collider != null)
             {
