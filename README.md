@@ -1,5 +1,5 @@
 # HerbMan
-Topdown Gathering Game made in Unity 2D (C#).
+Topdown Gathering Game made with the Unity Engine 2D (C#).
 
 Controls
 Movement: AWSD
