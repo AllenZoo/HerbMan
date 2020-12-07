@@ -6,12 +6,12 @@ public class GM_Initializer : MonoBehaviour
 {
     [SerializeField] 
     private Player player;
-    [SerializeField] private UI_Inventory uiInventory;
+    private UI_Inventory uiInventory;
 
-    [SerializeField] private UI_CharacterEquipment uiCharacterEquipment;
+    private UI_CharacterEquipment uiCharacterEquipment;
     private CharacterEquipment characterEquipment;
 
-    [SerializeField] private UI_CraftingSystem uiCraftingSystem;
+    private UI_CraftingSystem uiCraftingSystem;
     private CraftingSystem craftingSystem;
 
     private void Start()
@@ -25,12 +25,21 @@ public class GM_Initializer : MonoBehaviour
         uiInventory.SetCraftingSystem(craftingSystem);
         uiInventory.SetInventory(player.GetInventory());
 
-
-        uiCharacterEquipment.SetCharacterEquipment(characterEquipment);
         uiCharacterEquipment.SetInventory(player.GetInventory());
 
         uiCraftingSystem.SetCraftingSystem(craftingSystem);
         uiCraftingSystem.SetInventory(player.GetInventory());
     }
-
+    public void SetUIInventory(UI_Inventory uiInventory)
+    {
+        this.uiInventory = uiInventory;
+    }
+    public void SetUICharacterEquipment(UI_CharacterEquipment uiCharacterEquipment)
+    {
+        this.uiCharacterEquipment = uiCharacterEquipment;
+    }
+    public void SetUICraftingSystem(UI_CraftingSystem uiCraftingSystem)
+    {
+        this.uiCraftingSystem = uiCraftingSystem;
+    }
 }

@@ -86,8 +86,6 @@ public class QuestRequest
 }
 public class NPC_Trader_QuestManager : MonoBehaviour
 {
-
-    public static NPC_Trader_QuestManager Instance { get;  set; }
     public event EventHandler OnQuestCompletion;
 
     [SerializeField] private UI_TraderQuest ui_TQ;
@@ -106,7 +104,11 @@ public class NPC_Trader_QuestManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         npcTrader = GetComponent<NPC_Trader>();
         currentQuest = npcTrader.GetNextQuest();
+
+        OnQuestCompletion += NPC_Trader_QuestManager_OnQuestCompletion;
     }
+
+   
 
     private void Start()
     {
@@ -125,7 +127,7 @@ public class NPC_Trader_QuestManager : MonoBehaviour
 
             //Give Reward
             Player_Base.Instance.AddMoney(currentQuest.GetMoneyRewardAmount());
-            currentQuest = npcTrader.GetNextQuest();
+            //currentQuest = npcTrader.GetNextQuest();
             OnQuestCompletion?.Invoke(this, EventArgs.Empty);
         }
     }
@@ -135,5 +137,8 @@ public class NPC_Trader_QuestManager : MonoBehaviour
     {
         return currentQuest;
     }
-    
+    private void NPC_Trader_QuestManager_OnQuestCompletion(object sender, EventArgs e)
+    {
+        currentQuest = npcTrader.GetNextQuest();
+    }
 }

@@ -21,6 +21,8 @@ public class UI_TraderQuest : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUIQuestInterface(this.gameObject.transform);
+
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<Player>().GetInventory().OnItemListChanged += UI_TraderQuest_OnItemListChanged;
 
@@ -65,6 +67,7 @@ public class UI_TraderQuest : MonoBehaviour
 
     public void RefreshUI()
     {
+        GetCurQuest();
         InitQuestRequest();
         completionList = CheckInventory();
 

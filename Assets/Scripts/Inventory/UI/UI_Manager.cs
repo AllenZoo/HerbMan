@@ -21,32 +21,86 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Button closeButtonInventory;
 
     [Header("Trader Quests")]
-    [SerializeField] private Transform uiTraderQuest;
-    [SerializeField] private Button openButtonTQ;
-    [SerializeField] private Button closeButtonTQ;
+    private Transform uiQuestInterface;
+    private Button openButtonTQ;
+    private Button closeButtonTQ;
 
     private bool inCraftingSystem;
     private bool inInventory;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         inCraftingSystem = true;
         inInventory = true;
 
-        //Closing inventory and crafting and quest systems
-        CloseInventory();
-        CloseCraftingSystem();
-        CloseTraderQuestInterface();
+        //Closing inventory and crafting and quest systems after everything is initialized
+        Invoke("CloseInventory", 0.1f);
+        Invoke("CloseCraftingSystem", 0.1f);
+        Invoke("CloseTraderQuestInterface", 0.1f);
 
-        //Button Stuff
-        openButtonInventory.onClick.AddListener(OpenInventory);
-        closeButtonInventory.onClick.AddListener(CloseInventory);
+    }
+    private void Update()
+    {
+        if (PlayerCanMove())
+        {
+            player.GetComponent<Player_Movement>().enabled = true;
 
-        openButtonCrafting.onClick.AddListener(OpenCraftingSystem);
-        closeButtonCrafting.onClick.AddListener(CloseCraftingSystem);
+            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = true;
+        }
+        else
+        {
+            player.GetComponent<Player_Movement>().enabled = false;
 
-        openButtonTQ.onClick.AddListener(OpenTraderQuestInterface);
-        closeButtonTQ.onClick.AddListener(CloseTraderQuestInterface);
+            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = false;
+        }
+    }
+
+    public void SetUIInventory(Transform uiInventory)
+    {
+        this.uiInventory = uiInventory;
+    }
+    public void SetUIEquipment(Transform uiEquipment)
+    {
+        uiEquipmentSlots = uiEquipment;
+    }
+    public void SetUICraftingSystem(Transform uiCraftingSystem)
+    {
+        this.uiCraftingSystem = uiCraftingSystem;
+    }
+    public void SetUIQuestInterface(Transform uiQuestInterface)
+    {
+        this.uiQuestInterface = uiQuestInterface;
+    }
+    public void SetButton(Button button, bool isOpen, string system)
+    {
+        if (isOpen)
+        {
+            switch (system)
+            {
+                case "Inventory": openButtonInventory = button; openButtonInventory.onClick.AddListener(OpenInventory);
+                    break;
+                case "Crafting": openButtonCrafting = button; openButtonCrafting.onClick.AddListener(OpenCraftingSystem);
+                    break;
+                case "Quest": openButtonTQ = button; openButtonTQ.onClick.AddListener(OpenTraderQuestInterface);
+                    break;
+            }
+        }
+        else
+        {
+            switch (system)
+            {
+                case "Inventory":
+                    closeButtonInventory = button; closeButtonInventory.onClick.AddListener(CloseInventory);
+                    break;
+                case "Crafting":
+                    closeButtonCrafting = button; closeButtonCrafting.onClick.AddListener(CloseCraftingSystem);
+                    break;
+                case "Quest":
+                    closeButtonTQ = button; closeButtonTQ.onClick.AddListener(CloseTraderQuestInterface);
+                    break;
+            }
+        }
     }
 
     public void CloseInventory()
@@ -98,39 +152,21 @@ public class UI_Manager : MonoBehaviour
 
     public void CloseTraderQuestInterface()
     {
-        uiTraderQuest.transform.position = uiTraderQuest.transform.position - new Vector3(2000, 2000, 0);
+        uiQuestInterface.transform.position = uiQuestInterface.transform.position - new Vector3(2000, 2000, 0);
 
         openButtonTQ.gameObject.SetActive(true);
         closeButtonTQ.gameObject.SetActive(false);
     }
     public void OpenTraderQuestInterface()
     {
-        uiTraderQuest.transform.position = uiTraderQuest.transform.position + new Vector3(2000, 2000, 0);
+        uiQuestInterface.transform.position = uiQuestInterface.transform.position + new Vector3(2000, 2000, 0);
 
         openButtonTQ.gameObject.SetActive(false);
         closeButtonTQ.gameObject.SetActive(true);
     }
-
     public bool PlayerCanMove()
     {
         return !inCraftingSystem && !inInventory;
     }
 
-
-
-    private void Update()
-    {
-        if (PlayerCanMove())
-        {
-            player.GetComponent<Player_Movement>().enabled = true;
-
-            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = true;
-        }
-        else
-        {
-            player.GetComponent<Player_Movement>().enabled = false;
-
-            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = false;
-        }
-    }
 }

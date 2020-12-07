@@ -22,6 +22,8 @@ public class UI_CraftingSystem : MonoBehaviour
 
     private void Awake()
     {
+        FindObjectOfType<GM_Initializer>().GetComponent<GM_Initializer>().SetUICraftingSystem(this);
+
         itemContainer = transform.Find("itemContainer");
 
         herbSlot = transform.Find("herbSlot").GetComponent<UI_CraftingSlot>();
@@ -42,7 +44,11 @@ public class UI_CraftingSystem : MonoBehaviour
 
     }
 
-    
+    private void Start()
+    {
+        FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUICraftingSystem(this.gameObject.transform);
+
+    }
 
     public void SetCraftingSystem(CraftingSystem craftingSystem)
     {
