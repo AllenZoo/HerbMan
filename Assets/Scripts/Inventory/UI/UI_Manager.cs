@@ -5,56 +5,39 @@ using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private GameObject gameManager;
 
-    [Header("Crafting System")]
-    [SerializeField] private Transform uiCraftingSystem;
-    [SerializeField] private Button openButtonCrafting;
-    [SerializeField] private Button closeButtonCrafting;
+    //[Header("Crafting System")]
+    private Transform uiCraftingSystem;
+    private Button openButtonCrafting;
+    private Button closeButtonCrafting;
 
-    [Header("Equipment Slots")]
-    [SerializeField] private Transform uiEquipmentSlots;
+    //[Header("Equipment Slots")]
+    private Transform uiEquipmentSlots;
 
-    [Header("Inventory")]
-    [SerializeField] private Transform uiInventory;
-    [SerializeField] private Button openButtonInventory;
-    [SerializeField] private Button closeButtonInventory;
+    //[Header("Inventory")]
+    private Transform uiInventory;
+    private Button openButtonInventory;
+    private Button closeButtonInventory;
 
-    [Header("Trader Quests")]
+    //[Header("Trader Quests")]
     private Transform uiQuestInterface;
     private Button openButtonTQ;
     private Button closeButtonTQ;
 
-    private bool inCraftingSystem;
-    private bool inInventory;
+    private void Awake()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+    }
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        inCraftingSystem = true;
-        inInventory = true;
-
         //Closing inventory and crafting and quest systems after everything is initialized
         Invoke("CloseInventory", 0.1f);
         Invoke("CloseCraftingSystem", 0.1f);
         Invoke("CloseTraderQuestInterface", 0.1f);
-
     }
-    private void Update()
-    {
-        if (PlayerCanMove())
-        {
-            player.GetComponent<Player_Movement>().enabled = true;
-
-            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = true;
-        }
-        else
-        {
-            player.GetComponent<Player_Movement>().enabled = false;
-
-            player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = false;
-        }
-    }
+    
 
     public void SetUIInventory(Transform uiInventory)
     {
@@ -111,7 +94,7 @@ public class UI_Manager : MonoBehaviour
         openButtonInventory.gameObject.SetActive(true);
         closeButtonInventory.gameObject.SetActive(false);
 
-        inInventory = false;
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Inventory", false);
     }
     public void OpenInventory()
     {
@@ -121,7 +104,7 @@ public class UI_Manager : MonoBehaviour
         openButtonInventory.gameObject.SetActive(false);
         closeButtonInventory.gameObject.SetActive(true);
 
-        inInventory = true;
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Inventory", true);
     }
 
     public void CloseCraftingSystem()
@@ -130,7 +113,7 @@ public class UI_Manager : MonoBehaviour
         openButtonCrafting.gameObject.SetActive(true);
         closeButtonCrafting.gameObject.SetActive(false);
 
-        inCraftingSystem = false;
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", false);
     }
     public void OpenCraftingSystem()
     {
@@ -138,7 +121,7 @@ public class UI_Manager : MonoBehaviour
         openButtonCrafting.gameObject.SetActive(false);
         closeButtonCrafting.gameObject.SetActive(true);
 
-        inCraftingSystem = true;
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", true);
     }
 
     public void CloseEquipmentSlots()
@@ -156,6 +139,8 @@ public class UI_Manager : MonoBehaviour
 
         openButtonTQ.gameObject.SetActive(true);
         closeButtonTQ.gameObject.SetActive(false);
+
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", false);
     }
     public void OpenTraderQuestInterface()
     {
@@ -163,10 +148,8 @@ public class UI_Manager : MonoBehaviour
 
         openButtonTQ.gameObject.SetActive(false);
         closeButtonTQ.gameObject.SetActive(true);
-    }
-    public bool PlayerCanMove()
-    {
-        return !inCraftingSystem && !inInventory;
+
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", true);
     }
 
 }

@@ -23,6 +23,7 @@ public class UI_CraftingSystem : MonoBehaviour
     private void Awake()
     {
         FindObjectOfType<GM_Initializer>().GetComponent<GM_Initializer>().SetUICraftingSystem(this);
+        FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUICraftingSystem(this.gameObject.transform);
 
         itemContainer = transform.Find("itemContainer");
 
@@ -46,7 +47,7 @@ public class UI_CraftingSystem : MonoBehaviour
 
     private void Start()
     {
-        FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUICraftingSystem(this.gameObject.transform);
+
 
     }
 

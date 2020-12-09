@@ -17,6 +17,7 @@ public class UI_CharacterEquipment : MonoBehaviour
     private CharacterEquipment characterEquipment;
     private void Awake()
     {
+
         FindObjectOfType<GM_Initializer>().GetComponent<GM_Initializer>().SetUICharacterEquipment(this);
 
         itemContainer = transform.Find("itemContainer");
@@ -33,7 +34,6 @@ public class UI_CharacterEquipment : MonoBehaviour
     private void Start()
     {
         FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUIEquipment(this.gameObject.transform);
-
     }
     public void SetCharacterEquipment(CharacterEquipment characterEquipment)
     {

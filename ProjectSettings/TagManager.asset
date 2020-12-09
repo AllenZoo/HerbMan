@@ -11,6 +11,7 @@ TagManager:
   - Enemy_Gunner_Bullet
   - Gunner_Bullet
   - UI_Manager
+  - GameManager
   layers:
   - Default
   - TransparentFX

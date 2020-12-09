@@ -8,24 +8,32 @@ public class GM_Initializer : MonoBehaviour
     private Player player;
     private UI_Inventory uiInventory;
 
-    private UI_CharacterEquipment uiCharacterEquipment;
-    private CharacterEquipment characterEquipment;
+    [SerializeField] private UI_CharacterEquipment uiCharacterEquipment;
+    [SerializeField] private CharacterEquipment characterEquipment;
 
     private UI_CraftingSystem uiCraftingSystem;
     private CraftingSystem craftingSystem;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         characterEquipment = player.GetComponent<CharacterEquipment>();
         craftingSystem = player.GetComponent<CraftingSystem>();
+    }
+    private void Start()
+    {
+        Invoke("Initialize", 0.1f);
+    }
 
+    private void Initialize()
+    {
         uiInventory.SetPlayer(player);
         uiInventory.SetCharacterEquipment(characterEquipment);
         uiInventory.SetCraftingSystem(craftingSystem);
         uiInventory.SetInventory(player.GetInventory());
 
         uiCharacterEquipment.SetInventory(player.GetInventory());
+        uiCharacterEquipment.SetCharacterEquipment(characterEquipment);
 
         uiCraftingSystem.SetCraftingSystem(craftingSystem);
         uiCraftingSystem.SetInventory(player.GetInventory());

@@ -23,7 +23,6 @@ public class CharacterEquipment : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
-        
     }
 
     public Item GetPickaxeItem()

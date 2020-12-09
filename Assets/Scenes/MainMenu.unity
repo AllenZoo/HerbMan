@@ -3588,7 +3588,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 19
+      m_TileSpriteIndex: 20
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3813,7 +3813,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 10
-      m_TileSpriteIndex: 14
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -9751,8 +9751,8 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: -7457648174421407556, guid: 1c0c09395c1d41340a13c2fd9ce31033,
       type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 352334419468068627, guid: 1c0c09395c1d41340a13c2fd9ce31033, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
@@ -9763,10 +9763,10 @@ Tilemap:
     m_Data: {fileID: -8014868740033183983, guid: 1c0c09395c1d41340a13c2fd9ce31033,
       type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: 352334419468068627, guid: 1c0c09395c1d41340a13c2fd9ce31033, type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: 3370328470146093046, guid: 1c0c09395c1d41340a13c2fd9ce31033,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 6265441246202772064, guid: 1c0c09395c1d41340a13c2fd9ce31033,
       type: 3}
@@ -10044,6 +10044,11 @@ PrefabInstance:
     - target: {fileID: 1260593651719653232, guid: ecca6fae7736a1941b95b8f54250a7be,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533452772328297954, guid: ecca6fae7736a1941b95b8f54250a7be,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10467,8 +10472,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 619e35eecab4caa4a9aa9d2f6bb6ee4a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.528
+  m_Pitch: 0.75
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -10541,7 +10546,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.748
       inSlope: 0
       outSlope: 0
       tangentMode: 0

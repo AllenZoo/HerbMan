@@ -27,7 +27,7 @@ public class Inventory
         AddItem(new Item { itemType = Item.ItemType.Iron_Sickle, count = 1, system = Item.SystemType.inventory });
         AddItem(new Item { itemType = Item.ItemType.Amatite_Sickle, count = 1, system = Item.SystemType.inventory });
         AddItem(new Item { itemType = Item.ItemType.Hemm, count = 8, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.WaterHerb, count = 8, system = Item.SystemType.inventory });
+        //AddItem(new Item { itemType = Item.ItemType.WaterHerb, count = 1, system = Item.SystemType.inventory });
         AddItem(new Item { itemType = Item.ItemType.MellowMint, count = 8, system = Item.SystemType.inventory });
         AddItem(new Item { itemType = Item.ItemType.Flint, count = 3, system = Item.SystemType.inventory });
         AddItem(new Item { itemType = Item.ItemType.Stick, count = 3, system = Item.SystemType.inventory });

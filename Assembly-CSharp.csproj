@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GM_StateManager.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Assets.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\CMDebug.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\CameraFollow.cs" />
@@ -82,11 +83,11 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
+    <Compile Include="Assets\Player_Input.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_OutputSlot.cs" />
-    <Compile Include="Assets\Scripts\DM_DialogueManager.cs" />
     <Compile Include="Assets\Scripts\DeathTimer.cs" />
     <Compile Include="Assets\Scripts\Dialogue.cs" />
     <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Assets\Scripts\StatBars\HealthBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\LevelBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\StatBar.cs" />
+    <Compile Include="Assets\Scripts\UI_DialogueManager.cs" />
     <Compile Include="Assets\Scripts\UI_Manager_ButtonScript.cs" />
     <Compile Include="Assets\Scripts\UI_MoneyCount.cs" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
