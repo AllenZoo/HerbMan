@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GM_StateManager.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Assets.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\CMDebug.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\CameraFollow.cs" />
@@ -83,7 +82,6 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
-    <Compile Include="Assets\Player_Input.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
@@ -102,6 +100,7 @@
     <Compile Include="Assets\Scripts\Equipment\CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipmentSlot.cs" />
+    <Compile Include="Assets\Scripts\GM_StateManager.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Item.cs" />
@@ -130,11 +129,13 @@
     <Compile Include="Assets\Scripts\Player\Player_Base.cs" />
     <Compile Include="Assets\Scripts\Player\Player_ColliderEngine.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
+    <Compile Include="Assets\Scripts\Player_Input.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\StatBars\HealthBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\LevelBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\StatBar.cs" />
+    <Compile Include="Assets\Scripts\TutorialArrow.cs" />
     <Compile Include="Assets\Scripts\UI_DialogueManager.cs" />
     <Compile Include="Assets\Scripts\UI_Manager_ButtonScript.cs" />
     <Compile Include="Assets\Scripts\UI_MoneyCount.cs" />

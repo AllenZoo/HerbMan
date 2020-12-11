@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GM_Initializer : MonoBehaviour
 {
-    [SerializeField] 
     private Player player;
+
     private UI_Inventory uiInventory;
 
-    [SerializeField] private UI_CharacterEquipment uiCharacterEquipment;
-    [SerializeField] private CharacterEquipment characterEquipment;
+    private UI_CharacterEquipment uiCharacterEquipment;
+    private CharacterEquipment characterEquipment;
 
     private UI_CraftingSystem uiCraftingSystem;
     private CraftingSystem craftingSystem;

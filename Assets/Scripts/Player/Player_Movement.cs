@@ -28,9 +28,51 @@ public class Player_Movement : MonoBehaviour
     private bool isOrbitDashButtonDown = false;
 
     private bool isMoving = false;
+    private bool canMove;
 
     private Rigidbody2D rb;
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        playerAnimation = GetComponent<Player_Animation>();
+        playerBase = GetComponent<Player_Base>();
+    }
+    private void Update()
+    {
+        if (canMove)
+        {
+            HandleMovement();
+            HandleInput();
+            HandleOrbitTeleport();
+        }
+    }
+    private void FixedUpdate()
+    {
+        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Debug.Log("X: " + mousePosition.x + " Y: "+ mousePosition.y +" Z: "+ mousePosition.z+" Magnitude: "+ mousePosition.magnitude);
 
+        //rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
+        if (isMoving && canMove)
+        {
+            rb.velocity = moveDir * moveSpeed;
+            HandleSprint();
+            HandleLongDash();
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+
+    }
+
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
+        if (!canMove)
+        {
+            playerAnimation.PlayerMoveAnim(new Vector3(0,0,0));
+        }
+    }
     public void KnockedBack(float amount, GameObject enemy)
     {
         Debug.Log("getting knocked back");
@@ -163,37 +205,5 @@ public class Player_Movement : MonoBehaviour
    
   
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        playerAnimation = GetComponent<Player_Animation>();
-        playerBase = GetComponent<Player_Base>();
-    }
-    private void Update()
-    {
-       
-        HandleMovement();
-        HandleInput();
-        HandleOrbitTeleport();
-    }
-    private void FixedUpdate()
-    {
-        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Debug.Log("X: " + mousePosition.x + " Y: "+ mousePosition.y +" Z: "+ mousePosition.z+" Magnitude: "+ mousePosition.magnitude);
-        
-        //rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
-        if (isMoving)
-        {
-            rb.velocity = moveDir * moveSpeed;
-        }
-        else
-        {
-            rb.velocity = new Vector2(0, 0);
-        }
-        HandleSprint();
-        HandleLongDash();
-
-
-        
-    }
+   
 }
