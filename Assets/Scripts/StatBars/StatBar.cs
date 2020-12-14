@@ -31,6 +31,14 @@ public class StatBar : MonoBehaviour
 
         
     }
+    public float GetMaxValue()
+    {
+        return bar.maxValue;
+    }
+    public float GetCurValue()
+    {
+        return bar.value;
+    }
 
     private void StatBar_OnStatChanged(object sender, System.EventArgs e)
     {

@@ -5,11 +5,19 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] private bool isOneTime;
+    [SerializeField] private GameObject arrow;
     [SerializeField] private Dialogue dialogue;
 
     public void TriggerDialogue()
     {
-        FindObjectOfType<UI_DialogueManager>().StartDialogue(dialogue);
+        if (arrow)
+        {
+            FindObjectOfType<UI_DialogueManager>().StartDialogue(dialogue, arrow);
+        }
+        else
+        {
+            FindObjectOfType<UI_DialogueManager>().StartDialogue(dialogue);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,6 +28,11 @@ public class DialogueTrigger : MonoBehaviour
             if (isOneTime)
             {
                 Deactivate();
+            }
+            if (arrow)
+            {
+                arrow.SetActive(true);
+                arrow.GetComponent<TutorialArrow>().StartFlashing();
             }
         }
     }

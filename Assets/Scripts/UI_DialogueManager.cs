@@ -8,6 +8,7 @@ public class UI_DialogueManager : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private GameObject gameManager;
+    private GameObject arrow;
 
     private Text nameText;
     private Text dialogueText;
@@ -42,6 +43,22 @@ public class UI_DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
+    public void StartDialogue(Dialogue dialogue, GameObject arrow)
+    {
+        this.arrow = arrow;
+        nameText.text = dialogue.name;
+        animator.SetBool("isOpen", true);
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Dialogue", true);
+        sentences.Clear();
+
+        foreach (string sentence in dialogue.sentences)
+        {
+            sentences.Enqueue(sentence);
+        }
+
+        DisplayNextSentence();
+    }
+
     public void DisplayNextSentence()
     {
         if(sentences.Count == 0)
@@ -66,6 +83,11 @@ public class UI_DialogueManager : MonoBehaviour
     }
     private void EndDialogue()
     {
+        if (arrow)
+        {
+            arrow.SetActive(false);
+            arrow = null;
+        }
         gameManager.GetComponent<GM_StateManager>().SetStatus("Dialogue", false);
         animator.SetBool("isOpen", false);
     }

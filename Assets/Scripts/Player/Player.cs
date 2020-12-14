@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float num)
     {
+        Debug.Log("taking damage");
         player_Base.SubtractHealth(num);
     }
     public Inventory GetInventory()
