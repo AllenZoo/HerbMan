@@ -38,35 +38,38 @@ public class TutorialArrow : MonoBehaviour
     private IEnumerator Flash()
     {
         Debug.Log("Coroutine Started");
-        Color tempColour = new Color(255, 255, 255, 1);
-        float tempAlphaVal = 1;
+        Color32 tempColour = new Color(255, 255, 255, 1);
+        float tempAlphaVal = 255f;
         bool isFading = true;
         while (isFlashing)
         {
-            Debug.Log(tempColour.a + " " + isFading);
+
             if (isFading)
             {
-                tempAlphaVal -= 1/10;
-                tempColour.a = tempAlphaVal;
+                tempAlphaVal  -= 10;
+                tempColour.a = (byte)tempAlphaVal;
                 image.color = tempColour;
 
-                if(tempAlphaVal == 0.1)
+                if(tempAlphaVal == 15)
                 {
                     isFading = false;
                 }
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1/5);
             }
             else if (!isFading)
             {
-                tempColour.a += 1/10;
+                tempAlphaVal += 10;
+                tempColour.a = (byte)tempAlphaVal;
                 image.color = tempColour;
                 
-                if(tempColour.a == 1)
+                if(tempColour.a == 255)
                 {
                     isFading = true;
                 }
+                yield return new WaitForSeconds(1 / 5);
             }
-            yield return new WaitForSeconds(1);
+
+            //yield return new WaitForSeconds(1);
         }
 
         yield return null;
