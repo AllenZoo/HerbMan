@@ -98,7 +98,7 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy_Stipp.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Stipp_Animation.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Stipp_Movement.cs" />
-    <Compile Include="Assets\Scripts\Equipment\CharacterEquipment.cs" />
+    <Compile Include="Assets\Scripts\Equipment\Player_Equipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\GM_StateManager.cs" />
@@ -127,9 +127,9 @@
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Abilities.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Animation.cs" />
-    <Compile Include="Assets\Scripts\Player\Player_Base.cs" />
-    <Compile Include="Assets\Scripts\Player\Player_ColliderEngine.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Collision.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Stats.cs" />
     <Compile Include="Assets\Scripts\Player_Input.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />

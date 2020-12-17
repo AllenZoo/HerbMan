@@ -126,7 +126,7 @@ public class NPC_Trader_QuestManager : MonoBehaviour
             }
 
             //Give Reward
-            Player_Base.Instance.AddMoney(currentQuest.GetMoneyRewardAmount());
+            Player_Stats.Instance.AddMoney(currentQuest.GetMoneyRewardAmount());
             //currentQuest = npcTrader.GetNextQuest();
             OnQuestCompletion?.Invoke(this, EventArgs.Empty);
         }

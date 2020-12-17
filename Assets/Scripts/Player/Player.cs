@@ -7,33 +7,58 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
-    public event EventHandler OnEquipChanged;
 
+    //Events
+    internal event EventHandler OnEquipChanged;
+
+    //Sub classes
+    internal Player_Animation player_Animation;
+    internal Player_Stats player_Stats;
+    internal Player_Collision player_Collision;
+    internal Player_Movement player_Movement;
+    internal Player_Input player_Input;
+
+    //Components
+    internal Animator animator;
+    internal Rigidbody2D rb2D;
+
+    //Other
     private Inventory inventory;
-    private Player_Base player_Base;
-    private Player_ColliderEngine colliderEngine;
 
     private void Awake()
     {
         Instance = this;
+
+        player_Animation = GetComponent<Player_Animation>();
+        player_Stats = GetComponent<Player_Stats>();
+        player_Collision = GetComponent<Player_Collision>();
+        player_Movement = GetComponent<Player_Movement>();
+        player_Input = GetComponent<Player_Input>();
+
+        animator = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
+
         inventory = new Inventory(UseItem, 20);
-        player_Base = GetComponent<Player_Base>();
-        colliderEngine = GetComponent<Player_ColliderEngine>();
-        colliderEngine.enabled = false;
     }
-    private void OnTriggerEnter2D(Collider2D collider)
+
+    private void Start()
     {
-        colliderEngine.enabled = true;
+        //player_Collision.enabled = false;
     }
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        colliderEngine.enabled = false;
-    }
+
+    //private void OnTriggerEnter2D(Collider2D collider)
+    //{
+    //    player_Collision.enabled = true;
+    //}
+    //private void OnTriggerExit2D(Collider2D collider)
+    //{
+    //    player_Collision.enabled = false;
+    //}
 
     public void TakeDamage(float num)
     {
         Debug.Log("taking damage");
-        player_Base.SubtractHealth(num);
+        player_Stats.SubtractHealth(num);
     }
     public Inventory GetInventory()
     {
@@ -45,7 +70,7 @@ public class Player : MonoBehaviour
     }
     public void SetEquipment(Item item)
     {
-        //SetEquipment(item.itemType);
+        SetEquipment(item.itemType);
     }
     public void SetEquipment(Item.ItemType itemType)
     {

@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Player_Animation : MonoBehaviour
 {
+    [SerializeField] Player player;
     private Animator animator;
+
+    private void Awake()
+    {
+        player = GetComponent<Player>();
+    }
+
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = player.animator;
     }
     public void PlayerMoveAnim(Vector3 moveDir)
     {

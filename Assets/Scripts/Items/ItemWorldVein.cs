@@ -13,11 +13,11 @@ public class ItemWorldVein : MonoBehaviour
     private int phases;
     private int curPhase;
 
-    private CharacterEquipment characterEquipment;
+    private Player_Equipment characterEquipment;
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        characterEquipment = player.GetComponent<CharacterEquipment>();
+        characterEquipment = player.GetComponent<Player_Equipment>();
     }
 
     private void Start()

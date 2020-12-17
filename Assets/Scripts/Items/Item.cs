@@ -66,6 +66,27 @@ public class Item
         Stone_Sickle_Recipe,
         Iron_Sickle_Recipe,
         Amatite_Sickle_Recipe,
+
+        //Armor
+        Stone_Helmet,
+        Stone_Chestplate,
+        Stone_Pants,
+        Stone_Boots,
+
+        Iron_Helmet,
+        Iron_Chestplate,
+        Iron_Pants,
+        Iron_Boots,
+
+        Amatite_Helmet,
+        Amatite_Chestplate,
+        Amatite_Pants,
+        Amatite_Boots,
+
+        //Weapon
+        Stone_Sword,
+        Iron_Sword,
+        Amatite_Sword,
     }
     public enum SystemType
     {
@@ -133,24 +154,24 @@ public class Item
         }
     }
 
-    public CharacterEquipment.EquipSlot GetEquipSlot()
+    public Player_Equipment.EquipSlot GetEquipSlot()
     {
         switch (itemType)
         {
             default:
-                return CharacterEquipment.EquipSlot.UnEquipable;
+                return Player_Equipment.EquipSlot.UnEquipable;
             case ItemType.Stone_Pickaxe:
             case ItemType.Iron_Pickaxe:
             case ItemType.Amatite_Pickaxe:
-                return CharacterEquipment.EquipSlot.Pickaxe;
+                return Player_Equipment.EquipSlot.Pickaxe;
             case ItemType.Stone_Axe:
             case ItemType.Iron_Axe:
             case ItemType.Amatite_Axe:
-                return CharacterEquipment.EquipSlot.Axe;
+                return Player_Equipment.EquipSlot.Axe;
             case ItemType.Stone_Sickle:
             case ItemType.Iron_Sickle:
             case ItemType.Amatite_Sickle:
-                return CharacterEquipment.EquipSlot.Sickle;
+                return Player_Equipment.EquipSlot.Sickle;
 
         }
     }

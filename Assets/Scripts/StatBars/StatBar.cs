@@ -17,19 +17,16 @@ public class StatBar : MonoBehaviour
 
         if (isHealthBar)
         {
-            bar.maxValue = player.GetComponent<Player_Base>().GetMaxHealth();
-            player.GetComponent<Player_Base>().OnHealthChanged += StatBar_OnStatChanged;
+            bar.maxValue = player.GetComponent<Player_Stats>().GetMaxHealth();
+            player.GetComponent<Player_Stats>().OnHealthChanged += StatBar_OnStatChanged;
         }
         else if (isStaminaBar)
         {
-            bar.maxValue = player.GetComponent<Player_Base>().GetMaxStamina();
-            player.GetComponent<Player_Base>().OnStaminaUsed += StatBar_OnStatChanged;
+            bar.maxValue = player.GetComponent<Player_Stats>().GetMaxStamina();
+            player.GetComponent<Player_Stats>().OnStaminaUsed += StatBar_OnStatChanged;
         }
         bar.minValue = 0;
         bar.value = bar.maxValue;
-
-
-        
     }
     public float GetMaxValue()
     {
@@ -44,11 +41,11 @@ public class StatBar : MonoBehaviour
     {
         if (isHealthBar)
         {
-            bar.value = player.GetComponent<Player_Base>().GetHealth();
+            bar.value = player.GetComponent<Player_Stats>().GetHealth();
         }
         else if (isStaminaBar)
         {
-            bar.value = player.GetComponent<Player_Base>().GetStamina();
+            bar.value = player.GetComponent<Player_Stats>().GetStamina();
         }
     }
 }

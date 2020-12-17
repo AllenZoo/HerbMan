@@ -27,7 +27,7 @@ public class UI_MoneyCount : MonoBehaviour
     }
     private void RefreshUI()
     {
-        money = Player_Base.Instance.GetMoney();
+        money = Player_Stats.Instance.GetMoney();
         moneyText.text = "Money: " + money;
     }
 }

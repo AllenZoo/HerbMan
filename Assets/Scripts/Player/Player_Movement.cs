@@ -4,45 +4,45 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
-    public UI_Manager uI_Manager;
 
-    private const float ORBIT_DASH_AMOUNT = 5f;
+    [SerializeField] internal Player player;
+
+    [SerializeField] private LayerMask dashLayerMask;
+    [SerializeField] private UI_Manager uI_Manager;
 
     private float moveSpeed = 7f;
 
-    [SerializeField] private LayerMask dashLayerMask;
 
-    private Player_Animation playerAnimation;
-    private Player_Base playerBase;
+    //private Player_Animation playerAnimation;
+    //private Player_Base playerBase;
 
     private Vector3 moveDir;
     private Vector3 lastMoveDir;
     private Vector2 movement;
 
-    private bool isSprintButtonDown = false;
-
-    private bool isLongDashButtonDown = false;
     private bool isLongDashCD = false;
     private float longDashCooldown = 5f;
 
-    private bool isOrbitDashButtonDown = false;
 
     private bool isMoving = false;
     private bool canMove;
+    private bool outOfStamina = false;
 
     private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        player = GetComponent<Player>();
+    }
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        playerAnimation = GetComponent<Player_Animation>();
-        playerBase = GetComponent<Player_Base>();
+        rb = player.rb2D;
     }
     private void Update()
     {
         if (canMove)
         {
             HandleMovement();
-            HandleInput();
             HandleOrbitTeleport();
         }
     }
@@ -70,7 +70,7 @@ public class Player_Movement : MonoBehaviour
         this.canMove = canMove;
         if (!canMove)
         {
-            playerAnimation.PlayerMoveAnim(new Vector3(0,0,0));
+            player.player_Animation.PlayerMoveAnim(new Vector3(0,0,0));
         }
     }
     public void KnockedBack(float amount, GameObject enemy)
@@ -89,38 +89,7 @@ public class Player_Movement : MonoBehaviour
         transform.position = knockbackPosition;
         //rb.MovePosition(knockbackPosition * amount);
     }
-    private void HandleInput()
-    {
-        //Sprint
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isSprintButtonDown = true;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isSprintButtonDown = false;
-        }
 
-        //Dash
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isLongDashButtonDown = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isLongDashButtonDown = false;
-        }
-
-        //Orbit Flash
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            isOrbitDashButtonDown = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.G))
-        {
-            isOrbitDashButtonDown = false;
-        }
-    }
     private void HandleMovement()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -139,20 +108,20 @@ public class Player_Movement : MonoBehaviour
             isMoving = false;
         }
 
-        playerAnimation.PlayerMoveAnim(moveDir);
+        player.player_Animation.PlayerMoveAnim(moveDir);
     }
+
     private void HandleSprint()
     {
-        if (playerBase.GetStamina() < 1)
+        if (player.player_Stats.GetStamina() < 1)
         {
             //Stop sprinting
-            isSprintButtonDown = false;
             moveSpeed = 7;
         }
-        else if (isSprintButtonDown && isMoving)
+        else if (player.player_Input.isSprintButtonDown && isMoving)
         {
             moveSpeed = 10;
-            playerBase.UseStamina(1);
+            player.player_Stats.UseStamina(1);
         }
         else
         {
@@ -161,11 +130,11 @@ public class Player_Movement : MonoBehaviour
     }
     private void HandleLongDash()
     {
-        if (isLongDashButtonDown && !isLongDashCD && playerBase.GetStamina() >= 10)
+        if (player.player_Input.isLongDashButtonDown && !isLongDashCD && player.player_Stats.GetStamina() >= 10)
         {
             float dashAmount = 2f;
             Vector3 dashPosition = transform.position + lastMoveDir * dashAmount;
-            playerBase.UseStamina(10);
+            player.player_Stats.UseStamina(10);
             RaycastHit2D raycastHid2d = Physics2D.Raycast(transform.position, moveDir, dashAmount, dashLayerMask);
             if (raycastHid2d.collider != null)
             {
@@ -173,10 +142,9 @@ public class Player_Movement : MonoBehaviour
             }
 
             rb.MovePosition(dashPosition);
-            isLongDashButtonDown = false;
             StartCoroutine(StartLongDashCD(longDashCooldown));
         }
-        else if(isLongDashButtonDown && isLongDashCD)
+        else if(player.player_Input.isLongDashButtonDown && isLongDashCD)
         {
             Debug.Log("Long dash is on cooldown!");
         }
@@ -184,17 +152,17 @@ public class Player_Movement : MonoBehaviour
     }
     private void HandleOrbitTeleport()
     {
-        if (isOrbitDashButtonDown)
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 newMousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
-            //Vector2 mouseMovement = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
-            //rb.velocity = new Vector2(mouseMovement.x * ORBIT_DASH_SPEED, mouseMovement.y * ORBIT_DASH_SPEED);
-            //transform.position = new Vector2(mouseMovement.x * ORBIT_DASH_AMOUNT, mouseMovement.y * ORBIT_DASH_AMOUNT);
-            //transform.position = new Vector2(transform.position.x + newMousePosition.x, transform.position.y + newMousePosition.y);
+        //if (isOrbitDashButtonDown)
+        //{
+        //    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    Vector3 newMousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
+        //    //Vector2 mouseMovement = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
+        //    //rb.velocity = new Vector2(mouseMovement.x * ORBIT_DASH_SPEED, mouseMovement.y * ORBIT_DASH_SPEED);
+        //    //transform.position = new Vector2(mouseMovement.x * ORBIT_DASH_AMOUNT, mouseMovement.y * ORBIT_DASH_AMOUNT);
+        //    //transform.position = new Vector2(transform.position.x + newMousePosition.x, transform.position.y + newMousePosition.y);
 
-            isOrbitDashButtonDown = false;
-        }
+        //    isOrbitDashButtonDown = false;
+        //}
     }
     private IEnumerator StartLongDashCD(float time)
     {

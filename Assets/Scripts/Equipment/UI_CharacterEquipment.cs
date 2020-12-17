@@ -14,7 +14,7 @@ public class UI_CharacterEquipment : MonoBehaviour
     private UI_CharacterEquipmentSlot axeSlot;
     private UI_CharacterEquipmentSlot sickleSlot;
 
-    private CharacterEquipment characterEquipment;
+    private Player_Equipment playerEquipment;
     private void Awake()
     {
 
@@ -35,30 +35,30 @@ public class UI_CharacterEquipment : MonoBehaviour
     {
         FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUIEquipment(this.gameObject.transform);
     }
-    public void SetCharacterEquipment(CharacterEquipment characterEquipment)
+    public void SetCharacterEquipment(Player_Equipment playerEquipment)
     {
-        this.characterEquipment = characterEquipment;
+        this.playerEquipment = playerEquipment;
         UpdateVisual();
 
-        characterEquipment.OnEquipmentChanged += CharacterEquipment_OnEquipmentChanged;
+        playerEquipment.OnEquipmentChanged += PlayerEquipment_OnEquipmentChanged;
     }
 
     private void PickaxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        TryDropEquipmentInSlot(CharacterEquipment.EquipSlot.Pickaxe, e.item);
+        TryDropEquipmentInSlot(Player_Equipment.EquipSlot.Pickaxe, e.item);
     }
 
     private void AxeSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        TryDropEquipmentInSlot(CharacterEquipment.EquipSlot.Axe, e.item);
+        TryDropEquipmentInSlot(Player_Equipment.EquipSlot.Axe, e.item);
     }
 
     private void SickleSlot_OnItemDropped(object sender, UI_CharacterEquipmentSlot.OnItemDroppedEventArgs e)
     {
-        TryDropEquipmentInSlot(CharacterEquipment.EquipSlot.Sickle, e.item);
+        TryDropEquipmentInSlot(Player_Equipment.EquipSlot.Sickle, e.item);
     }
 
-    private void CharacterEquipment_OnEquipmentChanged(object sender, System.EventArgs e)
+    private void PlayerEquipment_OnEquipmentChanged(object sender, System.EventArgs e)
     {
         UpdateVisual();
     }
@@ -69,9 +69,9 @@ public class UI_CharacterEquipment : MonoBehaviour
             Destroy(child.gameObject);    
         }
 
-        Item pickaxeItem = characterEquipment.GetPickaxeItem();
-        Item axeItem = characterEquipment.GetAxeItem();
-        Item sickleItem = characterEquipment.GetSickleItem();
+        Item pickaxeItem = playerEquipment.GetPickaxeItem();
+        Item axeItem = playerEquipment.GetAxeItem();
+        Item sickleItem = playerEquipment.GetSickleItem();
 
         RefreshEquipmentSlot(pickaxeSlot, pickaxeItem);
         RefreshEquipmentSlot(axeSlot, axeItem);
@@ -102,28 +102,28 @@ public class UI_CharacterEquipment : MonoBehaviour
             characterEquipmentSlot.transform.Find("emptyImage").gameObject.SetActive(true);
         }
     }
-    private void TryDropEquipmentInSlot(CharacterEquipment.EquipSlot equipSlot, Item item)
+    private void TryDropEquipmentInSlot(Player_Equipment.EquipSlot equipSlot, Item item)
     {
         //Item dropped into material slot, check if slot and item are suitble.
-        if (characterEquipment.IsSuitableSlot(equipSlot, item))
+        if (playerEquipment.IsSuitableSlot(equipSlot, item))
         {
             //Check if slot is empty
-            if (characterEquipment.GetSlotItem(equipSlot) == null)
+            if (playerEquipment.GetSlotItem(equipSlot) == null)
             {
                 //Move item from inventory to slot
                 Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment};
-                characterEquipment.SetSlotItem(equipSlot, tempItem);
+                playerEquipment.SetSlotItem(equipSlot, tempItem);
                 inventory.RemoveItem(item);
                 UI_ItemDrag.Instance.Hide();
             }
             else
             {
                 //Item is present in slot, therefore switch items
-                Item tempItemInCharacterEquipment = characterEquipment.GetSlotItem(equipSlot);
+                Item tempItemInCharacterEquipment = playerEquipment.GetSlotItem(equipSlot);
                 Item tempItemForCharacterEquipmentSlot = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment };
 
                 //Move item from inventory to equipment slot
-                characterEquipment.SetSlotItem(equipSlot, tempItemForCharacterEquipmentSlot);
+                playerEquipment.SetSlotItem(equipSlot, tempItemForCharacterEquipmentSlot);
                 inventory.RemoveItem(item);
 
                 //Move item from equipment slot to inventory

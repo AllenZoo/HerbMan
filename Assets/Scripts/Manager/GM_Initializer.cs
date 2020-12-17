@@ -9,7 +9,7 @@ public class GM_Initializer : MonoBehaviour
     private UI_Inventory uiInventory;
 
     private UI_CharacterEquipment uiCharacterEquipment;
-    private CharacterEquipment characterEquipment;
+    private Player_Equipment characterEquipment;
 
     private UI_CraftingSystem uiCraftingSystem;
     private CraftingSystem craftingSystem;
@@ -17,7 +17,7 @@ public class GM_Initializer : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        characterEquipment = player.GetComponent<CharacterEquipment>();
+        characterEquipment = player.GetComponent<Player_Equipment>();
         craftingSystem = player.GetComponent<CraftingSystem>();
     }
     private void Start()

@@ -11,7 +11,7 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private Transform pfItemUI;
 
     private CraftingSystem craftingSystem;
-    private CharacterEquipment characterEquipment;
+    private Player_Equipment characterEquipment;
 
     private Inventory inventory;
     private Transform itemSlotContainer;
@@ -39,7 +39,7 @@ public class UI_Inventory : MonoBehaviour
     {
         this.craftingSystem = craftingSystem;
     }
-    public void SetCharacterEquipment(CharacterEquipment characterEquipment)
+    public void SetCharacterEquipment(Player_Equipment characterEquipment)
     {
         this.characterEquipment = characterEquipment;
     }
