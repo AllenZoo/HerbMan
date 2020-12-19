@@ -9,21 +9,25 @@ public class StatBar : MonoBehaviour
     [SerializeField] bool isStaminaBar = false;
 
     private Slider bar;
-    private GameObject player;
+    private Player player;
+
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         bar = this.GetComponent<Slider>();
+    }
 
+    private void Start()
+    {
         if (isHealthBar)
         {
-            bar.maxValue = player.GetComponent<Player_Stats>().GetMaxHealth();
-            player.GetComponent<Player_Stats>().OnHealthChanged += StatBar_OnStatChanged;
+            bar.maxValue = player.player_Stats.GetMaxHealth();
+            player.player_Stats.OnHealthChanged += StatBar_OnStatChanged;
         }
         else if (isStaminaBar)
         {
-            bar.maxValue = player.GetComponent<Player_Stats>().GetMaxStamina();
-            player.GetComponent<Player_Stats>().OnStaminaUsed += StatBar_OnStatChanged;
+            bar.maxValue = player.player_Stats.GetMaxStamina();
+            player.player_Stats.OnStaminaUsed += StatBar_OnStatChanged;
         }
         bar.minValue = 0;
         bar.value = bar.maxValue;
@@ -41,11 +45,11 @@ public class StatBar : MonoBehaviour
     {
         if (isHealthBar)
         {
-            bar.value = player.GetComponent<Player_Stats>().GetHealth();
+            bar.value = player.player_Stats.GetHealth();
         }
         else if (isStaminaBar)
         {
-            bar.value = player.GetComponent<Player_Stats>().GetStamina();
+            bar.value = player.player_Stats.GetStamina();
         }
     }
 }

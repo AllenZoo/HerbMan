@@ -48,6 +48,14 @@ MonoBehaviour:
   pfItemVein: {fileID: 5732735045537284784, guid: 87de385395be3264d9f60f1a0fdbc43a,
     type: 3}
   Stipp: {fileID: -5312013600042570317, guid: bf836b0e91724d54bbe3ad5f1679c895, type: 3}
+  StoneHelmet: {fileID: 6989650033457402193, guid: 720654032f199574b9b1e03be4ff0994,
+    type: 3}
+  StoneChestplate: {fileID: 8900409010297340952, guid: 720654032f199574b9b1e03be4ff0994,
+    type: 3}
+  StonePants: {fileID: 8728975851172161591, guid: 720654032f199574b9b1e03be4ff0994,
+    type: 3}
+  StoneBoots: {fileID: 3368723750339361051, guid: 720654032f199574b9b1e03be4ff0994,
+    type: 3}
   StonePickaxe: {fileID: 40089021974409930, guid: a599568e98faa6347965064b40011b2c,
     type: 3}
   IronPickaxe: {fileID: 4590178295354909491, guid: a599568e98faa6347965064b40011b2c,

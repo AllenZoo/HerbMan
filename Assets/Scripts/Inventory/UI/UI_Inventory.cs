@@ -20,7 +20,6 @@ public class UI_Inventory : MonoBehaviour
 
     private void Awake()
     {
-        FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUIInventory(this.gameObject.transform);
         FindObjectOfType<GM_Initializer>().GetComponent<GM_Initializer>().SetUIInventory(this);
 
         itemSlotContainer = transform.Find("ItemSlotContainer");

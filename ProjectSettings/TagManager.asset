@@ -12,6 +12,7 @@ TagManager:
   - Gunner_Bullet
   - UI_Manager
   - GameManager
+  - ScreenDimmer
   layers:
   - Default
   - TransparentFX

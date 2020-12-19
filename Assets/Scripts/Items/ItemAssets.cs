@@ -18,7 +18,13 @@ public class ItemAssets : MonoBehaviour
     [Header("Enemies")]
     public Sprite Stipp;
 
-    [Header("Tools")]
+    [Header("Equipment")]
+    public Sprite StoneHelmet;
+    public Sprite StoneChestplate;
+    public Sprite StonePants;
+    public Sprite StoneBoots;
+
+[Header("Tools")]
     //Tools
     public Sprite StonePickaxe;
     public Sprite IronPickaxe;

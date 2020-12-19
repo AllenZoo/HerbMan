@@ -28,6 +28,11 @@ public class UI_Manager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
+
+        uiCraftingSystem = FindObjectOfType<UI_CraftingSystem>().transform;
+        uiEquipmentSlots = FindObjectOfType<UI_CharacterEquipment>().transform;
+        uiInventory = FindObjectOfType<UI_Inventory>().transform;
+        uiQuestInterface = FindObjectOfType<UI_TraderQuest>().transform;
     }
 
     private void Start()
@@ -41,19 +46,19 @@ public class UI_Manager : MonoBehaviour
 
     public void SetUIInventory(Transform uiInventory)
     {
-        this.uiInventory = uiInventory;
+        //this.uiInventory = uiInventory;
     }
     public void SetUIEquipment(Transform uiEquipment)
     {
-        uiEquipmentSlots = uiEquipment;
+       // uiEquipmentSlots = uiEquipment;
     }
     public void SetUICraftingSystem(Transform uiCraftingSystem)
     {
-        this.uiCraftingSystem = uiCraftingSystem;
+        //this.uiCraftingSystem = uiCraftingSystem;
     }
     public void SetUIQuestInterface(Transform uiQuestInterface)
     {
-        this.uiQuestInterface = uiQuestInterface;
+        //this.uiQuestInterface = uiQuestInterface;
     }
     public void SetButton(Button button, bool isOpen, string system)
     {
