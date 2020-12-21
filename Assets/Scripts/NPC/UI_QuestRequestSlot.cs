@@ -45,12 +45,12 @@ public class UI_QuestRequestSlot : MonoBehaviour
         }
         UpdateVisibility();
     }
-    public void SetQuestObject(Item.ItemType itemType)
+    public void SetQuestObject(ItemOld.ItemType itemType)
     {
-        if (itemType != Item.ItemType.Null)
+        if (itemType != ItemOld.ItemType.Null)
         {
             isItem = true;
-            itemDisplay.gameObject.GetComponent<Image>().sprite = Item.GetSprite(itemType);
+            itemDisplay.gameObject.GetComponent<Image>().sprite = ItemOld.GetSprite(itemType);
         }
         else
         {
@@ -60,10 +60,10 @@ public class UI_QuestRequestSlot : MonoBehaviour
     }
     public void SetQuestObject(QuestRequest qr)
     {
-        if (qr.GetItemType() != Item.ItemType.Null)
+        if (qr.GetItemType() != ItemOld.ItemType.Null)
         {
             isItem = true;
-            itemDisplay.gameObject.GetComponent<Image>().sprite = Item.GetSprite(qr.GetItemType());
+            itemDisplay.gameObject.GetComponent<Image>().sprite = ItemOld.GetSprite(qr.GetItemType());
         }
         else
         {

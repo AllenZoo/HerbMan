@@ -18,7 +18,7 @@ public class UI_CraftingSystem : MonoBehaviour
     private UI_OutputSlot outputSlot;
 
     private CraftingSystem craftingSystem;
-    private Inventory inventory;
+    private InventoryOld inventory;
 
     private void Awake()
     {
@@ -58,26 +58,26 @@ public class UI_CraftingSystem : MonoBehaviour
 
         craftingSystem.OnMaterialChanged += CraftingSystem_OnMaterialChanged;
     }
-    public void SetInventory(Inventory inventory)
+    public void SetInventory(InventoryOld inventory)
     {
         this.inventory = inventory;
     }
 
     public void Craft()
     {
-        Item herb = craftingSystem.GetHerbItem();
-        Item ore = craftingSystem.GetOreItem();
-        Item wood = craftingSystem.GetWoodItem();
-        Item recipe = craftingSystem.GetRecipeItem();
-        Item energyShard = craftingSystem.GetEnergyShardItem();
+        ItemOld herb = craftingSystem.GetHerbItem();
+        ItemOld ore = craftingSystem.GetOreItem();
+        ItemOld wood = craftingSystem.GetWoodItem();
+        ItemOld recipe = craftingSystem.GetRecipeItem();
+        ItemOld energyShard = craftingSystem.GetEnergyShardItem();
 
         //Check if crafting slots are filled up
         if (herb != null && ore != null && wood != null)
         {
-            Item item = craftingSystem.CraftRecipeItem(herb, ore, wood, recipe);
-            if (item.itemType != Item.ItemType.Null)
+            ItemOld item = craftingSystem.CraftRecipeItem(herb, ore, wood, recipe);
+            if (item.itemType != ItemOld.ItemType.Null)
             {
-                item.system = Item.SystemType.craftedItem;
+                item.system = ItemOld.SystemType.craftedItem;
                 craftingSystem.SetOutput(item);
                 outputSlot.OnItemCrafted?.Invoke(this, new UI_OutputSlot.OnItemCraftedEventArgs { item = item });
             }
@@ -131,11 +131,11 @@ public class UI_CraftingSystem : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        Item herbItem = craftingSystem.GetHerbItem();
-        Item oreItem = craftingSystem.GetOreItem();
-        Item woodItem = craftingSystem.GetWoodItem();
-        Item energyShardItem = craftingSystem.GetEnergyShardItem();
-        Item recipeItem = craftingSystem.GetRecipeItem();
+        ItemOld herbItem = craftingSystem.GetHerbItem();
+        ItemOld oreItem = craftingSystem.GetOreItem();
+        ItemOld woodItem = craftingSystem.GetWoodItem();
+        ItemOld energyShardItem = craftingSystem.GetEnergyShardItem();
+        ItemOld recipeItem = craftingSystem.GetRecipeItem();
 
         if (herbItem?.count == 0)
         {
@@ -167,7 +167,7 @@ public class UI_CraftingSystem : MonoBehaviour
 
     }
     
-    private void RefreshCraftingSlot(UI_CraftingSlot craftingSlot, Item item)
+    private void RefreshCraftingSlot(UI_CraftingSlot craftingSlot, ItemOld item)
     {
         if(item != null)
         {
@@ -190,10 +190,10 @@ public class UI_CraftingSystem : MonoBehaviour
     }
     private void RefreshOutputSlot()
     {
-        Item item = craftingSystem.GetOutputItem();
+        ItemOld item = craftingSystem.GetOutputItem();
         if (item != null)
         {
-            Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.craftedItem };
+            ItemOld tempItem = new ItemOld { itemType = item.itemType, count = item.count, durability = item.durability, system = ItemOld.SystemType.craftedItem };
             Debug.Log(tempItem.itemType.ToString());
             Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
             uiItemTransform.GetComponent<RectTransform>().anchoredPosition = outputSlot.GetComponent<RectTransform>().anchoredPosition;
@@ -214,11 +214,11 @@ public class UI_CraftingSystem : MonoBehaviour
         }
     
     }
-    private void RefreshOutputSlot(Item item)
+    private void RefreshOutputSlot(ItemOld item)
     {
         if(item != null)
         {
-            Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment };
+            ItemOld tempItem = new ItemOld { itemType = item.itemType, count = item.count, durability = item.durability, system = ItemOld.SystemType.equipment };
 
             Transform uiItemTransform = Instantiate(pfItemUI, itemContainer);
             uiItemTransform.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition;
@@ -237,7 +237,7 @@ public class UI_CraftingSystem : MonoBehaviour
             outputSlot.transform.Find("itemSlot").gameObject.SetActive(true);
         }
     }
-    private void TryDropMaterialInSlot(CraftingSystem.MaterialSlot materialSlot, Item item)
+    private void TryDropMaterialInSlot(CraftingSystem.MaterialSlot materialSlot, ItemOld item)
     {
         //Item dropped into material slot, check if slot and item are suitble.
         if(craftingSystem.IsSuitableSlot(materialSlot, item))
@@ -246,7 +246,7 @@ public class UI_CraftingSystem : MonoBehaviour
             if(craftingSystem.GetSlotItem(materialSlot) == null)
             {
                 //Move item from inventory to slot
-                Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.crafting };
+                ItemOld tempItem = new ItemOld { itemType = item.itemType, count = item.count, durability = item.durability, system = ItemOld.SystemType.crafting };
                 craftingSystem.SetSlotItem(materialSlot, tempItem);
                 inventory.RemoveItem(item);
                 UI_ItemDrag.Instance.Hide();
@@ -254,8 +254,8 @@ public class UI_CraftingSystem : MonoBehaviour
             else
             {
                 //Item is present in slot, therefore switch items
-                Item tempItemInCraftingSlot = craftingSystem.GetSlotItem(materialSlot);
-                Item tempItemForCraftingSlot = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.crafting };
+                ItemOld tempItemInCraftingSlot = craftingSystem.GetSlotItem(materialSlot);
+                ItemOld tempItemForCraftingSlot = new ItemOld { itemType = item.itemType, count = item.count, durability = item.durability, system = ItemOld.SystemType.crafting };
 
                 //Move item from inventory to crafting slot
                 craftingSystem.SetSlotItem(materialSlot, tempItemForCraftingSlot);

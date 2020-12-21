@@ -12,6 +12,7 @@ public class Player_Collision : MonoBehaviour
     private ItemWorldVein itemWorldVein;
     private UI_Manager uiManager;
 
+
     private void Awake()
     {
         player = GetComponent<Player>();
@@ -26,26 +27,32 @@ public class Player_Collision : MonoBehaviour
     }
 
     //Class is turned off when no TriggerCollision
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(collider.tag == "Item")
+        var item = other.GetComponent<GroundItem>();
+        if (item)
         {
-            itemWorld = collider.GetComponent<ItemWorld>();
+            player.inventoryObject.AddItem(new Item(item.item), 1);
+        }
+
+        if(other.tag == "Item")
+        {
+            itemWorld = other.GetComponent<ItemWorld>();
             player.GetInventory().AddItem(itemWorld.GetItem());
             itemWorld.DestroySelf();
         }
-        else if(collider.tag == "Item Vein")
+        else if(other.tag == "Item Vein")
         {
-            itemWorld = collider.GetComponent<ItemWorld>();
-            itemWorldVein = collider.GetComponent<ItemWorldVein>();
+            itemWorld = other.GetComponent<ItemWorld>();
+            itemWorldVein = other.GetComponent<ItemWorldVein>();
         }
-        else if(collider.tag == "Enemy")
+        else if(other.tag == "Enemy")
         {
-            enemy_Base = collider.GetComponent<Enemy_Base>();
-            player.player_Movement.KnockedBack(enemy_Base.GetKnockbackAmount(), collider.gameObject);
+            enemy_Base = other.GetComponent<Enemy_Base>();
+            player.player_Movement.KnockedBack(enemy_Base.GetKnockbackAmount(), other.gameObject);
             player.TakeDamage(enemy_Base.GetCollsionDamage());
         }
-        else if(collider.tag == "NPC_Trader")
+        else if(other.tag == "NPC_Trader")
         {
             isTouchingTrader = true;
         }

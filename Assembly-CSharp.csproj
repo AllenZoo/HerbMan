@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BarText.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Assets.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\CMDebug.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\CameraFollow.cs" />
@@ -83,13 +82,14 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
+    <Compile Include="Assets\Scripts\BarText.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSlot.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_OutputSlot.cs" />
-    <Compile Include="Assets\Scripts\DeathTimer.cs" />
-    <Compile Include="Assets\Scripts\Dialogue.cs" />
-    <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\DialogueTrigger.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\UI_DialogueManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Base.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Gunner.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Gunner_Animation.cs" />
@@ -101,15 +101,15 @@
     <Compile Include="Assets\Scripts\Equipment\Player_Equipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\Equipment\UI_CharacterEquipmentSlot.cs" />
-    <Compile Include="Assets\Scripts\GM_StateManager.cs" />
+    <Compile Include="Assets\Scripts\GroundItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_ItemDrag.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Inventory\UI\UI_Manager.cs" />
-    <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\ItemAssets.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemOld.cs" />
     <Compile Include="Assets\Scripts\Items\ItemVein.cs" />
     <Compile Include="Assets\Scripts\Items\ItemVeinSpawner.cs" />
     <Compile Include="Assets\Scripts\Items\ItemWorld.cs" />
@@ -118,6 +118,8 @@
     <Compile Include="Assets\Scripts\Manager\GM_Initializer.cs" />
     <Compile Include="Assets\Scripts\Manager\GM_ObjectPooler.cs" />
     <Compile Include="Assets\Scripts\Manager\GM_SceneTransitioner.cs" />
+    <Compile Include="Assets\Scripts\Manager\GM_StateManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\UI_Manager_ButtonScript.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC_Trader.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC_Trader_QuestManager.cs" />
     <Compile Include="Assets\Scripts\NPC\UI_CheckBox.cs" />
@@ -128,18 +130,21 @@
     <Compile Include="Assets\Scripts\Player\Player_Abilities.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Animation.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Collision.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Input.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Stats.cs" />
-    <Compile Include="Assets\Scripts\Player_Input.cs" />
-    <Compile Include="Assets\Scripts\Portal.cs" />
-    <Compile Include="Assets\Scripts\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\DefaultObject.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\EquipmentObject.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\InventoryObject.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\ItemDatabaseObject.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\ItemObject.cs" />
     <Compile Include="Assets\Scripts\StatBars\HealthBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\LevelBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\StatBar.cs" />
     <Compile Include="Assets\Scripts\TutorialArrow.cs" />
-    <Compile Include="Assets\Scripts\UI_DialogueManager.cs" />
-    <Compile Include="Assets\Scripts\UI_Manager_ButtonScript.cs" />
+    <Compile Include="Assets\Scripts\UI_InventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\UI_MoneyCount.cs" />
+    <Compile Include="Assets\Scripts\UI_Stats.cs" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
@@ -693,6 +698,9 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Users/steven/Desktop/UnityProgramming/2019.3.15f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -705,8 +713,17 @@
     <Reference Include="Unity.2D.PixelPerfect.Editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
@@ -716,6 +733,12 @@
     </Reference>
     <Reference Include="Unity.2D.Path.Editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -734,6 +757,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
@@ -765,8 +791,14 @@
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/workspace/HerbMan/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

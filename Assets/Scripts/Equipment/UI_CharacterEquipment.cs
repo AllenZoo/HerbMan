@@ -7,7 +7,7 @@ public class UI_CharacterEquipment : MonoBehaviour
 {
     [SerializeField] private Transform pfItemUI;
 
-    private Inventory inventory;
+    private InventoryOld inventory;
     private Transform itemContainer;
 
     private UI_CharacterEquipmentSlot pickaxeSlot;
@@ -69,19 +69,19 @@ public class UI_CharacterEquipment : MonoBehaviour
             Destroy(child.gameObject);    
         }
 
-        Item pickaxeItem = playerEquipment.GetPickaxeItem();
-        Item axeItem = playerEquipment.GetAxeItem();
-        Item sickleItem = playerEquipment.GetSickleItem();
+        ItemOld pickaxeItem = playerEquipment.GetPickaxeItem();
+        ItemOld axeItem = playerEquipment.GetAxeItem();
+        ItemOld sickleItem = playerEquipment.GetSickleItem();
 
         RefreshEquipmentSlot(pickaxeSlot, pickaxeItem);
         RefreshEquipmentSlot(axeSlot, axeItem);
         RefreshEquipmentSlot(sickleSlot, sickleItem);
     }
-    public void SetInventory(Inventory inventory)
+    public void SetInventory(InventoryOld inventory)
     {
         this.inventory = inventory;
     }
-    private void RefreshEquipmentSlot(UI_CharacterEquipmentSlot characterEquipmentSlot, Item item)
+    private void RefreshEquipmentSlot(UI_CharacterEquipmentSlot characterEquipmentSlot, ItemOld item)
     {
         if(item != null)
         {
@@ -102,7 +102,7 @@ public class UI_CharacterEquipment : MonoBehaviour
             characterEquipmentSlot.transform.Find("emptyImage").gameObject.SetActive(true);
         }
     }
-    private void TryDropEquipmentInSlot(Player_Equipment.EquipSlot equipSlot, Item item)
+    private void TryDropEquipmentInSlot(Player_Equipment.EquipSlot equipSlot, ItemOld item)
     {
         //Item dropped into material slot, check if slot and item are suitble.
         if (playerEquipment.IsSuitableSlot(equipSlot, item))
@@ -111,7 +111,7 @@ public class UI_CharacterEquipment : MonoBehaviour
             if (playerEquipment.GetSlotItem(equipSlot) == null)
             {
                 //Move item from inventory to slot
-                Item tempItem = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment};
+                ItemOld tempItem = new ItemOld { itemType = item.itemType, count = item.count, durability = item.durability, system = ItemOld.SystemType.equipment};
                 playerEquipment.SetSlotItem(equipSlot, tempItem);
                 inventory.RemoveItem(item);
                 UI_ItemDrag.Instance.Hide();
@@ -119,8 +119,8 @@ public class UI_CharacterEquipment : MonoBehaviour
             else
             {
                 //Item is present in slot, therefore switch items
-                Item tempItemInCharacterEquipment = playerEquipment.GetSlotItem(equipSlot);
-                Item tempItemForCharacterEquipmentSlot = new Item { itemType = item.itemType, count = item.count, durability = item.durability, system = Item.SystemType.equipment };
+                ItemOld tempItemInCharacterEquipment = playerEquipment.GetSlotItem(equipSlot);
+                ItemOld tempItemForCharacterEquipmentSlot = new ItemOld { itemType = item.itemType, count = item.count, durability = item.durability, system = ItemOld.SystemType.equipment };
 
                 //Move item from inventory to equipment slot
                 playerEquipment.SetSlotItem(equipSlot, tempItemForCharacterEquipmentSlot);

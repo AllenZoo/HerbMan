@@ -13,7 +13,7 @@ public class UI_Inventory : MonoBehaviour
     private CraftingSystem craftingSystem;
     private Player_Equipment characterEquipment;
 
-    private Inventory inventory;
+    private InventoryOld inventory;
     private Transform itemSlotContainer;
     private Transform itemSlotTemplate;
     private Player player;
@@ -42,7 +42,7 @@ public class UI_Inventory : MonoBehaviour
     {
         this.characterEquipment = characterEquipment;
     }
-    public void SetInventory(Inventory inventory)
+    public void SetInventory(InventoryOld inventory)
     {
         this.inventory = inventory;
 
@@ -69,9 +69,9 @@ public class UI_Inventory : MonoBehaviour
         float itemSlotCellSize = 125f;
 
 
-        foreach (Inventory.InventorySlot inventorySlot in inventory.GetInventorySlotArray())
+        foreach (InventoryOld.InventorySlot inventorySlot in inventory.GetInventorySlotArray())
         {
-            Item item = inventorySlot.GetItem();
+            ItemOld item = inventorySlot.GetItem();
 
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
@@ -84,7 +84,7 @@ public class UI_Inventory : MonoBehaviour
             itemSlotRectTransform.Find("AccessButton").Find("DropButton").GetComponent<Button_UI>().ClickFunc = () =>
             {
                 //Drop Item
-                Item duplicateItem = new Item { itemType = item.itemType, count = item.count };
+                ItemOld duplicateItem = new ItemOld { itemType = item.itemType, count = item.count };
                 inventory.RemoveItem(item);
                 ItemWorld.DropItem(player.GetPosition(), duplicateItem);
             };
@@ -101,33 +101,33 @@ public class UI_Inventory : MonoBehaviour
                 uiItem.SetSprite(item.GetSprite());
             }
 
-            Inventory.InventorySlot tmpInventorySlot = inventorySlot;
+            InventoryOld.InventorySlot tmpInventorySlot = inventorySlot;
 
             UI_ItemSlot uiItemSlot = itemSlotRectTransform.GetComponent<UI_ItemSlot>();
 
             uiItemSlot.SetOnDropAction(() => {
                 Debug.Log("item dropped onto inventory slot");
                 // Dropped on this UI Item Slot
-                Item draggedItem = UI_ItemDrag.Instance.GetItem();
-                if (draggedItem.system == Item.SystemType.equipment)
+                ItemOld draggedItem = UI_ItemDrag.Instance.GetItem();
+                if (draggedItem.system == ItemOld.SystemType.equipment)
                 {
                     Debug.Log("Equipment item dropped into inventory slot");
                     inventory.AddItemFromEquipmentSlot(draggedItem, tmpInventorySlot);
                     characterEquipment.SetSlotItem(draggedItem.GetEquipSlot(), null);
                     
                 }
-                else if (draggedItem.system == Item.SystemType.crafting)
+                else if (draggedItem.system == ItemOld.SystemType.crafting)
                 {
                     Debug.Log("Crafting item dropped into inventory slot");
                     inventory.AddItem(draggedItem, tmpInventorySlot);
                     craftingSystem.SetSlotItem(draggedItem.GetMaterialSlot(), null);
                 }
-                else if (draggedItem.system == Item.SystemType.inventory)
+                else if (draggedItem.system == ItemOld.SystemType.inventory)
                 {
                     Debug.Log("Inventory item dropped into inventory slot");
                     inventory.AddItem(draggedItem, tmpInventorySlot);
                 }
-                else if (draggedItem.system == Item.SystemType.craftedItem)
+                else if (draggedItem.system == ItemOld.SystemType.craftedItem)
                 {
                     Debug.Log("crafted item dropped into inventory");
                     inventory.AddItem(draggedItem);

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ItemWorld : MonoBehaviour
 {
     
-    public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
+    public static ItemWorld SpawnItemWorld(Vector3 position, ItemOld item)
     {
         Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld, position, Quaternion.identity);
 
@@ -25,7 +25,7 @@ public class ItemWorld : MonoBehaviour
 
         return itemWorld;
     }
-    public static ItemWorld DropItem(Vector3 dropPosition, Item item)
+    public static ItemWorld DropItem(Vector3 dropPosition, ItemOld item)
     {
         Vector3 randomDir = UtilsClass.GetRandomDir();
         ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir, item);
@@ -33,7 +33,7 @@ public class ItemWorld : MonoBehaviour
         return itemWorld;
     }
 
-    private Item item;
+    private ItemOld item;
     private ItemVein itemVein;
     private SpriteRenderer spriteRenderer;
 
@@ -42,7 +42,7 @@ public class ItemWorld : MonoBehaviour
         spriteRenderer = this.GetComponent<SpriteRenderer>();
     }
 
-    public void SetItem(Item item)
+    public void SetItem(ItemOld item)
     {
         this.item = item;
         spriteRenderer.sprite = item.GetSprite();
@@ -52,7 +52,7 @@ public class ItemWorld : MonoBehaviour
         this.itemVein = itemVein;
         spriteRenderer.sprite = itemVein.GetSprite();
     }
-    public Item GetItem()
+    public ItemOld GetItem()
     {
         return item;
     }

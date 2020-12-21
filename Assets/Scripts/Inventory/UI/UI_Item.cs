@@ -15,9 +15,9 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
     private Image image;
     private TextMeshProUGUI countText;
 
-    private Item item;
+    private ItemOld item;
     private int count;
-    private Item.SystemType systemType;
+    private ItemOld.SystemType systemType;
 
     private void Awake()
     {
@@ -61,7 +61,7 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
     {
         return count;
     }
-    public Item.SystemType GetSystemType()
+    public ItemOld.SystemType GetSystemType()
     {
         return systemType;
     }
@@ -77,7 +77,7 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
     {
         this.count = count;
     }
-    public void SetSystemType(Item.SystemType systemType)
+    public void SetSystemType(ItemOld.SystemType systemType)
     {
         this.systemType = systemType;
     }
@@ -102,12 +102,12 @@ public class UI_Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IE
         gameObject.SetActive(true);
     }
 
-    public void SetItem(Item item)
+    public void SetItem(ItemOld item)
     {
 
         this.item = item;
         
-        SetSprite(Item.GetSprite(item.itemType));
+        SetSprite(ItemOld.GetSprite(item.itemType));
     }
 
 }

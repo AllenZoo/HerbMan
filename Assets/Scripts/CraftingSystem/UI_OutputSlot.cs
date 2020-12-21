@@ -10,7 +10,7 @@ public class UI_OutputSlot : MonoBehaviour
 
     public class OnItemCraftedEventArgs : EventArgs
     {
-        public Item item;
+        public ItemOld item;
     }
 
 }

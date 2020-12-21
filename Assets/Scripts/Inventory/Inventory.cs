@@ -3,41 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using System.Linq;
 
-public class Inventory
+public class InventoryOld
 {
-    private List<Item> itemList;
-    private Action<Item> useItemAction;
+    private List<ItemOld> itemList;
+    private Action<ItemOld> useItemAction;
     public InventorySlot[] inventorySlotArray;
 
     public event EventHandler OnItemListChanged;
 
-    public Inventory(Action<Item> useItemAction, int inventorySlotCount)
+    public InventoryOld(Action<ItemOld> useItemAction, int inventorySlotCount)
     {
         this.useItemAction = useItemAction;
-        itemList = new List<Item>();
+        itemList = new List<ItemOld>();
 
         inventorySlotArray = new InventorySlot[inventorySlotCount];
         for (int i = 0; i < inventorySlotCount; i++)
         {
             inventorySlotArray[i] = new InventorySlot(i);
         }
-        
-        AddItem(new Item { itemType = Item.ItemType.Iron_Axe, count = 1, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.Iron_Sickle, count = 1, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.Amatite_Sickle, count = 1, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.Hemm, count = 8, system = Item.SystemType.inventory });
-        //AddItem(new Item { itemType = Item.ItemType.WaterHerb, count = 1, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.MellowMint, count = 8, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.Flint, count = 3, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.Stick, count = 3, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.Stone_Pickaxe_Recipe, count = 1, system = Item.SystemType.inventory });
-        AddItem(new Item { itemType = Item.ItemType.Iron_Pickaxe_Recipe, count = 1, system = Item.SystemType.inventory });
-    }
 
-    public Inventory(int inventorySlotCount)
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Iron_Axe, count = 1, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Iron_Sickle, count = 1, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Amatite_Sickle, count = 1, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Hemm, count = 8, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.MellowMint, count = 8, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Flint, count = 3, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Stick, count = 3, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Stone_Pickaxe_Recipe, count = 1, system = ItemOld.SystemType.inventory });
+        AddItem(new ItemOld { itemType = ItemOld.ItemType.Iron_Pickaxe_Recipe, count = 1, system = ItemOld.SystemType.inventory });
+    }
+ 
+
+
+
+    public InventoryOld(int inventorySlotCount)
     {
-        itemList = new List<Item>();
+        itemList = new List<ItemOld>();
         inventorySlotArray = new InventorySlot[inventorySlotCount];
         for (int i = 0; i < inventorySlotCount; i++)
         {
@@ -57,7 +60,7 @@ public class Inventory
         Debug.LogError("Cannot find an empty InventorySlot!");
         return null;
     }
-    public InventorySlot GetInventorySlotWithItem(Item item)
+    public InventorySlot GetInventorySlotWithItem(ItemOld item)
     {
         foreach (InventorySlot inventorySlot in inventorySlotArray)
         {
@@ -70,13 +73,13 @@ public class Inventory
         return null;
     }
 
-    public void AddItem(Item item)
+    public void AddItem(ItemOld item)
     {
         //Debug.Log(item.itemType.ToString());
         if (item.IsStackable())
         {
             bool itemAlreadyInInventory = false;
-            foreach (Item inventoryItem in itemList)
+            foreach (ItemOld inventoryItem in itemList)
             {
                 if (inventoryItem.itemType == item.itemType)
                 {
@@ -86,8 +89,8 @@ public class Inventory
             }
             if (!itemAlreadyInInventory)
             {
-                Item tempItem = item;
-                tempItem.system = Item.SystemType.inventory;
+                ItemOld tempItem = item;
+                tempItem.system = ItemOld.SystemType.inventory;
 
                 itemList.Add(tempItem);
                 GetEmptyInventorySlot().SetItem(tempItem);
@@ -95,8 +98,8 @@ public class Inventory
         }
         else
         {
-            Item tempItem = item;
-            tempItem.system = Item.SystemType.inventory;
+            ItemOld tempItem = item;
+            tempItem.system = ItemOld.SystemType.inventory;
 
             //Debug.Log("Item count:" + item.count);
             //Debug.Log("tempItem count:" + tempItem.count);
@@ -105,20 +108,20 @@ public class Inventory
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
-    public void AddItemAmount(Item item, int count)
+    public void AddItemAmount(ItemOld item, int count)
     {
 
     }
-    public void RemoveItemAmount(Item.ItemType itemType, int count)
+    public void RemoveItemAmount(ItemOld.ItemType itemType, int count)
     {
-        RemoveItem(new Item { itemType = itemType, count = count });
+        RemoveItem(new ItemOld { itemType = itemType, count = count });
     }
-    public void RemoveItem(Item item)
+    public void RemoveItem(ItemOld item)
     {
         if (item.IsStackable())
         {
-            Item itemInInventory = null;
-            foreach (Item inventoryItem in itemList)
+            ItemOld itemInInventory = null;
+            foreach (ItemOld inventoryItem in itemList)
             {
                 if (inventoryItem.itemType == item.itemType)
                 {
@@ -140,7 +143,7 @@ public class Inventory
 
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
-    public void AddItem(Item item, InventorySlot inventorySlot)
+    public void AddItem(ItemOld item, InventorySlot inventorySlot)
     {
         int tempCount = item.count;
 
@@ -148,29 +151,29 @@ public class Inventory
 
         inventorySlot.SetItem(item);
         inventorySlot.SetCount(tempCount);
-        inventorySlot.SetSystemType(Item.SystemType.inventory);
+        inventorySlot.SetSystemType(ItemOld.SystemType.inventory);
 
         itemList.Add(item);
 
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
-    public void AddItemFromEquipmentSlot(Item item, InventorySlot inventorySlot)
+    public void AddItemFromEquipmentSlot(ItemOld item, InventorySlot inventorySlot)
     {
         int tempCount = item.count;
 
         inventorySlot.SetItem(item);
         inventorySlot.SetCount(tempCount);
-        inventorySlot.SetSystemType(Item.SystemType.inventory);
+        inventorySlot.SetSystemType(ItemOld.SystemType.inventory);
 
         itemList.Add(item);
 
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
-    public List<Item> GetItemList()
+    public List<ItemOld> GetItemList()
     {
         return itemList;
     }
-    public void UseItem(Item item)
+    public void UseItem(ItemOld item)
     {
         useItemAction(item);
     }
@@ -185,23 +188,23 @@ public class Inventory
     {
 
         private int index;
-        private Item item;
+        private ItemOld item;
 
         public InventorySlot(int index)
         {
             this.index = index;
         }
 
-        public Item GetItem()
+        public ItemOld GetItem()
         {
             return item;
         }
 
-        public void SetItem(Item item)
+        public void SetItem(ItemOld item)
         {
             this.item = item;
             //this.item.count = item.count;
-            item.system = Item.SystemType.inventory;
+            item.system = ItemOld.SystemType.inventory;
         }
 
         public void RemoveItem()
@@ -224,11 +227,11 @@ public class Inventory
         {
             item.count = count;
         }
-        public Item.SystemType GetSystemType()
+        public ItemOld.SystemType GetSystemType()
         {
             return item.system;
         }
-        public void SetSystemType(Item.SystemType systemType)
+        public void SetSystemType(ItemOld.SystemType systemType)
         {
             item.system = systemType;
         }

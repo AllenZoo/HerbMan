@@ -9,7 +9,7 @@ public class ItemWorldVein : MonoBehaviour
 
     //public VeinBar veinBar;
     private ItemVein itemVein;
-    private Item item;
+    private ItemOld item;
     private int phases;
     private int curPhase;
 
@@ -85,7 +85,7 @@ public class ItemWorldVein : MonoBehaviour
         }
         return false;
     }
-    public Item Harvest()
+    public ItemOld Harvest()
     {
          curPhase += 1;
          animator.SetFloat("Phase", curPhase);

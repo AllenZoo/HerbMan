@@ -23,7 +23,9 @@ public class Player : MonoBehaviour
     internal Rigidbody2D rb2D;
 
     //Other
-    private Inventory inventory;
+    private InventoryOld inventory;
+
+    public InventoryObject inventoryObject;
 
     private void Awake()
     {
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
 
-        inventory = new Inventory(UseItem, 20);
+        inventory = new InventoryOld(UseItem, 20);
     }
 
     private void Start()
@@ -60,7 +62,7 @@ public class Player : MonoBehaviour
         Debug.Log("taking damage");
         player_Stats.SubtractHealth(num);
     }
-    public Inventory GetInventory()
+    public InventoryOld GetInventory()
     {
         return inventory;
     }
@@ -68,11 +70,11 @@ public class Player : MonoBehaviour
     {
         return this.transform.position;
     }
-    public void SetEquipment(Item item)
+    public void SetEquipment(ItemOld item)
     {
         SetEquipment(item.itemType);
     }
-    public void SetEquipment(Item.ItemType itemType)
+    public void SetEquipment(ItemOld.ItemType itemType)
     {
         switch (itemType)
         {
@@ -80,7 +82,7 @@ public class Player : MonoBehaviour
         }
         OnEquipChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void UseItem(Item item)
+    private void UseItem(ItemOld item)
     {
         if (item.IsTool())
         {
@@ -89,7 +91,7 @@ public class Player : MonoBehaviour
             switch (item.itemType)
             {
                 default: break;
-                case Item.ItemType.Stone_Pickaxe: break;
+                case ItemOld.ItemType.Stone_Pickaxe: break;
 
             }
         }

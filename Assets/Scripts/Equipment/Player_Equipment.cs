@@ -26,50 +26,50 @@ public class Player_Equipment : MonoBehaviour
     }
 
 
-    private Item pickaxeItem;
-    private Item axeItem;
-    private Item sickleItem;
+    private ItemOld pickaxeItem;
+    private ItemOld axeItem;
+    private ItemOld sickleItem;
 
-    private Item helmetItem;
-    private Item chestplateItem;
-    private Item pantItem;
-    private Item bootItem;
+    private ItemOld helmetItem;
+    private ItemOld chestplateItem;
+    private ItemOld pantItem;
+    private ItemOld bootItem;
 
     private void Awake()
     {
         player = GetComponent<Player>();
     }
 
-    public Item GetPickaxeItem()
+    public ItemOld GetPickaxeItem()
     {
         return pickaxeItem;
     }
-    public Item GetAxeItem()
+    public ItemOld GetAxeItem()
     {
         return axeItem;
     }
-    public Item GetSickleItem()
+    public ItemOld GetSickleItem()
     {
         return sickleItem;
     }
-    public Item GetHelmetItem()
+    public ItemOld GetHelmetItem()
     {
         return helmetItem;
     }
-    public Item GetChestplateItem()
+    public ItemOld GetChestplateItem()
     {
         return chestplateItem;
     }
-    public Item GetPantItem()
+    public ItemOld GetPantItem()
     {
         return pantItem;
     }
-    public Item GetBootItem()
+    public ItemOld GetBootItem()
     {
         return bootItem;
     }
    
-    public Item GetSlotItem(EquipSlot equipSlot)
+    public ItemOld GetSlotItem(EquipSlot equipSlot)
     {
         switch (equipSlot)
         {
@@ -93,7 +93,7 @@ public class Player_Equipment : MonoBehaviour
 
         return null;
     }
-    public void SetSlotItem(EquipSlot equipSlot, Item item)
+    public void SetSlotItem(EquipSlot equipSlot, ItemOld item)
     {
         //failproof to check if item and slot are suitable
         if (item == null || equipSlot == item.GetEquipSlot())
@@ -110,44 +110,44 @@ public class Player_Equipment : MonoBehaviour
             }
         }
     }
-    public bool IsSuitableSlot(EquipSlot equipSlot, Item item)
+    public bool IsSuitableSlot(EquipSlot equipSlot, ItemOld item)
     {
         return equipSlot == item.GetEquipSlot();
     }
-    private void SetPickaxeItem(Item pickaxeItem)
+    private void SetPickaxeItem(ItemOld pickaxeItem)
     {
         this.pickaxeItem = pickaxeItem;
         //player.SetEquipment(pickaxeItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void SetAxeItem(Item axeItem)
+    private void SetAxeItem(ItemOld axeItem)
     {
         this.axeItem = axeItem;
         //player.SetEquipment(axeItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void SetSickleItem(Item sickleItem)
+    private void SetSickleItem(ItemOld sickleItem)
     {
         this.sickleItem = sickleItem;
         //player.SetEquipment(sickleItem);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void SetHelmetItem(Item helmetItem)
+    private void SetHelmetItem(ItemOld helmetItem)
     {
         this.helmetItem = helmetItem;
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void SetChestplateItem(Item chestplateItem)
+    private void SetChestplateItem(ItemOld chestplateItem)
     {
         this.chestplateItem = chestplateItem;
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void SetPantItem(Item pantItem)
+    private void SetPantItem(ItemOld pantItem)
     {
         this.pantItem = pantItem;
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void SetBootItem(Item bootItem)
+    private void SetBootItem(ItemOld bootItem)
     {
         this.bootItem = bootItem;
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);

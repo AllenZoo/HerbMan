@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemWorldSpawner : MonoBehaviour
 {
-    public Item item;
+    public ItemOld item;
 
     [SerializeField] private bool isRespawnable;
     [SerializeField] private bool isVein;

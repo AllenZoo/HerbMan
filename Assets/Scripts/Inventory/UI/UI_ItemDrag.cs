@@ -14,7 +14,7 @@ public class UI_ItemDrag : MonoBehaviour
     private RectTransform parentRectTransform;
     private CanvasGroup canvasGroup;
     private Image image;
-    private Item item;
+    private ItemOld item;
 
     private void Awake()
     {
@@ -48,12 +48,12 @@ public class UI_ItemDrag : MonoBehaviour
         return this.tag;
     }
 
-    public Item GetItem()
+    public ItemOld GetItem()
     {
         return item;
     }
 
-    public void SetItem(Item item)
+    public void SetItem(ItemOld item)
     {
         this.item = item;
     }
@@ -68,7 +68,7 @@ public class UI_ItemDrag : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Show(Item item)
+    public void Show(ItemOld item)
     {
         gameObject.SetActive(true);
 

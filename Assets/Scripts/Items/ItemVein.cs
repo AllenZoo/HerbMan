@@ -24,7 +24,7 @@ public class ItemVein
         Redwood_V,
     }
 
-    public Item item;
+    public ItemOld item;
     public ItemType itemType;
     public float harvestTime;
     public int animPhase;
@@ -78,7 +78,7 @@ public class ItemVein
     {
         return harvestTime;
     }
-    public Item GetItem()
+    public ItemOld GetItem()
     {
         return item;
     }

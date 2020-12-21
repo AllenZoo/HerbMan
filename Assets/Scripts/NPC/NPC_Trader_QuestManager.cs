@@ -65,20 +65,20 @@ public class Quest
 [System.Serializable]
 public class QuestRequest
 {
-    [SerializeField] private Item item;
+    [SerializeField] private ItemOld item;
     public QuestRequest()
     {
-        item = new Item { itemType = Item.ItemType.Null, count = 0 };
+        item = new ItemOld { itemType = ItemOld.ItemType.Null, count = 0 };
     }
-    public QuestRequest(Item.ItemType itemType, int count)
+    public QuestRequest(ItemOld.ItemType itemType, int count)
     {
-        item = new Item { itemType = itemType, count = count };
+        item = new ItemOld { itemType = itemType, count = count };
     }
     public int GetItemCount()
     {
         return item.count;
     }
-    public Item.ItemType GetItemType()
+    public ItemOld.ItemType GetItemType()
     {
         return item.itemType;
     }
@@ -122,7 +122,7 @@ public class NPC_Trader_QuestManager : MonoBehaviour
             foreach(QuestRequest qr in currentQuest.GetRequestList())
             {
                 //Remove items from inventory
-                player.GetComponent<Player>().GetInventory().RemoveItem(new Item { itemType = qr.GetItemType(), count = qr.GetItemCount() });
+                player.GetComponent<Player>().GetInventory().RemoveItem(new ItemOld { itemType = qr.GetItemType(), count = qr.GetItemCount() });
             }
 
             //Give Reward

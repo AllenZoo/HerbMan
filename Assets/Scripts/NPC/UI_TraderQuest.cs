@@ -140,12 +140,12 @@ public class UI_TraderQuest : MonoBehaviour
     {
         List<bool> boolList = new List<bool>();
 
-        Inventory inv = player.GetComponent<Player>().GetInventory();
+        InventoryOld inv = player.GetComponent<Player>().GetInventory();
         foreach (QuestRequest questRequest in quest.GetRequestList())
         {
             int count = 0;
             bool enoughItem = false;
-            foreach (Item item in inv.GetItemList())
+            foreach (ItemOld item in inv.GetItemList())
             {
 
                 if (!enoughItem && questRequest.GetItemType() == item.itemType)
