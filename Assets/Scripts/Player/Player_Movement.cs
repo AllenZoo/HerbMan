@@ -25,7 +25,7 @@ public class Player_Movement : MonoBehaviour
 
 
     private bool isMoving = false;
-    private bool canMove;
+    private bool canMove = true;
     private bool outOfStamina = false;
 
     private Rigidbody2D rb;

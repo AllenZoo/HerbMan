@@ -4,7 +4,15 @@ using UnityEngine;
 
 public enum ItemType {
     Default, 
-    Equipment,
+    Helmet,
+    Chestplate,
+    Pants,
+    Boots,
+    Weapon,
+    Orb,
+    Pickaxe,
+    Axe,
+    Sickle,
     Crafting,
     Healing
 }
@@ -18,13 +26,15 @@ public enum Attributes
 
 public abstract class ItemObject : ScriptableObject
 {
-    public int id;
     public Sprite sprite;
+    public bool isStackable;
     public ItemType itemType;
 
     [TextArea(5, 20)]
     public string description;
-    public ItemBuff[] buffs;
+    public Item data = new Item();
+
+    
 
     public Item CreateItem()
     {
@@ -36,17 +46,24 @@ public abstract class ItemObject : ScriptableObject
 [System.Serializable]
 public class Item {
     public string name;
-    public int id;
+    public int id = -1;
     public ItemBuff[] buffs;
+
+    public Item()
+    {
+        name = "";
+        id = -1;
+    }
+
     public Item(ItemObject item)
     {
         name = item.name;
-        id = item.id;
-        buffs = new ItemBuff[item.buffs.Length];
+        id = item.data.id;
+        buffs = new ItemBuff[item.data.buffs.Length];
         for(int i = 0; i < buffs.Length; i++)
         {
-            buffs[i] = new ItemBuff(item.buffs[i].min, item.buffs[i].max);
-            buffs[i].attribute = item.buffs[i].attribute;
+            buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max);
+            buffs[i].attribute = item.data.buffs[i].attribute;
         }
     } 
 }

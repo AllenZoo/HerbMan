@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Dialogue\DialogueTrigger.cs" />
     <Compile Include="Assets\Scripts\Dialogue\UI_DialogueManager.cs" />
+    <Compile Include="Assets\Scripts\DynamicInterface.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Base.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Gunner.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Gunner_Animation.cs" />
@@ -141,10 +142,11 @@
     <Compile Include="Assets\Scripts\StatBars\HealthBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\LevelBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\StatBar.cs" />
+    <Compile Include="Assets\Scripts\StaticInterface.cs" />
     <Compile Include="Assets\Scripts\TutorialArrow.cs" />
-    <Compile Include="Assets\Scripts\UI_InventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\UI_MoneyCount.cs" />
     <Compile Include="Assets\Scripts\UI_Stats.cs" />
+    <Compile Include="Assets\Scripts\UserInterface.cs" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

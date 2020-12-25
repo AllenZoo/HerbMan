@@ -16,7 +16,7 @@ public class Player_Collision : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
-        uiManager = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
+        //uiManager = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
     }
     private void Start()
     {

@@ -104,5 +104,9 @@ public class Player : MonoBehaviour
             }
         }
     }
-   
+
+    private void OnApplicationQuit()
+    {
+        inventoryObject.container.items = new InventorySlot[24];
+    }
 }
