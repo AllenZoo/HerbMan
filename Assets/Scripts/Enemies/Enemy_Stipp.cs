@@ -19,7 +19,6 @@ public class Enemy_Stipp : MonoBehaviour
         //Visual
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        sprite = ItemAssets.Instance.Stipp;
         spriteRenderer.sprite = sprite;
 
         //Base (Stores stats)

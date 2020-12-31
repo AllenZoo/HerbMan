@@ -35,11 +35,13 @@ public class Player_Input : MonoBehaviour
         //Save Inventory
         if (Input.GetKeyDown(KeyCode.L))
         {
-            player.inventoryObject.Save();
+            player.inventory.Save();
+            player.equipment.Save();
         }
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
-            player.inventoryObject.Load();
+            player.inventory.Load();
+            player.equipment.Load();
         }
 
         //Sprint

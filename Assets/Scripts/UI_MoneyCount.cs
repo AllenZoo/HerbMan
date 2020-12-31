@@ -18,7 +18,7 @@ public class UI_MoneyCount : MonoBehaviour
     private void Start()
     {
 
-        npcTrader.GetComponent<NPC_Trader_QuestManager>().OnQuestCompletion += npcTrader_OnQuestCompletion;
+        //npcTrader.GetComponent<NPC_Trader_QuestManager>().OnQuestCompletion += npcTrader_OnQuestCompletion;
     }
 
     private void npcTrader_OnQuestCompletion(object sender, System.EventArgs e)

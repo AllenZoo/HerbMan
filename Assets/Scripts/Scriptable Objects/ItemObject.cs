@@ -14,7 +14,8 @@ public enum ItemType {
     Axe,
     Sickle,
     Crafting,
-    Healing
+    Material,
+    Healing,
 }
 
 public enum Attributes
@@ -24,7 +25,8 @@ public enum Attributes
     Speed,
 }
 
-public abstract class ItemObject : ScriptableObject
+[CreateAssetMenu(fileName = "New Item", menuName = "Assets/Item")]
+public class ItemObject : ScriptableObject
 {
     public Sprite sprite;
     public bool isStackable;

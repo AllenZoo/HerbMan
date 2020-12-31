@@ -8,8 +8,6 @@ public class Player_Collision : MonoBehaviour
     //Other
     private bool isTouchingTrader;
     private Enemy_Base enemy_Base;
-    private ItemWorld itemWorld;
-    private ItemWorldVein itemWorldVein;
     private UI_Manager uiManager;
 
 
@@ -21,8 +19,6 @@ public class Player_Collision : MonoBehaviour
     private void Start()
     {
         enemy_Base = null;
-        itemWorld = null;
-        itemWorldVein = null;
         isTouchingTrader = false;
     }
 
@@ -32,20 +28,19 @@ public class Player_Collision : MonoBehaviour
         var item = other.GetComponent<GroundItem>();
         if (item)
         {
-            player.inventoryObject.AddItem(new Item(item.item), 1);
+            if(player.inventory.AddItem(new Item(item.item), 1))
+            {
+                Destroy(other.gameObject);
+            }
         }
 
-        if(other.tag == "Item")
-        {
-            itemWorld = other.GetComponent<ItemWorld>();
-            player.GetInventory().AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
-        }
-        else if(other.tag == "Item Vein")
-        {
-            itemWorld = other.GetComponent<ItemWorld>();
-            itemWorldVein = other.GetComponent<ItemWorldVein>();
-        }
+        //if(other.tag == "Item")
+        //{
+        //    itemWorld = other.GetComponent<ItemWorld>();
+        //    player.GetInventory().AddItem(itemWorld.GetItem());
+        //    itemWorld.DestroySelf();
+        //}
+
         else if(other.tag == "Enemy")
         {
             enemy_Base = other.GetComponent<Enemy_Base>();
@@ -61,24 +56,22 @@ public class Player_Collision : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         enemy_Base = null;
-        itemWorld = null;
-        itemWorldVein = null;
         isTouchingTrader = false;
     }
 
     void Update()
     {
-        if (itemWorldVein != null)
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                //OnCollisionVein?.Invoke(this, EventArgs.Empty);
-                if (itemWorldVein.CanHarvest())
-                {
-                    player.GetInventory().AddItem(itemWorldVein.Harvest());
-                }
-            }
-        }
+        //if (itemWorldVein != null)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F))
+        //    {
+        //        //OnCollisionVein?.Invoke(this, EventArgs.Empty);
+        //        if (itemWorldVein.CanHarvest())
+        //        {
+        //            //player.GetInventory().AddItem(itemWorldVein.Harvest());
+        //        }
+        //    }
+        //}
         if (isTouchingTrader)
         {
             if (Input.GetKeyDown(KeyCode.G))

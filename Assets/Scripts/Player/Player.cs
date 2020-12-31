@@ -23,9 +23,8 @@ public class Player : MonoBehaviour
     internal Rigidbody2D rb2D;
 
     //Other
-    private InventoryOld inventory;
-
-    public InventoryObject inventoryObject;
+    public InventoryObject inventory;
+    public InventoryObject equipment;
 
     private void Awake()
     {
@@ -40,7 +39,6 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
 
-        inventory = new InventoryOld(UseItem, 20);
     }
 
     private void Start()
@@ -62,7 +60,7 @@ public class Player : MonoBehaviour
         Debug.Log("taking damage");
         player_Stats.SubtractHealth(num);
     }
-    public InventoryOld GetInventory()
+    public InventoryObject GetInventory()
     {
         return inventory;
     }
@@ -70,43 +68,44 @@ public class Player : MonoBehaviour
     {
         return this.transform.position;
     }
-    public void SetEquipment(ItemOld item)
-    {
-        SetEquipment(item.itemType);
-    }
-    public void SetEquipment(ItemOld.ItemType itemType)
-    {
-        switch (itemType)
-        {
-            default: break;
-        }
-        OnEquipChanged?.Invoke(this, EventArgs.Empty);
-    }
-    private void UseItem(ItemOld item)
-    {
-        if (item.IsTool())
-        {
-            Debug.Log("Using Tool!");
-            //Equip Tool
-            switch (item.itemType)
-            {
-                default: break;
-                case ItemOld.ItemType.Stone_Pickaxe: break;
+    //public void SetEquipment(ItemOld item)
+    //{
+    //    SetEquipment(item.itemType);
+    //}
+    //public void SetEquipment(ItemOld.ItemType itemType)
+    //{
+    //    switch (itemType)
+    //    {
+    //        default: break;
+    //    }
+    //    OnEquipChanged?.Invoke(this, EventArgs.Empty);
+    //}
+    //private void UseItem(ItemOld item)
+    //{
+    //    if (item.IsTool())
+    //    {
+    //        Debug.Log("Using Tool!");
+    //        //Equip Tool
+    //        switch (item.itemType)
+    //        {
+    //            default: break;
+    //            case ItemOld.ItemType.Stone_Pickaxe: break;
 
-            }
-        }
+    //        }
+    //    }
 
-        if (item.IsMaterial())
-        {
-            switch (item.itemType)
-            {
-                default: break;
-            }
-        }
-    }
+    //    if (item.IsMaterial())
+    //    {
+    //        switch (item.itemType)
+    //        {
+    //            default: break;
+    //        }
+    //    }
+    //}
 
     private void OnApplicationQuit()
     {
-        inventoryObject.container.items = new InventorySlot[24];
+        inventory.container.Clear();
+        equipment.container.Clear();
     }
 }

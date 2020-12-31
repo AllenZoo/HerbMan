@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0cfa8a7b4e8504b872d01e4239ac31, type: 3}
+  m_Name: ITEM_HERB_WATERHERB
+  m_EditorClassIdentifier: 
+  sprite: {fileID: -6863170747963377554, guid: 72da23c705223c342beb60bced7dcfbd, type: 3}
+  isStackable: 1
+  itemType: 11
+  description: A tier 3 herb
+  data:
+    name: 
+    id: -1
+    buffs: []

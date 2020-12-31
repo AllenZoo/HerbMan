@@ -4,171 +4,171 @@ using UnityEngine;
 
 public class UI_TraderQuest : MonoBehaviour
 {
-    private GameObject player;
-    private GameObject npcTrader;
+    //private GameObject player;
+    //private GameObject npcTrader;
 
-    private Quest quest;
-    private QuestRequest qrOne;
-    private QuestRequest qrTwo;
-    private QuestRequest qrThree;
+    //private Quest quest;
+    //private QuestRequest qrOne;
+    //private QuestRequest qrTwo;
+    //private QuestRequest qrThree;
 
-    private List<bool> completionList;
+    //private List<bool> completionList;
 
-    private UI_QuestRequestSlot qrSlotOne;
-    private UI_QuestRequestSlot qrSlotTwo;
-    private UI_QuestRequestSlot qrSlotThree;
-
-
-    private void Start()
-    {
-        FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUIQuestInterface(this.gameObject.transform);
-
-        player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<Player>().GetInventory().OnItemListChanged += UI_TraderQuest_OnItemListChanged;
-
-        npcTrader = GameObject.FindGameObjectWithTag("NPC_Trader");
-        npcTrader.GetComponent<NPC_Trader_QuestManager>().OnQuestCompletion += UI_TraderQuest_OnQuestCompletion;
-
-        GetCurQuest();
-        InitQuestRequest();
-
-        qrSlotOne = transform.Find("QuestRequestSlotOne").GetComponent<UI_QuestRequestSlot>();
-        qrSlotTwo = transform.Find("QuestRequestSlotTwo").GetComponent<UI_QuestRequestSlot>();
-        qrSlotThree = transform.Find("QuestRequestSlotThree").GetComponent<UI_QuestRequestSlot>();
-
-        RefreshUI();
-
-        //TEST AREA
-
-    }
-
-    private void UI_TraderQuest_OnQuestCompletion(object sender, System.EventArgs e)
-    {
-        RefreshUI();
-    }
-
-    private void UI_TraderQuest_OnItemListChanged(object sender, System.EventArgs e)
-    {
-        RefreshUI();
-    }
-
-    public bool IsQuestComplete()
-    {
-        foreach(bool state in completionList)
-        {
-            if(state == false)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public void RefreshUI()
-    {
-        GetCurQuest();
-        InitQuestRequest();
-        completionList = CheckInventory();
-
-        //Refresh Slot info
-        qrSlotOne.gameObject.SetActive(true);
-        qrSlotOne.SetQuestObject(qrOne);
-        qrSlotOne.SetCount(qrOne);
-
-        qrSlotTwo.gameObject.SetActive(true);
-        qrSlotTwo.SetQuestObject(qrTwo);
-        qrSlotTwo.SetCount(qrTwo);
-
-        qrSlotThree.gameObject.SetActive(true);
-        qrSlotThree.SetQuestObject(qrThree);
-        qrSlotThree.SetCount(qrThree);
-
-        //Check if Quest Request exists for each slot
-
-        //Checkbox
-        int count = 0;
-        foreach (bool isComplete in completionList)
-        {
-            if (count == 0)
-            {
-                qrSlotOne.SetCompletionState(isComplete);
-            }
-            else if (count == 1)
-            {
-                qrSlotTwo.SetCompletionState(isComplete);
-            }
-            else if (count == 2)
-            {
-                qrSlotThree.SetCompletionState(isComplete);
-            }
-            count++;
-        }
-
-    }
-    private void GetCurQuest()
-    {
-        quest = GameObject.FindGameObjectWithTag("NPC_Trader").GetComponent<NPC_Trader_QuestManager>().GetQuest();
-    }
-    private void InitQuestRequest()
-    {
-        qrOne = new QuestRequest();
-        qrTwo = new QuestRequest();
-        qrThree = new QuestRequest();
-
-        int count = 0;
-        foreach (QuestRequest qr in quest.GetRequestList())
-        {
-            if (count == 0)
-            {
-                qrOne = qr;
-            }
-            else if (count == 1)
-            {
-                qrTwo = qr;
-            }
-            else if (count == 2)
-            {
-                qrThree = qr;
-            }
-            count++;
-        }
+    //private UI_QuestRequestSlot qrSlotOne;
+    //private UI_QuestRequestSlot qrSlotTwo;
+    //private UI_QuestRequestSlot qrSlotThree;
 
 
-    }
-    private List<bool> CheckInventory()
-    {
-        List<bool> boolList = new List<bool>();
+    //private void Start()
+    //{
+    //    FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetUIQuestInterface(this.gameObject.transform);
 
-        InventoryOld inv = player.GetComponent<Player>().GetInventory();
-        foreach (QuestRequest questRequest in quest.GetRequestList())
-        {
-            int count = 0;
-            bool enoughItem = false;
-            foreach (ItemOld item in inv.GetItemList())
-            {
+    //    player = GameObject.FindGameObjectWithTag("Player");
+    //    //player.GetComponent<Player>().GetInventory().OnItemListChanged += UI_TraderQuest_OnItemListChanged;
 
-                if (!enoughItem && questRequest.GetItemType() == item.itemType)
-                {
-                    count += item.count;
-                }
-                if (questRequest.GetItemCount() <= count)
-                {
-                    enoughItem = true;
-                }
-            }
+    //    npcTrader = GameObject.FindGameObjectWithTag("NPC_Trader");
+    //    npcTrader.GetComponent<NPC_Trader_QuestManager>().OnQuestCompletion += UI_TraderQuest_OnQuestCompletion;
 
-            boolList.Add(enoughItem);
-        }
-        return boolList;
-    }
+    //    GetCurQuest();
+    //    InitQuestRequest();
 
-    //DEBUGGING
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RefreshUI();
-        }
-    }
+    //    qrSlotOne = transform.Find("QuestRequestSlotOne").GetComponent<UI_QuestRequestSlot>();
+    //    qrSlotTwo = transform.Find("QuestRequestSlotTwo").GetComponent<UI_QuestRequestSlot>();
+    //    qrSlotThree = transform.Find("QuestRequestSlotThree").GetComponent<UI_QuestRequestSlot>();
+
+    //    RefreshUI();
+
+    //    //TEST AREA
+
+    //}
+
+    //private void UI_TraderQuest_OnQuestCompletion(object sender, System.EventArgs e)
+    //{
+    //    RefreshUI();
+    //}
+
+    //private void UI_TraderQuest_OnItemListChanged(object sender, System.EventArgs e)
+    //{
+    //    RefreshUI();
+    //}
+
+    //public bool IsQuestComplete()
+    //{
+    //    foreach(bool state in completionList)
+    //    {
+    //        if(state == false)
+    //        {
+    //            return false;
+    //        }
+    //    }
+
+    //    return true;
+    //}
+
+    //public void RefreshUI()
+    //{
+    //    GetCurQuest();
+    //    InitQuestRequest();
+    //    completionList = CheckInventory();
+
+    //    //Refresh Slot info
+    //    qrSlotOne.gameObject.SetActive(true);
+    //    qrSlotOne.SetQuestObject(qrOne);
+    //    qrSlotOne.SetCount(qrOne);
+
+    //    qrSlotTwo.gameObject.SetActive(true);
+    //    qrSlotTwo.SetQuestObject(qrTwo);
+    //    qrSlotTwo.SetCount(qrTwo);
+
+    //    qrSlotThree.gameObject.SetActive(true);
+    //    qrSlotThree.SetQuestObject(qrThree);
+    //    qrSlotThree.SetCount(qrThree);
+
+    //    //Check if Quest Request exists for each slot
+
+    //    //Checkbox
+    //    int count = 0;
+    //    foreach (bool isComplete in completionList)
+    //    {
+    //        if (count == 0)
+    //        {
+    //            qrSlotOne.SetCompletionState(isComplete);
+    //        }
+    //        else if (count == 1)
+    //        {
+    //            qrSlotTwo.SetCompletionState(isComplete);
+    //        }
+    //        else if (count == 2)
+    //        {
+    //            qrSlotThree.SetCompletionState(isComplete);
+    //        }
+    //        count++;
+    //    }
+
+    //}
+    //private void GetCurQuest()
+    //{
+    //    quest = GameObject.FindGameObjectWithTag("NPC_Trader").GetComponent<NPC_Trader_QuestManager>().GetQuest();
+    //}
+    //private void InitQuestRequest()
+    //{
+    //    qrOne = new QuestRequest();
+    //    qrTwo = new QuestRequest();
+    //    qrThree = new QuestRequest();
+
+    //    int count = 0;
+    //    foreach (QuestRequest qr in quest.GetRequestList())
+    //    {
+    //        if (count == 0)
+    //        {
+    //            qrOne = qr;
+    //        }
+    //        else if (count == 1)
+    //        {
+    //            qrTwo = qr;
+    //        }
+    //        else if (count == 2)
+    //        {
+    //            qrThree = qr;
+    //        }
+    //        count++;
+    //    }
+
+
+    //}
+    //private List<bool> CheckInventory()
+    //{
+    //    List<bool> boolList = new List<bool>();
+
+    //    //InventoryOld inv = player.GetComponent<Player>().GetInventory();
+    //    foreach (QuestRequest questRequest in quest.GetRequestList())
+    //    {
+    //        int count = 0;
+    //        bool enoughItem = false;
+    //        foreach (ItemOld item in inv.GetItemList())
+    //        {
+
+    //            if (!enoughItem && questRequest.GetItemType() == item.itemType)
+    //            {
+    //                count += item.count;
+    //            }
+    //            if (questRequest.GetItemCount() <= count)
+    //            {
+    //                enoughItem = true;
+    //            }
+    //        }
+
+    //        boolList.Add(enoughItem);
+    //    }
+    //    return boolList;
+    //}
+
+    ////DEBUGGING
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.R))
+    //    {
+    //        RefreshUI();
+    //    }
+    //}
 }
