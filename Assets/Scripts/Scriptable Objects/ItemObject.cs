@@ -14,7 +14,9 @@ public enum ItemType {
     Axe,
     Sickle,
     Crafting,
-    Material,
+    Herb,
+    Ore,
+    Wood,
     Healing,
 }
 
@@ -25,7 +27,7 @@ public enum Attributes
     Speed,
 }
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Assets/Item")]
+//[CreateAssetMenu(fileName = "New Item", menuName = "Assets/Item")]
 public class ItemObject : ScriptableObject
 {
     public Sprite sprite;

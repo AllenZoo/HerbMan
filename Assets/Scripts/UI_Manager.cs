@@ -28,37 +28,35 @@ public class UI_Manager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
-
-        //uiCraftingSystem = FindObjectOfType<UI_CraftingSystem>().transform;
-        //uiEquipmentSlots = FindObjectOfType<UI_CharacterEquipment>().transform;
-        //uiInventory = FindObjectOfType<UI_Inventory>().transform;
-        //uiQuestInterface = FindObjectOfType<UI_TraderQuest>().transform;
     }
 
     private void Start()
     {
         //Closing inventory and crafting and quest systems after everything is initialized
-        Invoke("CloseInventory", 0.1f);
-        Invoke("CloseCraftingSystem", 0.1f);
-        Invoke("CloseTraderQuestInterface", 0.1f);
+        if (uiInventory)
+            Invoke("CloseInventory", 0.1f);
+        if(uiCraftingSystem)
+            Invoke("CloseCraftingSystem", 0.1f);
+        if(uiQuestInterface)
+            Invoke("CloseTraderQuestInterface", 0.1f);
     }
     
 
     public void SetUIInventory(Transform uiInventory)
     {
-        //this.uiInventory = uiInventory;
+        this.uiInventory = uiInventory;
     }
     public void SetUIEquipment(Transform uiEquipment)
     {
-       // uiEquipmentSlots = uiEquipment;
+        this.uiEquipmentSlots = uiEquipment;
     }
     public void SetUICraftingSystem(Transform uiCraftingSystem)
     {
-        //this.uiCraftingSystem = uiCraftingSystem;
+        this.uiCraftingSystem = uiCraftingSystem;
     }
     public void SetUIQuestInterface(Transform uiQuestInterface)
     {
-        //this.uiQuestInterface = uiQuestInterface;
+        this.uiQuestInterface = uiQuestInterface;
     }
     public void SetButton(Button button, bool isOpen, string system)
     {
@@ -93,21 +91,17 @@ public class UI_Manager : MonoBehaviour
 
     public void CloseInventory()
     {
-        uiInventory.transform.position = uiInventory.transform.position - new Vector3(2000, 2000, 0);
-        CloseEquipmentSlots();
+        uiInventory.gameObject.SetActive(false);
 
-        openButtonInventory.gameObject.SetActive(true);
-        closeButtonInventory.gameObject.SetActive(false);
+        UpdateButtonStatus();
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Inventory", false);
     }
     public void OpenInventory()
     {
-        uiInventory.transform.position = uiInventory.transform.position + new Vector3(2000, 2000, 0);
-        OpenEquipmentSlots();
+        uiInventory.gameObject.SetActive(true);
 
-        openButtonInventory.gameObject.SetActive(false);
-        closeButtonInventory.gameObject.SetActive(true);
+        UpdateButtonStatus();
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Inventory", true);
     }
@@ -156,5 +150,26 @@ public class UI_Manager : MonoBehaviour
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", true);
     }
+    public void OpenInventoryUI()
+    {
+        uiInventory.gameObject.SetActive(true);
 
+    }
+
+    public void UpdateButtonStatus()
+    {
+        #region Inventory
+        if (uiInventory.gameObject.activeInHierarchy)
+        {
+            openButtonInventory.gameObject.SetActive(false);
+            closeButtonInventory.gameObject.SetActive(true);
+        }
+        else
+        {
+            openButtonInventory.gameObject.SetActive(true);
+            closeButtonInventory.gameObject.SetActive(false);
+        }
+        #endregion
+        
+    }
 }
