@@ -2,10 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Animator))]
 public class Player_Animation : MonoBehaviour
 {
     [SerializeField] Player player;
     private Animator animator;
+
+    private string currentAnimationState;
+    public enum AnimationState
+    {
+        Attack,
+        Walk,
+        Run,
+        Dash,
+    }
+
+    //Animation States
+    private const string PLAYER_ATTACK = "Player_Attack";
+    private const string PLAYER_IDLE = "Player_Idle";
+    private const string PLAYER_WALK = "Player_Walk";
+    private const string PLAYER_RUN = "Player_Run";
 
     private void Awake()
     {
@@ -34,5 +51,17 @@ public class Player_Animation : MonoBehaviour
         }
     }
 
+    public void ChangeAnimationState(string newState)
+    {
+        if (currentAnimationState == newState)
+        {
+            return;
+        }
+
+        animator.Play(newState);
+
+        currentAnimationState = newState;
+    }
+    
     
 }

@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(Player_Stats))]
+[RequireComponent(typeof(Player_Animation))]
+[RequireComponent(typeof(Player_Collision))]
+[RequireComponent(typeof(Player_Movement))]
+[RequireComponent(typeof(Player_Input))]
+[RequireComponent(typeof(Player_Equipment))]
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
@@ -17,6 +23,7 @@ public class Player : MonoBehaviour
     internal Player_Collision player_Collision;
     internal Player_Movement player_Movement;
     internal Player_Input player_Input;
+    internal Player_Equipment player_Equipment;
 
     //Components
     internal Animator animator;
@@ -35,6 +42,7 @@ public class Player : MonoBehaviour
         player_Collision = GetComponent<Player_Collision>();
         player_Movement = GetComponent<Player_Movement>();
         player_Input = GetComponent<Player_Input>();
+        player_Equipment = GetComponent<Player_Equipment>();
 
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();

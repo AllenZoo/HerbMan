@@ -63,7 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EquipmentUI.cs" />
+    <Compile Include="Assets\Collectable.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Assets.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\CMDebug.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\CameraFollow.cs" />
@@ -83,10 +83,13 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
-    <Compile Include="Assets\InventoryUI.cs" />
+    <Compile Include="Assets\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Attribute.cs" />
     <Compile Include="Assets\Scripts\BarText.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\CraftingRecipe.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
+    <Compile Include="Assets\Scripts\CraftingUI.cs" />
     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Dialogue\DialogueTrigger.cs" />
     <Compile Include="Assets\Scripts\Dialogue\UI_DialogueManager.cs" />
@@ -99,10 +102,13 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy_Stipp_Animation.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy_Stipp_Movement.cs" />
     <Compile Include="Assets\Scripts\Equipment\Player_Equipment.cs" />
+    <Compile Include="Assets\Scripts\EquipmentUI.cs" />
+    <Compile Include="Assets\Scripts\IModifier.cs" />
     <Compile Include="Assets\Scripts\Interface\DynamicInterface.cs" />
     <Compile Include="Assets\Scripts\Interface\StaticInterface.cs" />
     <Compile Include="Assets\Scripts\Interface\UserInterface.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryObject.cs" />
+    <Compile Include="Assets\Scripts\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\Items\GroundItem.cs" />
     <Compile Include="Assets\Scripts\Items\GroundItemVein.cs" />
     <Compile Include="Assets\Scripts\Manager\GM_Initializer.cs" />
@@ -110,6 +116,7 @@
     <Compile Include="Assets\Scripts\Manager\GM_SceneTransitioner.cs" />
     <Compile Include="Assets\Scripts\Manager\GM_StateManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UI_Manager_ButtonScript.cs" />
+    <Compile Include="Assets\Scripts\ModifiableInt.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC_Trader.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC_Trader_QuestManager.cs" />
     <Compile Include="Assets\Scripts\NPC\UI_CheckBox.cs" />

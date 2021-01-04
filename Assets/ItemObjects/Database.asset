@@ -12,11 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd64c10edf049b44a458cdbb73e46c0, type: 3}
   m_Name: Database
   m_EditorClassIdentifier: 
-  items:
+  itemObjects:
   - {fileID: 11400000, guid: 770750652f9c4524591ebd612726d594, type: 2}
   - {fileID: 11400000, guid: 5504e01982aa97d43ae18054f6cf003c, type: 2}
   - {fileID: 11400000, guid: e13712f437a101445bc48370ce39eb46, type: 2}
   - {fileID: 11400000, guid: d101a1218774cf64ea01db049c2150f5, type: 2}
+  - {fileID: 11400000, guid: 7909b299508e8ee4fbc25f8156c68253, type: 2}
+  - {fileID: 11400000, guid: 70bdc7dd1f5253447b5f95c95629bc65, type: 2}
+  - {fileID: 11400000, guid: 02c861608a6b50d43a035f7a6ab4b481, type: 2}
+  - {fileID: 11400000, guid: f8d6558565be7d947bf37e8ed7e182dd, type: 2}
+  - {fileID: 11400000, guid: 6faa142ec48376141a5b19c3d59eaa40, type: 2}
+  - {fileID: 11400000, guid: ede7f2477de4a5746b31dd3d83fbbbc9, type: 2}
+  - {fileID: 11400000, guid: 4832e2604d341fc4185dc3d185d3b77c, type: 2}
+  - {fileID: 11400000, guid: 28cc1d3cb62a5f44fbe03d72466815a0, type: 2}
+  - {fileID: 11400000, guid: 07cc74084ea29554a86721ccb97d2959, type: 2}
   - {fileID: 11400000, guid: 3cf7738f0b3e805479e8093e4d11bc6b, type: 2}
   - {fileID: 11400000, guid: 749eea98291772b4fa6ef640e118f632, type: 2}
   - {fileID: 11400000, guid: 4dcc945bfe217f249b7498d8f883dd72, type: 2}
@@ -29,12 +38,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9618ed9ec16ee1e4c8f6e0287049521c, type: 2}
   - {fileID: 11400000, guid: a75869616b5b7684a8f770290afabdea, type: 2}
   - {fileID: 11400000, guid: a0f8d5743738ca84d87382e56d9a6500, type: 2}
-  - {fileID: 11400000, guid: 7909b299508e8ee4fbc25f8156c68253, type: 2}
-  - {fileID: 11400000, guid: 70bdc7dd1f5253447b5f95c95629bc65, type: 2}
-  - {fileID: 11400000, guid: 02c861608a6b50d43a035f7a6ab4b481, type: 2}
-  - {fileID: 11400000, guid: f8d6558565be7d947bf37e8ed7e182dd, type: 2}
-  - {fileID: 11400000, guid: 6faa142ec48376141a5b19c3d59eaa40, type: 2}
-  - {fileID: 11400000, guid: ede7f2477de4a5746b31dd3d83fbbbc9, type: 2}
-  - {fileID: 11400000, guid: 4832e2604d341fc4185dc3d185d3b77c, type: 2}
-  - {fileID: 11400000, guid: 28cc1d3cb62a5f44fbe03d72466815a0, type: 2}
-  - {fileID: 11400000, guid: 07cc74084ea29554a86721ccb97d2959, type: 2}
+  craftingRecipes: []

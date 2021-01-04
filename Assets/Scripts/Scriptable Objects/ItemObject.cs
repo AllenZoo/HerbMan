@@ -17,7 +17,8 @@ public enum ItemType {
     Herb,
     Ore,
     Wood,
-    Healing,
+    Recipe,
+    EnergyShard,
 }
 
 public enum Attributes
@@ -38,8 +39,6 @@ public class ItemObject : ScriptableObject
     public string description;
     public Item data = new Item();
 
-    
-
     public Item CreateItem()
     {
         Item newItem = new Item(this);
@@ -51,7 +50,9 @@ public class ItemObject : ScriptableObject
 public class Item {
     public string name;
     public int id = -1;
+    public int tier;
     public ItemBuff[] buffs;
+
 
     public Item()
     {
@@ -63,7 +64,10 @@ public class Item {
     {
         name = item.name;
         id = item.data.id;
+        tier = item.data.tier;
+
         buffs = new ItemBuff[item.data.buffs.Length];
+
         for(int i = 0; i < buffs.Length; i++)
         {
             buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max);
@@ -73,7 +77,7 @@ public class Item {
 }
 
 [System.Serializable]
-public class ItemBuff
+public class ItemBuff: IModifier
 {
     public Attributes attribute;
     public int value;
@@ -85,6 +89,10 @@ public class ItemBuff
         min = _min;
         max = _max;
         GenerateValue();
+    }
+    public void AddValue(ref int baseValue)
+    {
+        baseValue += value;
     }
 
     public void GenerateValue()

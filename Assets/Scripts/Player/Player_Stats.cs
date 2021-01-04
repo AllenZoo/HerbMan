@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Player_Stats : MonoBehaviour
 {
-    public static Player_Stats Instance { get; private set; }
-
     [SerializeField] internal Player player;
 
     //Stats
@@ -24,14 +22,7 @@ public class Player_Stats : MonoBehaviour
     private float level = 1;
     private float experience = 0;
 
-
-    //Stats
-
-    private float attack = 1;
-    private float defence = 1;
-    private float speed = 1;
-
-    
+    public Attribute[] attributes;
 
     //Stamina Regen
     private float dexterity = 1;
@@ -54,17 +45,104 @@ public class Player_Stats : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
         player = GetComponent<Player>();
     }
     private void Start()
     {
+
+        for (int i = 0; i < attributes.Length; i++)
+        {
+            attributes[i].SetParent(this);
+        }
+        for (int i = 0; i < player.equipment.GetSlots.Length; i++)
+        {
+            player.equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;
+            player.equipment.GetSlots[i].OnAfterUpdate += OnAfterSlotUpdate;
+        }
 
         RefillBars();
         OnHealthChanged += Player_Stats_OnHealthChanged;
         OnStaminaUsed += Player_Stats_OnStaminaChanged;
         OnLevelUp += Player_Stats_OnLevelUp;
     }
+
+    public void OnBeforeSlotUpdate(InventorySlot _slot)
+    {
+        if(_slot.ItemObject == null)
+        {
+            return;
+        }
+        switch (_slot.parent.inventory.type)
+        {
+            case InterfaceType.Inventory:
+                break;
+            case InterfaceType.Equipment:
+                Debug.Log(string.Concat("Removed ", _slot.ItemObject, " on ", _slot.parent.inventory.type, " Allowed Items: ", string.Join(", ", _slot.allowedItems)));
+
+                for (int i = 0; i < _slot.item.buffs.Length; i++)
+                {
+                    for (int j = 0; j < attributes.Length; j++)
+                    {
+                        if (attributes[j].type == _slot.item.buffs[i].attribute)
+                        {
+                            attributes[j].value.RemoveModifier(_slot.item.buffs[i]);
+                        }
+                    }
+                }
+
+                break;
+            case InterfaceType.Crafting:
+                break;
+            case InterfaceType.Quest:
+                break;
+            default:
+                break;
+        }
+    }
+    public void OnAfterSlotUpdate(InventorySlot _slot)
+    {
+        if (_slot.ItemObject == null)
+        {
+            return;
+        }
+        switch (_slot.parent.inventory.type)
+        {
+            case InterfaceType.Inventory:
+                break;
+            case InterfaceType.Equipment:
+                Debug.Log(string.Concat("Placed ", _slot.ItemObject, " on ", _slot.parent.inventory.type, " Allowed Items: ", string.Join(", ", _slot.allowedItems)));
+
+                for (int i = 0; i < _slot.item.buffs.Length; i++)
+                {
+                    for (int j = 0; j < attributes.Length; j++)
+                    {
+                        if(attributes[j].type == _slot.item.buffs[i].attribute)
+                        {
+                            attributes[j].value.AddModifier(_slot.item.buffs[i]);
+                        }
+                    }
+                }
+
+                break;
+            case InterfaceType.Crafting:
+                break;
+            case InterfaceType.Quest:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void AttributeModified(Attribute attribute)
+    {
+        Debug.Log(string.Concat(attribute.type, " was updated! Value is now: ", attribute.value.ModifiedValue));
+    }
+
+    #region OldCode
+    //Stats
+    private float attack = 1;
+    private float defence = 1;
+    private float speed = 1;
 
     //MONEY
     public float GetMoney()
@@ -146,6 +224,7 @@ public class Player_Stats : MonoBehaviour
         speed = num;
         OnStatChanged.Invoke(this, EventArgs.Empty);
     }
+    #endregion
 
     //HEALTH
     public float GetHealth()

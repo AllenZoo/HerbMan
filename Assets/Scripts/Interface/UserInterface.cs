@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,19 +13,42 @@ public abstract class UserInterface : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < inventory.container.items.Length; i++)
+        for(int i = 0; i < inventory.GetSlots.Length; i++)
         {
-            inventory.container.items[i].parent = this;
+            inventory.GetSlots[i].parent = this;
+            inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
         }
         CreateSlots();
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
     }
 
-    private void Update()
+    private void OnSlotUpdate(InventorySlot _slot)
     {
-        slotsOnInterface.UpdateSlotDisplay();
+        if (_slot.item.id >= 0)
+        {
+            //update slot with item
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = _slot.ItemObject.sprite;
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+            _slot.slotDisplay.GetComponentInChildren<Text>().text = _slot.amount == 1 ? "" : _slot.amount.ToString("n0");
+
+            _slot.slotDisplay.transform.Find("emptyImage (icon)")?.transform.gameObject.SetActive(false);
+        }
+        else
+        {
+            //clear slot
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+            _slot.slotDisplay.GetComponentInChildren<Text>().text = "";
+
+            _slot.slotDisplay.transform.Find("emptyImage (icon)")?.transform.gameObject.SetActive(true);
+        }
     }
+
+    //private void Update()
+    //{
+    //    slotsOnInterface.UpdateSlotDisplay();
+    //}
 
     public abstract void CreateSlots();
 
@@ -124,6 +148,8 @@ public static class ExtensionMethods
                 _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = _slot.Value.ItemObject.sprite;
                 _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
                 _slot.Key.GetComponentInChildren<Text>().text = _slot.Value.amount == 1 ? "" : _slot.Value.amount.ToString("n0");
+
+                _slot.Key.transform.Find("emptyImage (icon)")?.transform.gameObject.SetActive(false);
             }
             else
             {
@@ -131,6 +157,8 @@ public static class ExtensionMethods
                 _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
                 _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
                 _slot.Key.GetComponentInChildren<Text>().text = "";
+
+                _slot.Key.transform.Find("emptyImage (icon)")?.transform.gameObject.SetActive(true);
             }
         }
     }

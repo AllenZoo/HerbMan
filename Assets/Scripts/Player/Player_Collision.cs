@@ -76,7 +76,7 @@ public class Player_Collision : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
-                uiManager.OpenTraderQuestInterface();
+                uiManager.OpenQuest();
             }
         }
     }
