@@ -19,4 +19,5 @@ MonoBehaviour:
   data:
     name: 
     id: 16
+    tier: 3
     buffs: []

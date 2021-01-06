@@ -136,13 +136,46 @@ public class Player_Stats : MonoBehaviour
     public void AttributeModified(Attribute attribute)
     {
         Debug.Log(string.Concat(attribute.type, " was updated! Value is now: ", attribute.value.ModifiedValue));
+        OnStatChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    #region OldCode
-    //Stats
-    private float attack = 1;
-    private float defence = 1;
-    private float speed = 1;
+    //ATTACK
+    public float GetAttack()
+    {
+        for (int i = 0; i < attributes.Length - 1; i++)
+        {
+            if (attributes[i].type == Attributes.Attack)
+            {
+                return attributes[i].value.ModifiedValue;
+            }
+        }
+        return -1;
+    }
+    //DEFENCE
+    public float GetDefence()
+    {
+        for (int i = 0; i < attributes.Length - 1; i++)
+        {
+            if (attributes[i].type == Attributes.Defence)
+            {
+                return attributes[i].value.ModifiedValue;
+            }
+        }
+        return -1;
+    }
+    //SPEED
+    public float GetSpeed()
+    {
+        for (int i = 0; i < attributes.Length - 1; i++)
+        {
+            if (attributes[i].type == Attributes.Speed)
+            {
+                return attributes[i].value.ModifiedValue;
+            }
+        }
+        return -1;
+    }
+
 
     //MONEY
     public float GetMoney()
@@ -161,70 +194,6 @@ public class Player_Stats : MonoBehaviour
     {
         money = num;
     }
-
-    //ATTACK
-    public float GetAttack()
-    {
-        return attack;
-    }
-    public void AddAttack(float num)
-    {
-        attack += num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-    public void SubtractAttack(float num)
-    {
-        attack -= num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-    public void SetAttack(float num)
-    {
-        attack = num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-
-    //DEFENCE
-    public float GetDefence()
-    {
-        return defence;
-    }
-    public void AddDefence(float num)
-    {
-        defence += num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-    public void SubtractDefence(float num)
-    {
-        defence -= num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-    public void SetDefence(float num)
-    {
-        defence = num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-
-    //SPEED
-    public float GetSpeed()
-    {
-        return speed;
-    }
-    public void AddSpeed(float num)
-    {
-        speed += num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-    public void SubtractSpeed(float num)
-    {
-        speed -= num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-    public void SetSpeed(float num)
-    {
-        speed = num;
-        OnStatChanged.Invoke(this, EventArgs.Empty);
-    }
-    #endregion
 
     //HEALTH
     public float GetHealth()

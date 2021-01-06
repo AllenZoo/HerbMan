@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof (Player))]
 public class Player_Input : MonoBehaviour
 {
     [SerializeField] internal Player player;
+
+    //
+    public Dictionary<KeyCode, bool> keys;
 
     //Inputs
     internal bool isSprintButtonDown = false; //SHIFT
@@ -18,11 +22,14 @@ public class Player_Input : MonoBehaviour
     internal bool isHorizontalMovementButtonDown = false; //A, D
     internal bool isVerticalMovementButtonDown = false; //W,S
 
+    internal bool isKeycodeFDown = false;
+
     //Other
     private Vector2 movement;
     private void Awake()
     {
         player = GetComponent<Player>();
+        keys = new Dictionary<KeyCode, bool>();
     }
 
     private void Update()
@@ -30,8 +37,21 @@ public class Player_Input : MonoBehaviour
         HandleInput();
     }
 
+    public bool IsKeyPressed(KeyCode keyCode)
+    {
+        return Input.GetKeyDown(keyCode);
+    }
+
     private void HandleInput()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            keys.Add(KeyCode.F, true);
+        }
+        else if(Input.GetKeyUp(KeyCode.F))
+        {
+            keys.Remove(KeyCode.F);
+        }
         //Save Inventory
         if (Input.GetKeyDown(KeyCode.L))
         {

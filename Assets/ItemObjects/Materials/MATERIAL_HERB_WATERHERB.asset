@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 11
   description: A tier 3 herb
   data:
-    name: 
-    id: -1
+    name: Waterherb
+    id: 7
+    tier: 0
     buffs: []

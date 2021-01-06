@@ -196,14 +196,25 @@ public class InventorySlot
 
     public void UpdateSlot(Item _item, int _amount)
     {
-        //if(OnBeforeUpdate != null)
         OnBeforeUpdate?.Invoke(this);
         
-
         item = _item;
         amount = _amount;
 
-        //if (OnAfterUpdate != null)
+        OnAfterUpdate?.Invoke(this);
+    }
+
+    public void UpdateSlot(int _amount)
+    {
+        OnBeforeUpdate?.Invoke(this);
+
+        if(_amount <= 0)
+        {
+            item.id = -1;
+        }
+
+        amount = _amount;
+
         OnAfterUpdate?.Invoke(this);
     }
 

@@ -62,6 +62,11 @@ public class Item {
 
     public Item(ItemObject item)
     {
+        //if(item == null)
+        //{
+        //    return;
+        //}
+
         name = item.name;
         id = item.data.id;
         tier = item.data.tier;
@@ -80,9 +85,9 @@ public class Item {
 public class ItemBuff: IModifier
 {
     public Attributes attribute;
-    public int value;
     public int min;
     public int max;
+    internal int value;
 
     public ItemBuff(int _min, int _max)
     {

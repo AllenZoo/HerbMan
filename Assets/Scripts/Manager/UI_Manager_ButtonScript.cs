@@ -19,7 +19,7 @@ public class UI_Manager_ButtonScript : MonoBehaviour
         CloseQuest,
     }
 
-    private void Start()
+    private void Awake()
     {
         UI_Manager_SetButton();
     }
@@ -40,6 +40,6 @@ public class UI_Manager_ButtonScript : MonoBehaviour
 
         }
 
-        FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>().SetButton(this.gameObject.GetComponent<Button>(), isOpen, system);
+        FindObjectOfType<UI_Manager>()?.GetComponent<UI_Manager>().SetButton(this.gameObject.GetComponent<Button>(), isOpen, system);
     }
 }

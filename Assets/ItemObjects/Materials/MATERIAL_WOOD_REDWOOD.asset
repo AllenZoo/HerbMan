@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 13
   description: 
   data:
-    name: 
+    name: Redwood
     id: 14
+    tier: 0
     buffs: []

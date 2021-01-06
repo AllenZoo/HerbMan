@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 13
   description: 
   data:
-    name: 
+    name: Pine
     id: 13
+    tier: 0
     buffs: []

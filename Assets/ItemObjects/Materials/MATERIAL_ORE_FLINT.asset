@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 12
   description: 
   data:
-    name: 
+    name: Flint
     id: 9
+    tier: 0
     buffs: []

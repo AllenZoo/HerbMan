@@ -7,21 +7,16 @@ public class UI_Manager : MonoBehaviour
 {
     private GameObject gameManager;
 
-    //[Header("Crafting System")]
-    private Transform uiCrafting;
-    private Button openButtonCrafting;
-    private Button closeButtonCrafting;
+    private GameObject uiInventory;
+    private GameObject uiCrafting;
+    private GameObject uiEquipment;
+    private GameObject uiQuest;
+    private GameObject uiStats;
 
-    //[Header("Equipment Slots")]
-    private Transform uiEquipment;
-
-    //[Header("Inventory")]
-    private Transform uiInventory;
     private Button openButtonInventory;
     private Button closeButtonInventory;
-
-    //[Header("Trader Quests")]
-    private Transform uiQuest;
+    private Button openButtonCrafting;
+    private Button closeButtonCrafting;
     private Button openButtonTQ;
     private Button closeButtonTQ;
 
@@ -35,28 +30,34 @@ public class UI_Manager : MonoBehaviour
         //Closing inventory and crafting and quest systems after everything is initialized
         if (uiInventory)
             Invoke("CloseInventory", 0);
-        if(uiCrafting)
-            Invoke("CloseCraftingSystem", 0.1f);
-        if(uiQuest)
-            Invoke("CloseTraderQuestInterface", 0.1f);
+        if (uiCrafting)
+            Invoke("CloseCrafting", 0 );
+        if (uiQuest)
+            CloseQuest();
+
+        UpdateButtonStatus();
     }
 
     #region Setters
-    public void SetUIInventory(Transform uiInventory)
+    public void SetUIInventory(GameObject uiInventory)
     {
         this.uiInventory = uiInventory;
     }
-    public void SetUIEquipment(Transform uiEquipment)
+    public void SetUIEquipment(GameObject uiEquipment)
     {
         this.uiEquipment = uiEquipment;
     }
-    public void SetUICrafting(Transform uiCraftingSystem)
+    public void SetUICrafting(GameObject uiCraftingSystem)
     {
         this.uiCrafting = uiCraftingSystem;
     }
-    public void SetUIQuest(Transform uiQuestInterface)
+    public void SetUIQuest(GameObject uiQuestInterface)
     {
         this.uiQuest = uiQuestInterface;
+    }
+    public void SetUIStats(GameObject uiStats)
+    {
+        this.uiStats = uiStats;
     }
     public void SetButton(Button button, bool isOpen, string system)
     {
@@ -90,10 +91,11 @@ public class UI_Manager : MonoBehaviour
     }
     #endregion
 
+    #region Actions
     public void OpenInventory()
     {
         OpenInventoryUI();
-        OpenEquipment();
+        OpenEquipmentUI();
 
         UpdateButtonStatus();
 
@@ -102,24 +104,28 @@ public class UI_Manager : MonoBehaviour
     public void CloseInventory()
     {
         CloseInventoryUI();
-        CloseEquipment();
+        CloseEquipmentUI();
+        CloseCraftingUI();
 
         UpdateButtonStatus();
-
         gameManager.GetComponent<GM_StateManager>().SetStatus("Inventory", false);
     }
 
     public void OpenCrafting()
     {
-        uiCrafting.transform.position = uiCrafting.transform.position + new Vector3(2000, 2000, 0);
+        OpenCraftingUI();
+        OpenInventoryUI();
 
+        UpdateButtonStatus();
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", true);
     }
     public void CloseCrafting()
     {
-        uiCrafting.transform.position = uiCrafting.transform.position - new Vector3(2000, 2000, 0);
+        CloseCraftingUI();
+        CloseInventoryUI();
 
+        UpdateButtonStatus();
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", false);
     }
@@ -127,10 +133,16 @@ public class UI_Manager : MonoBehaviour
     public void OpenEquipment()
     {
         OpenEquipmentUI();
+
+        UpdateButtonStatus();
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", true);
     }
     public void CloseEquipment()
     {
         CloseEquipmentUI();
+
+        UpdateButtonStatus();
+        gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", false);
     }
 
     public void OpenQuest()
@@ -143,50 +155,49 @@ public class UI_Manager : MonoBehaviour
     }
     public void CloseQuest()
     {
-        uiQuest.transform.position = uiQuest.transform.position - new Vector3(2000, 2000, 0);
+        CloseQuestUI();
 
-        openButtonTQ.gameObject.SetActive(true);
-        closeButtonTQ.gameObject.SetActive(false);
+        UpdateButtonStatus();
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", false);
     }
-
+    #endregion
 
     #region UI
     public void OpenInventoryUI()
     {
-        uiInventory.gameObject.SetActive(true);
+        uiInventory.SetActive(true);
     }
     public void CloseInventoryUI()
     {
-        uiInventory.gameObject.SetActive(false);
+        uiInventory.SetActive(false);
     }
 
     public void OpenEquipmentUI()
     {
-        uiEquipment.gameObject.SetActive(true);
+        uiEquipment.SetActive(true);
     }
     public void CloseEquipmentUI()
     {
-        uiEquipment.gameObject.SetActive(false);
+        uiEquipment.SetActive(false);
     }
 
     public void OpenCraftingUI()
     {
-        uiCrafting.gameObject.SetActive(true);
+        uiCrafting.SetActive(true);
     }
     public void CloseCraftingUI()
     {
-        uiCrafting.gameObject.SetActive(false);
+        uiCrafting.SetActive(false);
     }
 
     public void OpenQuestUI()
     {
-        uiQuest.gameObject.SetActive(true);
+        uiQuest.SetActive(true);
     }
     public void CloseQuestUI()
     {
-        uiQuest.gameObject.SetActive(false);
+        uiQuest.SetActive(false);
     }
     #endregion
 
@@ -214,21 +225,21 @@ public class UI_Manager : MonoBehaviour
             openButtonCrafting.gameObject.SetActive(false);
             closeButtonCrafting.gameObject.SetActive(true);
         }
-        //else
-        //{
-        //    //Crafting UI is closed.
-        //    openButtonCrafting.gameObject.SetActive(true);
-        //    closeButtonCrafting.gameObject.SetActive(false);
-        //}
+        else
+        {
+            //Crafting UI is closed.
+            openButtonCrafting.gameObject.SetActive(true);
+            closeButtonCrafting.gameObject.SetActive(false);
+        }
         #endregion
 
         #region Quest
-        if (uiQuest != null && uiQuest.gameObject.activeInHierarchy)
-        {
-            //Quest UI is open.
-            openButtonTQ.gameObject.SetActive(false);
-            closeButtonTQ.gameObject.SetActive(true);
-        }
+        //if (uiQuest != null && uiQuest.gameObject.activeInHierarchy)
+        //{
+        //    //Quest UI is open.
+        //    openButtonTQ.gameObject.SetActive(false);
+        //    closeButtonTQ.gameObject.SetActive(true);
+        //}
         //else
         //{
         //    //Quest UI is closed.

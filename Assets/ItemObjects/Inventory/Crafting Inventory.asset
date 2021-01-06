@@ -17,42 +17,42 @@ MonoBehaviour:
   type: 2
   container:
     slots:
-    - allowedItems: 
+    - allowedItems: 0b000000
       item:
         name: 
         id: -1
         tier: 0
         buffs: []
       amount: 0
-    - allowedItems: 
+    - allowedItems: 0c000000
       item:
         name: 
         id: -1
         tier: 0
         buffs: []
       amount: 0
-    - allowedItems: 
+    - allowedItems: 0d000000
       item:
         name: 
         id: -1
         tier: 0
         buffs: []
       amount: 0
-    - allowedItems: 
+    - allowedItems: 0f000000
       item:
         name: 
         id: -1
         tier: 0
         buffs: []
       amount: 0
-    - allowedItems: 
+    - allowedItems: 0e000000
       item:
         name: 
         id: -1
         tier: 0
         buffs: []
       amount: 0
-    - allowedItems: 
+    - allowedItems: 00000000
       item:
         name: 
         id: -1

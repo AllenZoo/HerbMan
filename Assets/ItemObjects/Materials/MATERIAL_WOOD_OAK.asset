@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 13
   description: 
   data:
-    name: 
+    name: Oak
     id: 12
+    tier: 0
     buffs: []

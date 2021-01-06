@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 7
   description: Used to mine stone and iron ore.
   data:
-    name: 
+    name: StonePickaxe
     id: 23
+    tier: 1
     buffs: []

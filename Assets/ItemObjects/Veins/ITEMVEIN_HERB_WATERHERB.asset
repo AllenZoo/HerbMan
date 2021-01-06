@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ITEMVEIN_HERB_WATERHERB
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 33bfc7e5fd2126745a93316d80abd381, type: 2}
-  resourceType: 0
   animation:
   - {fileID: -4390639603833135218, guid: 72da23c705223c342beb60bced7dcfbd, type: 3}
+  - {fileID: -7841156895152688054, guid: 72da23c705223c342beb60bced7dcfbd, type: 3}
+  tierRequired: 3
+  toolRequired: 9

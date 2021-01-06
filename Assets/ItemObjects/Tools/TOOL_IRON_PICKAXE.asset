@@ -18,5 +18,6 @@ MonoBehaviour:
   description: A polished pickaxe capable of mining Amatite.
   data:
     name: 
-    id: 20
+    id: 8
+    tier: 2
     buffs: []

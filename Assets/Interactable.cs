@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PolygonCollider2D))]
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public delegate void Interacation(Player player);
+
+    private Interacation curFunc;
+    private KeyCode interactInput;
+
+    public KeyCode GetInputKey()
     {
-        
+        return interactInput;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetInteractionInput(KeyCode keyCode)
     {
-        
+        interactInput = keyCode;
     }
+
+    public void SetInteractionFunc(Interacation func)
+    {
+        curFunc = func;
+    }
+
+    public void Interact(Player player)
+    {
+        curFunc(player);
+    }
+
 }

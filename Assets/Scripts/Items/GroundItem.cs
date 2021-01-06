@@ -3,9 +3,21 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class GroundItem : MonoBehaviour, ISerializationCallbackReceiver
+[RequireComponent(typeof (Collectable))]
+public class GroundItem : Collectable, ISerializationCallbackReceiver
 {
     public ItemObject item;
+
+    private void Awake()
+    {
+        GetComponent<Collectable>().SetCollectFunction(GroundItemCollect);
+    }
+
+    public void GroundItemCollect(Player player)
+    {
+        player.inventory.AddItem(new Item(item), 1);
+        Destroy(gameObject);
+    }
 
     public void OnAfterDeserialize()
     {

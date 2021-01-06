@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf0563987863621499b8ce90ebbfa065, type: 3}
+  m_Name: RECIPE_STONE_SICKLE
+  m_EditorClassIdentifier: 
+  items:
+  - itemObject: {fileID: 11400000, guid: 3cf7738f0b3e805479e8093e4d11bc6b, type: 2}
+    amount: 1
+  - itemObject: {fileID: 11400000, guid: 61b5f6692b85e584fba64e3222cec9b8, type: 2}
+    amount: 1
+  - itemObject: {fileID: 11400000, guid: a0f8d5743738ca84d87382e56d9a6500, type: 2}
+    amount: 1
+  - itemObject: {fileID: 11400000, guid: 3d2ff37121ebb88449d453786d84a2e4, type: 2}
+    amount: 1
+  output: {fileID: 11400000, guid: 07cc74084ea29554a86721ccb97d2959, type: 2}

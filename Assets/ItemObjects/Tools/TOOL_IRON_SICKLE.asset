@@ -18,5 +18,6 @@ MonoBehaviour:
   description: An iron sickle used to harvest Mellowmint!
   data:
     name: 
-    id: 21
+    id: 9
+    tier: 2
     buffs: []

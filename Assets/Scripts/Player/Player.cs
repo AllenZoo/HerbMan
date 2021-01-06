@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     //Other
     public InventoryObject inventory;
     public InventoryObject equipment;
+    public InventoryObject crafting;
 
     private void Awake()
     {
@@ -115,5 +116,6 @@ public class Player : MonoBehaviour
     {
         inventory.container.Clear();
         equipment.container.Clear();
+        crafting.container.Clear();
     }
 }

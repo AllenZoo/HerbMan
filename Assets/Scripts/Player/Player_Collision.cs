@@ -5,8 +5,14 @@ using UnityEngine;
 public class Player_Collision : MonoBehaviour
 {
     [SerializeField] internal Player player;
+
+    //...ables...
+    private Collectable collectableRef;
+    private Interactable interactableRef;
+
     //Other
     private bool isTouchingTrader;
+    private bool isTouchingInteractable;
     private Enemy_Base enemy_Base;
     private UI_Manager uiManager;
 
@@ -14,32 +20,28 @@ public class Player_Collision : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
-        //uiManager = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
+
     }
     private void Start()
     {
         enemy_Base = null;
         isTouchingTrader = false;
+        isTouchingInteractable = false;
     }
 
     //Class is turned off when no TriggerCollision
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var item = other.GetComponent<GroundItem>();
-        if (item)
+        if (other.tag == "Collectable")
         {
-            if(player.inventory.AddItem(new Item(item.item), 1))
-            {
-                Destroy(other.gameObject);
-            }
+            collectableRef = other.GetComponent<Collectable>();
+            collectableRef.Collect(player);
         }
-
-        //if(other.tag == "Item")
-        //{
-        //    itemWorld = other.GetComponent<ItemWorld>();
-        //    player.GetInventory().AddItem(itemWorld.GetItem());
-        //    itemWorld.DestroySelf();
-        //}
+        if(other.tag == "Interactable")
+        {
+            interactableRef = other.GetComponent<Interactable>();
+            isTouchingInteractable = true;
+        }
 
         else if(other.tag == "Enemy")
         {
@@ -57,27 +59,22 @@ public class Player_Collision : MonoBehaviour
     {
         enemy_Base = null;
         isTouchingTrader = false;
+        isTouchingInteractable = false;
     }
 
     void Update()
     {
-        //if (itemWorldVein != null)
+        if (isTouchingInteractable && player.player_Input.IsKeyPressed(interactableRef.GetInputKey()))
+        {
+            interactableRef.Interact(player);
+        }
+
+        //if (isTouchingTrader)
         //{
-        //    if (Input.GetKeyDown(KeyCode.F))
+        //    if (Input.GetKeyDown(KeyCode.G))
         //    {
-        //        //OnCollisionVein?.Invoke(this, EventArgs.Empty);
-        //        if (itemWorldVein.CanHarvest())
-        //        {
-        //            //player.GetInventory().AddItem(itemWorldVein.Harvest());
-        //        }
+        //        uiManager.OpenQuest();
         //    }
         //}
-        if (isTouchingTrader)
-        {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                uiManager.OpenQuest();
-            }
-        }
     }
 }

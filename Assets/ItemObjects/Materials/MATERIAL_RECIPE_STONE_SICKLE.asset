@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f9c7cf1d52b634e8d4d78c6b48aa54, type: 3}
+  m_Name: MATERIAL_RECIPE_STONE_SICKLE
+  m_EditorClassIdentifier: 
+  sprite: {fileID: -7593274340499129432, guid: 91b8ebaa953765044b5201d7732eaa14, type: 3}
+  isStackable: 0
+  itemType: 14
+  description: 
+  data:
+    name: 
+    id: 0
+    tier: 0
+    buffs: []

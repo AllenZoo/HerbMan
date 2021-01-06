@@ -7,5 +7,7 @@ public class ItemVeinObject : ScriptableObject
 {
     public ItemObject item;
     public Sprite[] animation;
+    public int tierRequired;
+    public ItemType toolRequired;
 }
 
