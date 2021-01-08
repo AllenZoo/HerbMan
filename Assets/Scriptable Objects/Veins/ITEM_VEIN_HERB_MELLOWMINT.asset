@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b8587b7274e7041a9e9d0503408a49, type: 3}
+  m_Name: ITEM_VEIN_HERB_MELLOWMINT
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 749eea98291772b4fa6ef640e118f632, type: 2}
+  animation:
+  - {fileID: 2622827160072410584, guid: 4c47232a63a07d14d9af0df5ef727fea, type: 3}
+  - {fileID: -6894401662851617781, guid: 4c47232a63a07d14d9af0df5ef727fea, type: 3}
+  - {fileID: 1526409546179487468, guid: 4c47232a63a07d14d9af0df5ef727fea, type: 3}
+  tierRequired: 2
+  toolRequired: 9

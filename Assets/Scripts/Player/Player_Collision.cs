@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void CollisionEvent();
 public class Player_Collision : MonoBehaviour
 {
     [SerializeField] internal Player player;
@@ -16,6 +17,10 @@ public class Player_Collision : MonoBehaviour
     private Enemy_Base enemy_Base;
     private UI_Manager uiManager;
 
+
+
+    public event CollisionEvent CollectedCollectable;
+    public event CollisionEvent InteractedInteracatable;
 
     private void Awake()
     {
@@ -68,13 +73,22 @@ public class Player_Collision : MonoBehaviour
         {
             interactableRef.Interact(player);
         }
-
-        //if (isTouchingTrader)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.G))
-        //    {
-        //        uiManager.OpenQuest();
-        //    }
-        //}
     }
+    public void RegisterCollectedCollectableEvent(CollisionEvent method)
+    {
+        CollectedCollectable += method;
+    }
+    public void UnregisterCollectedCollectableEvent(CollisionEvent method)
+    {
+        CollectedCollectable -= method;
+    }
+    public void RegisterInteractedInteractableEvent(CollisionEvent method)
+    {
+        InteractedInteracatable += method;
+    }
+    public void RegisterInteractedInteractablEvent(CollisionEvent method)
+    {
+        InteractedInteracatable -= method;
+    }
+
 }

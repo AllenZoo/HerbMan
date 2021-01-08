@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b8587b7274e7041a9e9d0503408a49, type: 3}
+  m_Name: ITEM_VEIN_WOOD_OAK
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: dd4ac9b123d56a4499e6c15d67025b44, type: 2}
+  animation:
+  - {fileID: 3786389241983592065, guid: 0c89850d7dd334941b8d7774313bac66, type: 3}
+  - {fileID: -3683937149824037029, guid: 0c89850d7dd334941b8d7774313bac66, type: 3}
+  tierRequired: 1
+  toolRequired: 8

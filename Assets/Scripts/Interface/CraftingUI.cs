@@ -119,6 +119,8 @@ public class CraftingUI : MonoBehaviour
         if (recipeItemSlot.item.id >= 0)
             FindObjectOfType<Player>().inventory.AddItem(recipeItemSlot?.item, recipeItemSlot.amount);
 
+        if (outputSlot.item.id >= 0)
+            FindObjectOfType<Player>().inventory.AddItem(outputSlot?.item, outputSlot.amount);
         craftingInventory.Clear();
     }
 }

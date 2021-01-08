@@ -4,34 +4,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Quest
+public class QuestOld
 {
     [SerializeField] private List<QuestRequest> questRequestList;
     [SerializeField] private float moneyReward;
 
-    public Quest()
+    public QuestOld()
     {
         questRequestList = new List<QuestRequest>();
     }
-    public Quest(QuestRequest qrOne)
+    public QuestOld(QuestRequest qrOne)
     {
         questRequestList = new List<QuestRequest>();
         questRequestList.Add(qrOne);
     }
-    public Quest(QuestRequest qrOne, QuestRequest qrTwo)
+    public QuestOld(QuestRequest qrOne, QuestRequest qrTwo)
     {
         questRequestList = new List<QuestRequest>();
         questRequestList.Add(qrOne);
         questRequestList.Add(qrTwo);
     }
-    public Quest(QuestRequest qrOne, QuestRequest qrTwo, QuestRequest qrThree)
+    public QuestOld(QuestRequest qrOne, QuestRequest qrTwo, QuestRequest qrThree)
     {
         questRequestList = new List<QuestRequest>();
         questRequestList.Add(qrOne);
         questRequestList.Add(qrTwo);
         questRequestList.Add(qrThree);
     }
-    public Quest(List<QuestRequest> questRequestList)
+    public QuestOld(List<QuestRequest> questRequestList)
     {
         this.questRequestList = questRequestList;
     }

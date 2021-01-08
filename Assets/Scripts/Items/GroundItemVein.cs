@@ -20,6 +20,10 @@ public class GroundItemVein : Interactable, ISerializationCallbackReceiver
 
         GetComponent<Interactable>().SetInteractionInput(keyCode);
         GetComponent<Interactable>().SetInteractionFunc(GroundItemVeinInteraction);
+
+        //Resets collider so there's no funky triggers
+        Destroy(GetComponent<PolygonCollider2D>());
+        gameObject.AddComponent<PolygonCollider2D>().isTrigger = true;
     }
 
     public void GroundItemVeinInteraction(Player player)
@@ -36,6 +40,7 @@ public class GroundItemVein : Interactable, ISerializationCallbackReceiver
     {
 #if UNITY_EDITOR
         GetComponentInChildren<SpriteRenderer>().sprite = itemVeinObject.animation[0];
+        //this.name = "GROUND " + itemVeinObject.name;
         EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
 #endif
     }

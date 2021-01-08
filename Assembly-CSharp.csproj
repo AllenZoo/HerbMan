@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Collectable.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Assets.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\CMDebug.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\CameraFollow.cs" />
@@ -83,8 +82,10 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
-    <Compile Include="Assets\Interactable.cs" />
+    <Compile Include="Assets\QuestUI.cs" />
+    <Compile Include="Assets\RewardDisplay.cs" />
     <Compile Include="Assets\Scripts\Attribute.cs" />
+    <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingRecipe.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\UI_CraftingSystem.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy_Stipp_Movement.cs" />
     <Compile Include="Assets\Scripts\Equipment\Player_Equipment.cs" />
     <Compile Include="Assets\Scripts\IModifier.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Interface\CraftingUI.cs" />
     <Compile Include="Assets\Scripts\Interface\DynamicInterface.cs" />
     <Compile Include="Assets\Scripts\Interface\EquipmentUI.cs" />
@@ -130,12 +132,19 @@
     <Compile Include="Assets\Scripts\Player\Player_Collision.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Input.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
+    <Compile Include="Assets\Scripts\Player\Player_Quest.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Stats.cs" />
+    <Compile Include="Assets\Scripts\Player_Events.cs" />
+    <Compile Include="Assets\Scripts\QuestGiver.cs" />
+    <Compile Include="Assets\Scripts\QuestManager.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\AdventureQuestObject.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\CollectionQuestObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\DefaultObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\EquipmentObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\ItemDatabaseObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\ItemObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\ItemVeinObject.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\QuestObject.cs" />
     <Compile Include="Assets\Scripts\StatBars\BarText.cs" />
     <Compile Include="Assets\Scripts\StatBars\HealthBar.cs" />
     <Compile Include="Assets\Scripts\StatBars\LevelBar.cs" />

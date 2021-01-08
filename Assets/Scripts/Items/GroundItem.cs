@@ -11,6 +11,10 @@ public class GroundItem : Collectable, ISerializationCallbackReceiver
     private void Awake()
     {
         GetComponent<Collectable>().SetCollectFunction(GroundItemCollect);
+
+        //Resets collider so there's no funky triggers
+        Destroy(GetComponent<PolygonCollider2D>());
+        gameObject.AddComponent<PolygonCollider2D>().isTrigger = true;
     }
 
     public void GroundItemCollect(Player player)
@@ -28,6 +32,7 @@ public class GroundItem : Collectable, ISerializationCallbackReceiver
     {
 #if UNITY_EDITOR
         GetComponentInChildren<SpriteRenderer>().sprite = item.sprite;
+        //this.name = "GROUND ITEM " + item.name;
         EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
 #endif
     }

@@ -15,6 +15,8 @@ public class UI_DialogueManager : MonoBehaviour
 
     private Queue<string> sentences;
 
+    private DialogueTrigger currentDialogueTrigger;
+
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
@@ -28,6 +30,10 @@ public class UI_DialogueManager : MonoBehaviour
         dialogueText = this.transform.Find("dialogueText").GetComponent<Text>();
     }
 
+    public void SetCurrentDialogueTrigger(DialogueTrigger dialogueTrigger)
+    {
+        currentDialogueTrigger = dialogueTrigger;
+    }
     public void StartDialogue(Dialogue dialogue)
     {
         nameText.text = dialogue.name;
@@ -42,7 +48,6 @@ public class UI_DialogueManager : MonoBehaviour
 
         DisplayNextSentence();
     }
-
     public void StartDialogue(Dialogue dialogue, GameObject arrow)
     {
         this.arrow = arrow;
@@ -58,7 +63,6 @@ public class UI_DialogueManager : MonoBehaviour
 
         DisplayNextSentence();
     }
-
     public void DisplayNextSentence()
     {
         if(sentences.Count == 0)
@@ -71,7 +75,6 @@ public class UI_DialogueManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
-
     private IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
@@ -90,5 +93,6 @@ public class UI_DialogueManager : MonoBehaviour
         }
         gameManager.GetComponent<GM_StateManager>().SetStatus("Dialogue", false);
         animator.SetBool("isOpen", false);
+        currentDialogueTrigger.isDialogueDone = true;
     }
 }

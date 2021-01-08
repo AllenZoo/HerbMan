@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPC_Trader : MonoBehaviour
 {
     [SerializeField] 
-    private List<Quest> questList;
+    private List<QuestOld> questList;
     private int questNum =0;
 
     private void Awake()
@@ -19,11 +19,11 @@ public class NPC_Trader : MonoBehaviour
 
 
         //Adds empty quest so when last quest is finished, no null reference exception
-        questList.Add(new Quest());
+        questList.Add(new QuestOld());
     }
-    public Quest GetNextQuest()
+    public QuestOld GetNextQuest()
     {
-        Quest returnQuest = questList[questNum];
+        QuestOld returnQuest = questList[questNum];
         questNum++;
         return returnQuest;
     }

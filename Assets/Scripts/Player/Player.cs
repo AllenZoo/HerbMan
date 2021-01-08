@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(Player_Movement))]
 [RequireComponent(typeof(Player_Input))]
 [RequireComponent(typeof(Player_Equipment))]
+[RequireComponent(typeof(Player_Quest))]
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     internal Player_Movement player_Movement;
     internal Player_Input player_Input;
     internal Player_Equipment player_Equipment;
+    internal Player_Quest player_Quest;
 
     //Components
     internal Animator animator;
@@ -44,6 +46,7 @@ public class Player : MonoBehaviour
         player_Movement = GetComponent<Player_Movement>();
         player_Input = GetComponent<Player_Input>();
         player_Equipment = GetComponent<Player_Equipment>();
+        player_Quest = GetComponent<Player_Quest>();
 
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
