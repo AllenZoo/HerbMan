@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(EventTrigger))]
 public class DynamicInterface : UserInterface
 {
-    public GameObject inventoryPrefab;
+    public GameObject inventorySlotPrefab;
+
+    public bool isInteractable = true;
 
     public int X_START;
     public int Y_START;
@@ -18,14 +21,17 @@ public class DynamicInterface : UserInterface
         slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
         for (int i = 0; i < inventory.GetSlots.Length; i++)
         {
-            var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
+            var obj = Instantiate(inventorySlotPrefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
 
-            AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
-            AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
-            AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
-            AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
-            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
+            if (isInteractable)
+            {
+                AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
+                AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
+                AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
+                AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
+                AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
+            }
 
             inventory.GetSlots[i].slotDisplay = obj;
             

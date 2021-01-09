@@ -63,6 +63,7 @@ public class GroundItemVein : Interactable, ISerializationCallbackReceiver
                 if (sickleItem.data.tier >= itemVeinObject.tierRequired)
                 {
                     player.inventory.AddItem(new Item(itemVeinObject.item), 1);
+                    player.player_Event.InvokeItemAddedToInventory(itemVeinObject.item);
                     GrowPlant();
                 }
             }
@@ -74,6 +75,7 @@ public class GroundItemVein : Interactable, ISerializationCallbackReceiver
                 if (sickleItem.data.tier >= itemVeinObject.tierRequired)
                 {
                     player.inventory.AddItem(new Item(itemVeinObject.item), 1);
+                    player.player_Event.InvokeItemAddedToInventory(itemVeinObject.item);
                     GrowPlant();
                 }
             }
@@ -85,6 +87,7 @@ public class GroundItemVein : Interactable, ISerializationCallbackReceiver
                 if (axeItem.data.tier >= itemVeinObject.tierRequired)
                 {
                     player.inventory.AddItem(new Item(itemVeinObject.item), 1);
+                    player.player_Event.InvokeItemAddedToInventory(itemVeinObject.item);
                     GrowPlant();
                 }
             }
@@ -103,14 +106,11 @@ public class GroundItemVein : Interactable, ISerializationCallbackReceiver
 
     private void GrowPlant()
     {
-        /** minus 2 because:
-         * (1) player cannot harvest an empty plant vein sprite (empty vein sprite is contained in itemVeinObject.anmation[]
-         * (2) it's an array starting at index 0
-         * **/
-
         //growth phase starts at 0
         growthPhase++;
-        if (!(growthPhase < itemVeinObject.animation.Length - 2))
+
+        //Check if plant can grow anymore
+        if (growthPhase >= (itemVeinObject.animation.Length - 1))
         {
             //plant can't grow anymore or it's completely harvested
             Debug.Log("" + itemVeinObject.item.data.name + " vein cannot be harvested further");

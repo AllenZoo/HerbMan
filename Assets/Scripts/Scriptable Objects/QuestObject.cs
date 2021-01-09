@@ -8,20 +8,38 @@ public enum QuestType
     Killing,
 }
 [CreateAssetMenu(fileName = "New Quest", menuName = "Assets/Quests/Quest")]
-public abstract class QuestObject : ScriptableObject
+public class QuestObject : ScriptableObject
 {
-    public QuestType questType;
     public Quest quest;
 }
 
 [System.Serializable]
 public class Quest 
 {
+    public bool isActive;
+
     public string name;
+
+    [TextArea(3, 10)]
     public string summary;
+
+    [TextArea(3, 10)]
     public string objective;
-    public int moneyReward;
+
+    public Sprite objectivePortrait;
+
+    public QuestGoal questGoal;
+
+    public Reward[] rewards;
+
     public GameObject endNPC;
+}
+
+[System.Serializable]
+public class Reward
+{
+    public ItemObject item;
+    public int amount;
 }
 
 public class Objective

@@ -20,6 +20,7 @@ public class GroundItem : Collectable, ISerializationCallbackReceiver
     public void GroundItemCollect(Player player)
     {
         player.inventory.AddItem(new Item(item), 1);
+        player.player_Event.InvokeItemAddedToInventory(item);
         Destroy(gameObject);
     }
 

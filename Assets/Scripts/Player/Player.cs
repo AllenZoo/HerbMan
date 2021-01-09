@@ -11,6 +11,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(Player_Input))]
 [RequireComponent(typeof(Player_Equipment))]
 [RequireComponent(typeof(Player_Quest))]
+[RequireComponent(typeof(Player_Events))]
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     internal Player_Input player_Input;
     internal Player_Equipment player_Equipment;
     internal Player_Quest player_Quest;
+    internal Player_Events player_Event;
 
     //Components
     internal Animator animator;
@@ -47,6 +49,7 @@ public class Player : MonoBehaviour
         player_Input = GetComponent<Player_Input>();
         player_Equipment = GetComponent<Player_Equipment>();
         player_Quest = GetComponent<Player_Quest>();
+        player_Event = GetComponent<Player_Events>();
 
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -114,6 +117,11 @@ public class Player : MonoBehaviour
     //        }
     //    }
     //}
+
+    public void InvokeOnInventoryChanged()
+    {
+
+    }
 
     private void OnApplicationQuit()
     {

@@ -9,14 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895cbacff07205543b26d261f9ada0aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 366f6ab0af81bca4b835c5eb4464f0c0, type: 3}
   m_Name: John's Quest
   m_EditorClassIdentifier: 
-  questType: 0
   quest:
-    name: To search for Melom..
-    moneyReward: 3
-    endNPC: {fileID: 7799221645520750597, guid: e318461fb7c47c64991612c70c2c6158,
+    isActive: 0
+    name: To search for melom...
+    summary: John is hungry and need you to find some nice orange meloms! Do it adventurer!
+      for the gold!
+    objective: -Scavenge for a melom (0/1)
+    objectivePortrait: {fileID: -189053693183986825, guid: 6f573f5bd8325c1498218651d819bd81,
       type: 3}
-  itemsToCollect:
-  - {fileID: 11400000, guid: 4dcc945bfe217f249b7498d8f883dd72, type: 2}
+    questGoal:
+      goalType: 0
+      requiredItem: {fileID: 11400000, guid: 4dcc945bfe217f249b7498d8f883dd72, type: 2}
+      requiredAmount: 1
+      currentAmount: 0
+    rewards:
+    - item: {fileID: 11400000, guid: 942db25b9acc2424385e997f5779fbcc, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: 770750652f9c4524591ebd612726d594, type: 2}
+      amount: 1
+    endNPC: {fileID: 0}

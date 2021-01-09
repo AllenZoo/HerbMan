@@ -23,6 +23,12 @@ public class InventoryObject : ScriptableObject
 
     public bool AddItem(Item _item, int _amount)
     {
+        if(type == InterfaceType.Inventory)
+        {
+            Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            //player.player_Event.InvokeItemAddedToInventory(_item);
+        }
+
         if(EmptySlotCount <= 0)
         {
             return false;

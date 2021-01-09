@@ -82,8 +82,6 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
-    <Compile Include="Assets\QuestUI.cs" />
-    <Compile Include="Assets\RewardDisplay.cs" />
     <Compile Include="Assets\Scripts\Attribute.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingRecipe.cs" />
@@ -108,6 +106,7 @@
     <Compile Include="Assets\Scripts\Interface\DynamicInterface.cs" />
     <Compile Include="Assets\Scripts\Interface\EquipmentUI.cs" />
     <Compile Include="Assets\Scripts\Interface\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\Interface\QuestUI.cs" />
     <Compile Include="Assets\Scripts\Interface\StaticInterface.cs" />
     <Compile Include="Assets\Scripts\Interface\StatsUI.cs" />
     <Compile Include="Assets\Scripts\Interface\UserInterface.cs" />
@@ -136,9 +135,8 @@
     <Compile Include="Assets\Scripts\Player\Player_Stats.cs" />
     <Compile Include="Assets\Scripts\Player_Events.cs" />
     <Compile Include="Assets\Scripts\QuestGiver.cs" />
+    <Compile Include="Assets\Scripts\QuestGoal.cs" />
     <Compile Include="Assets\Scripts\QuestManager.cs" />
-    <Compile Include="Assets\Scripts\Scriptable Objects\AdventureQuestObject.cs" />
-    <Compile Include="Assets\Scripts\Scriptable Objects\CollectionQuestObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\DefaultObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\EquipmentObject.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\ItemDatabaseObject.cs" />

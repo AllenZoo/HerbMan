@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
+    [SerializeField] InventoryObject rewardInventory;
+
     private GameObject gameManager;
 
     private GameObject uiInventory;
@@ -28,14 +30,26 @@ public class UI_Manager : MonoBehaviour
     private void Start()
     {
         //Closing inventory and crafting and quest systems after everything is initialized
+
         if (uiInventory)
-            CloseInventory();
+        {
+            Invoke("CloseInventory", 1/100);
+        }
+
         if (uiCrafting)
-            CloseCrafting();
+        {
+            Invoke("CloseCrafting", 1 / 100);
+        }
+
         if (uiQuest)
-            CloseQuest();
+        {
+            Invoke("CloseQuest", 1 / 100);
+        }
+
         if (uiStats)
-            CloseStats();
+        {
+            Invoke("CloseStats", 1 / 100);
+        }
 
         UpdateButtonStatus();
     }
@@ -94,6 +108,8 @@ public class UI_Manager : MonoBehaviour
     #endregion
 
     #region Actions
+
+    #region Inventory
     public void OpenInventory()
     {
         OpenInventoryUI();
@@ -110,7 +126,9 @@ public class UI_Manager : MonoBehaviour
 
         UpdateButtonStatus();
     }
+    #endregion
 
+    #region Crafting
     public void OpenCrafting()
     {
         OpenCraftingUI();
@@ -127,7 +145,9 @@ public class UI_Manager : MonoBehaviour
 
 
     }
+    #endregion
 
+    #region Equipment
     public void OpenEquipment()
     {
         OpenEquipmentUI();
@@ -140,10 +160,12 @@ public class UI_Manager : MonoBehaviour
 
         UpdateButtonStatus();
     }
+    #endregion
 
+    #region Quest
     public void OpenQuest()
     {
-        //OpenQuestUI();
+        OpenQuestUI();
 
         UpdateButtonStatus();
 
@@ -157,18 +179,24 @@ public class UI_Manager : MonoBehaviour
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", false);
     }
+    #endregion
+
+    #region Stats
     public void OpenStats()
     {
         OpenStatsUI();
     }
-
     public void CloseStats()
     {
         CloseStatsUI();
     }
     #endregion
 
+    #endregion
+
     #region UI
+
+    #region Inventory
     public void OpenInventoryUI()
     {
         uiInventory.SetActive(true);
@@ -177,7 +205,9 @@ public class UI_Manager : MonoBehaviour
     {
         uiInventory.SetActive(false);
     }
+    #endregion
 
+    #region Equipment
     public void OpenEquipmentUI()
     {
         uiEquipment.SetActive(true);
@@ -186,7 +216,9 @@ public class UI_Manager : MonoBehaviour
     {
         uiEquipment.SetActive(false);
     }
+    #endregion
 
+    #region Crafting
     public void OpenCraftingUI()
     {
         uiCrafting.SetActive(true);
@@ -195,23 +227,25 @@ public class UI_Manager : MonoBehaviour
     {
         uiCrafting.SetActive(false);
     }
+    #endregion
 
-    public void SetQuestUI()
+    #region Quest
+    public GameObject GetQuestUI()
     {
-
+        return uiQuest;
     }
-    public void OpenQuestUI(Quest quest, ItemObject itemObject)
+
+    public void OpenQuestUI()
     {
         uiQuest.SetActive(true);
-        uiQuest.GetComponent<QuestUI>().SetSummary(quest.summary);
-        uiQuest.GetComponent<QuestUI>().SetObjective(itemObject, quest.summary);
-
     }
     public void CloseQuestUI()
     {
         uiQuest.SetActive(false);
     }
+    #endregion
 
+    #region Stats
     public void OpenStatsUI()
     {
         uiStats.SetActive(true);
@@ -223,21 +257,23 @@ public class UI_Manager : MonoBehaviour
     }
     #endregion
 
+    #endregion
+
     public void UpdateButtonStatus()
     {
         #region Inventory
         if (uiInventory != null && uiInventory.gameObject.activeInHierarchy)
         {
             //Inventory UI is open.
-            openButtonInventory.gameObject.SetActive(false);
-            closeButtonInventory.gameObject.SetActive(true);
+            openButtonInventory?.gameObject.SetActive(false);
+            closeButtonInventory?.gameObject.SetActive(true);
             gameManager.GetComponent<GM_StateManager>().SetStatus("Inventory", true);
         }
         else
         {
             //Inventory UI is closed.
-            openButtonInventory.gameObject.SetActive(true);
-            closeButtonInventory.gameObject.SetActive(false);
+            openButtonInventory?.gameObject.SetActive(true);
+            closeButtonInventory?.gameObject.SetActive(false);
             gameManager.GetComponent<GM_StateManager>().SetStatus("Inventory", false);
         }
         #endregion
@@ -259,15 +295,15 @@ public class UI_Manager : MonoBehaviour
         if (uiCrafting != null && uiCrafting.gameObject.activeInHierarchy)
         {
             //Crafting UI is open.
-            openButtonCrafting.gameObject.SetActive(false);
-            closeButtonCrafting.gameObject.SetActive(true);
+            openButtonCrafting?.gameObject.SetActive(false);
+            closeButtonCrafting?.gameObject.SetActive(true);
             gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", true);
         }
         else
         {
             //Crafting UI is closed.
-            openButtonCrafting.gameObject.SetActive(true);
-            closeButtonCrafting.gameObject.SetActive(false);
+            openButtonCrafting?.gameObject.SetActive(true);
+            closeButtonCrafting?.gameObject.SetActive(false);
             gameManager.GetComponent<GM_StateManager>().SetStatus("Crafting", false);
         }
         #endregion
@@ -288,5 +324,10 @@ public class UI_Manager : MonoBehaviour
         //    gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", false);
         //}
         #endregion
+    }
+
+    private void OnApplicationQuit()
+    {
+        rewardInventory.Clear();
     }
 }

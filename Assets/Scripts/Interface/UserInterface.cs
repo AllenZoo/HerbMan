@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(EventTrigger))]
 public abstract class UserInterface : MonoBehaviour
 {
     public InventoryObject inventory;
