@@ -79,6 +79,8 @@ public class Item {
             buffs[i].attribute = item.data.buffs[i].attribute;
         }
     } 
+
+
 }
 
 [System.Serializable]

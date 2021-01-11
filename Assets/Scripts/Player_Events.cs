@@ -12,21 +12,36 @@ public class Player_Events : MonoBehaviour
     public delegate void ItemAdded(ItemObject item);
     public event ItemAdded OnItemAddedToInventory;
 
+    public delegate void QuestCompleted(Quest quest);
+    public event QuestCompleted OnQuestCompleted;
+
     private void Awake()
     {
         player = GetComponent<Player>();
     }
 
-    public void RegisterItemAddedToInventory(ItemAdded itemAdded)
+    public void RegisterItemAddedToInventory(ItemAdded method)
     {
         Debug.Log("Registered method");
-        OnItemAddedToInventory += itemAdded;
+        OnItemAddedToInventory += method;
     }
 
     public void InvokeItemAddedToInventory(ItemObject itemObject)
     {
         Debug.Log("Item Added To Inventory");
         OnItemAddedToInventory.Invoke(itemObject);
+    }
+
+    public void RegisterQuestCompleted(QuestCompleted method)
+    {
+        Debug.Log("Registered method to Quest Completed");
+        OnQuestCompleted += method;
+    }
+
+    public void InvokeQuestCompleted(Quest quest)
+    {
+        Debug.Log("Quest completed");
+        OnQuestCompleted.Invoke(quest);
     }
     public void Test()
     {

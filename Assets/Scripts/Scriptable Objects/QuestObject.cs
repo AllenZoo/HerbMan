@@ -16,7 +16,10 @@ public class QuestObject : ScriptableObject
 [System.Serializable]
 public class Quest 
 {
-    public bool isActive;
+    public bool isComplete
+    {
+        get { return questGoal.IsReached(); }
+    }
 
     public string name;
 

@@ -12,50 +12,78 @@ public class QuestGiver : MonoBehaviour
     public Sprite portrait;
     public KeyCode keyCode;
 
-    private Player playerRef;
+    private Player player;
     private DialogueTrigger dialogueTriggerRef;
     private Interactable interactableRef;
     private QuestUI questUI;
 
+    private bool questIsGiven;
+    private bool rewardGiven;
+
     private void Awake()
     {
-        playerRef = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         dialogueTriggerRef = GetComponent<DialogueTrigger>();
 
         interactableRef = GetComponent<Interactable>();
         interactableRef.SetInteractionInput(keyCode);
         interactableRef.SetInteractionFunc(QuestGiverInteraction);
+
+        questIsGiven = false;
+        rewardGiven = false;
     }
 
     private void OpenQuestWindow()
     {
-        FindObjectOfType<UI_Manager>().OpenQuest();
-
         questUI = FindObjectOfType<UI_Manager>().GetQuestUI().GetComponent<QuestUI>();
-        questUI.transform.parent.Find("Buttons").Find("AcceptButton").GetComponent<Button>().onClick.AddListener(AcceptQuest);
-        questUI.transform.parent.Find("Buttons").Find("DeclineButton").GetComponent<Button>().onClick.AddListener(DeclineQuest);
 
-        //Title
-        questUI.SetTitle(questObject.quest.name);
+        questUI.ShowAcptDecButtons();
+        questUI.HideRewardButton();
+        questUI.HideCheckBox();
 
-        //Summary
-        questUI.SetSummary(portrait, questObject.quest.summary);
+        questUI.transform.Find("AD_Buttons").Find("AcceptButton").GetComponent<Button>().onClick.AddListener(AcceptQuest);
+        questUI.transform.Find("AD_Buttons").Find("DeclineButton").GetComponent<Button>().onClick.AddListener(DeclineQuest);
 
-        //Objective
-        questUI.SetObjective(questObject.quest.objectivePortrait, questObject.quest.objective);
-
-        //Reward
-        questUI.SetReward(questObject);
+        FindObjectOfType<UI_Manager>().SetQuestGiverRef(questObject.quest, portrait);
+        FindObjectOfType<UI_Manager>().OpenQuestUI();
     }
+
+    private void OpenCompletedQuestWindow()
+    {
+        questUI = FindObjectOfType<UI_Manager>().GetQuestUI().GetComponent<QuestUI>();
+
+        questUI.HideAcptDecButtons();
+        questUI.ShowRewardButton();
+        questUI.ShowCheckBox();
+
+        questUI.transform.Find("CollectRewardButton").GetComponentInChildren<Button>().onClick.AddListener(CollectReward);
+
+        FindObjectOfType<UI_Manager>().SetQuestGiverRef(questObject.quest, portrait);
+        FindObjectOfType<UI_Manager>().OpenQuestUI();
+    }
+
     private void CloseQuestWindow()
     {
-        FindObjectOfType<UI_Manager>().CloseQuest();
+        FindObjectOfType<UI_Manager>().CloseQuestGiverWindow();
     }
 
     private void QuestGiverInteraction(Player player)
     {
-        StartCoroutine(QuestGiveDialogue());
+        if (!questIsGiven)
+        {
+            StartCoroutine(QuestGiveDialogue());
+        }
+
+        else if (player.player_Quest.IsQuestComplete())
+        {
+            OpenCompletedQuestWindow();
+        }
+        else
+        {
+            //Quest is given but no complete
+        }
+
     }
     private IEnumerator QuestGiveDialogue()
     {
@@ -69,12 +97,39 @@ public class QuestGiver : MonoBehaviour
     private void AcceptQuest()
     {
         Debug.Log("Quest Accepted" + ": " + questObject.quest.name);
-        playerRef.player_Quest.AddQuest(questObject.quest);
+        player.player_Quest.AddQuest(questObject.quest);
+
+        questIsGiven = true;
+        questUI.HideAcptDecButtons();
+        questUI.ShowCheckBox();
+
         CloseQuestWindow(); 
     }
     private void DeclineQuest()
     {
         Debug.Log("Quest Declined");
         CloseQuestWindow();
+    }
+    private void CollectReward()
+    {
+
+        for (int i = 0; i < questObject.quest.rewards.Length; i++)
+        {
+            player.inventory.AddItem(new Item (questObject.quest.rewards[i].item), questObject.quest.rewards[i].amount);
+            rewardGiven = true;
+        }
+        if (rewardGiven)
+        {
+            Debug.Log(questObject.quest.questGoal.requiredItem.name);
+            player.inventory.RemoveItem(new Item(questObject.quest.questGoal.requiredItem), questObject.quest.questGoal.requiredAmount);
+        }
+
+        FindObjectOfType<UI_Manager>().SetQuestGiverRef(null, null);
+        CloseQuestWindow();
+    }
+    private void OnApplicationQuit()
+    {
+        Debug.Log("Resetting Quest");
+        questObject.quest.questGoal.currentAmount = 0;
     }
 }

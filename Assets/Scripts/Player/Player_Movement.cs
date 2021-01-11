@@ -10,7 +10,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private UI_Manager uI_Manager;
 
-    private float moveSpeed = 7f;
+    private float moveSpeed;
 
 
     //private Player_Animation playerAnimation;

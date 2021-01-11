@@ -26,6 +26,7 @@ public class QuestGoal
                 currentAmount++;
             }
         }
+        Debug.Log(currentAmount);
     }
 
     public void EnemyKilled(Enemy_Base enemy)
@@ -35,6 +36,8 @@ public class QuestGoal
 
         }
     }
+
+    
 }
 
 public enum GoalType

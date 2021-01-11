@@ -82,6 +82,7 @@
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Sprite.cs" />
+    <Compile Include="Assets\QuestStatusUI.cs" />
     <Compile Include="Assets\Scripts\Attribute.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\CraftingRecipe.cs" />
@@ -119,9 +120,9 @@
     <Compile Include="Assets\Scripts\Manager\GM_StateManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UI_Manager_ButtonScript.cs" />
     <Compile Include="Assets\Scripts\ModifiableInt.cs" />
+    <Compile Include="Assets\Scripts\NPC\CheckboxUI.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC_Trader.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC_Trader_QuestManager.cs" />
-    <Compile Include="Assets\Scripts\NPC\UI_CheckBox.cs" />
     <Compile Include="Assets\Scripts\NPC\UI_QuestRequestSlot.cs" />
     <Compile Include="Assets\Scripts\NPC\UI_TraderQuest.cs" />
     <Compile Include="Assets\Scripts\Player\OrbitController.cs" />

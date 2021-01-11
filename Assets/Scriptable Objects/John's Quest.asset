@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: John's Quest
   m_EditorClassIdentifier: 
   quest:
-    isActive: 0
     name: To search for melom...
     summary: John is hungry and need you to find some nice orange meloms! Do it adventurer!
       for the gold!
-    objective: -Scavenge for a melom (0/1)
+    objective: -Scavenge for a melom
     objectivePortrait: {fileID: -189053693183986825, guid: 6f573f5bd8325c1498218651d819bd81,
       type: 3}
     questGoal:
@@ -26,7 +25,7 @@ MonoBehaviour:
       requiredAmount: 1
       currentAmount: 0
     rewards:
-    - item: {fileID: 11400000, guid: 942db25b9acc2424385e997f5779fbcc, type: 2}
+    - item: {fileID: 11400000, guid: 3d2ff37121ebb88449d453786d84a2e4, type: 2}
       amount: 1
     - item: {fileID: 11400000, guid: 770750652f9c4524591ebd612726d594, type: 2}
       amount: 1

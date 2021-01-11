@@ -28,15 +28,40 @@ public class Player_Quest : MonoBehaviour
         quests.Remove(quest);
     }
 
+    public void OpenQuestWindow()
+    {
+
+    }
     public void ItemGathered(ItemObject item)
     {
         Debug.Log(item.name + " gathered.");
         if (quests.Count >= 1)
         {
             quests[0].questGoal.ItemGathered(item);
+
+            if (quests[0].questGoal.IsReached())
+            {
+                player.player_Event.InvokeQuestCompleted(quests[0]);
+                Debug.Log("Quest Complete!");
+            }
         }
+
+        
     }
 
+    public Quest GetCurQuest()
+    {
+        if (quests.Count >= 1)
+        {
+            return quests[0];
+        }
+        return null;
+    }
+
+    public bool IsQuestComplete()
+    {
+        return quests[0].isComplete;
+    }
     public List<Quest> GetQuestList()
     {
         return quests;

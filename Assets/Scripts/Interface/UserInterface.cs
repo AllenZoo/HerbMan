@@ -26,7 +26,7 @@ public abstract class UserInterface : MonoBehaviour
 
     private void OnSlotUpdate(InventorySlot _slot)
     {
-        if (_slot.item.id >= 0)
+        if (_slot.item != null && _slot.item.id >= 0)
         {
             //update slot with item
             _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = _slot.ItemObject.sprite;

@@ -99,9 +99,30 @@ public class InventoryObject : ScriptableObject
     {
         for(int i = 0; i < GetSlots.Length; i++)
         {
-            if(GetSlots[i].item == _item)
+            if(GetSlots[i].item.name == _item.name)
             {
                GetSlots[i].UpdateSlot(null, 0);
+            }
+        }
+    }
+
+    public void RemoveItem(Item _item, int amount)
+    {
+        int itemsToRemove = amount;
+        for (int i = 0; i < GetSlots.Length; i++)
+        {
+            if (GetSlots[i].item.name == _item.name)
+            {
+                for (int j = 0; j < GetSlots[i].amount; j++)
+                {
+                    if(itemsToRemove == 0)
+                    {
+                        return;
+                    }
+
+                    itemsToRemove--;
+                    GetSlots[i].UpdateSlot(GetSlots[i].amount -= 1);
+                }
             }
         }
     }
