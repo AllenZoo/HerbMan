@@ -35,7 +35,7 @@ public class Quest
 
     public Reward[] rewards;
 
-    public GameObject endNPC;
+    //public GameObject endNPC;
 }
 
 [System.Serializable]

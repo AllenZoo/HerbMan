@@ -8,12 +8,12 @@ public class OrbitController : MonoBehaviour
 
 
     private Transform player;
-    private Player_Movement playerMovement;
+    private Player_Actions playerMovement;
 
     private void Start()
     {
         player = transform.parent;
-        playerMovement = player.GetComponent<Player_Movement>();
+        playerMovement = player.GetComponent<Player_Actions>();
     }
     private void FollowMouse()
     {

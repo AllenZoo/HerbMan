@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(Player_Stats))]
 [RequireComponent(typeof(Player_Animation))]
 [RequireComponent(typeof(Player_Collision))]
-[RequireComponent(typeof(Player_Movement))]
+[RequireComponent(typeof(Player_Actions))]
 [RequireComponent(typeof(Player_Input))]
 [RequireComponent(typeof(Player_Equipment))]
 [RequireComponent(typeof(Player_Quest))]
@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    public Level level;
     //Events
     internal event EventHandler OnEquipChanged;
 
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     internal Player_Animation player_Animation;
     internal Player_Stats player_Stats;
     internal Player_Collision player_Collision;
-    internal Player_Movement player_Movement;
+    internal Player_Actions player_Movement;
     internal Player_Input player_Input;
     internal Player_Equipment player_Equipment;
     internal Player_Quest player_Quest;
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
         player_Animation = GetComponent<Player_Animation>();
         player_Stats = GetComponent<Player_Stats>();
         player_Collision = GetComponent<Player_Collision>();
-        player_Movement = GetComponent<Player_Movement>();
+        player_Movement = GetComponent<Player_Actions>();
         player_Input = GetComponent<Player_Input>();
         player_Equipment = GetComponent<Player_Equipment>();
         player_Quest = GetComponent<Player_Quest>();
@@ -58,17 +59,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        //player_Collision.enabled = false;
+        level = new Level(1, OnLevelUp, OnExpChange);
     }
-
-    //private void OnTriggerEnter2D(Collider2D collider)
-    //{
-    //    player_Collision.enabled = true;
-    //}
-    //private void OnTriggerExit2D(Collider2D collider)
-    //{
-    //    player_Collision.enabled = false;
-    //}
 
     public void TakeDamage(float num)
     {
@@ -83,44 +75,21 @@ public class Player : MonoBehaviour
     {
         return this.transform.position;
     }
-    //public void SetEquipment(ItemOld item)
-    //{
-    //    SetEquipment(item.itemType);
-    //}
-    //public void SetEquipment(ItemOld.ItemType itemType)
-    //{
-    //    switch (itemType)
-    //    {
-    //        default: break;
-    //    }
-    //    OnEquipChanged?.Invoke(this, EventArgs.Empty);
-    //}
-    //private void UseItem(ItemOld item)
-    //{
-    //    if (item.IsTool())
-    //    {
-    //        Debug.Log("Using Tool!");
-    //        //Equip Tool
-    //        switch (item.itemType)
-    //        {
-    //            default: break;
-    //            case ItemOld.ItemType.Stone_Pickaxe: break;
 
-    //        }
-    //    }
-
-    //    if (item.IsMaterial())
-    //    {
-    //        switch (item.itemType)
-    //        {
-    //            default: break;
-    //        }
-    //    }
-    //}
-
-    public void InvokeOnInventoryChanged()
+    public void OnLevelUp()
     {
+        Debug.Log("Player: levelled up!");
+        player_Event.InvokeOnLeveledUp();
+    }
 
+    public void OnExpChange()
+    {
+        player_Event.InvokeOnExpChanged();
+    }
+
+    public int GetLevel()
+    {
+        return level.GetCurLevel();
     }
 
     private void OnApplicationQuit()

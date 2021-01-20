@@ -11,8 +11,10 @@ public class Player_Input : MonoBehaviour
     public Dictionary<KeyCode, bool> keys;
 
     //Inputs
+    internal bool isAttackButtonDown = false; //SPACE
+
     internal bool isSprintButtonDown = false; //SHIFT
-    internal bool isLongDashButtonDown = false; //SPACE
+    internal bool isLongDashButtonDown = false; //T
 
     internal bool isRightButtonDown = false;
     internal bool isLeftButtonDown = false;
@@ -44,6 +46,7 @@ public class Player_Input : MonoBehaviour
 
     private void HandleInput()
     {
+        //Interaction Button
         if (Input.GetKeyDown(KeyCode.F))
         {
             keys.Add(KeyCode.F, true);
@@ -52,6 +55,19 @@ public class Player_Input : MonoBehaviour
         {
             keys.Remove(KeyCode.F);
         }
+
+        //Attack Button
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isAttackButtonDown = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Debug.Log("Space button up");
+            isAttackButtonDown = false;
+        }
+
+
         //Save Inventory
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -75,24 +91,20 @@ public class Player_Input : MonoBehaviour
         }
 
         //Dash
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             isLongDashButtonDown = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.T))
         {
             isLongDashButtonDown = false;
         }
 
-        ////Orbit Flash
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    isOrbitDashButtonDown = true;
-        //}
-        //else if (Input.GetKeyUp(KeyCode.G))
-        //{
-        //    isOrbitDashButtonDown = false;
-        //}
+        //Test Input
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            player.level.AddExp(999);
+        }
     }
 
     private void RegularMovement()

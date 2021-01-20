@@ -7,7 +7,7 @@ public class GM_StateManager : MonoBehaviour
     [SerializeField] private GameObject screenDimmer;
 
     private GameObject player;
-    private Player_Movement playerInput;
+    private Player_Actions playerInput;
     private GameState gameState;
 
     public bool inInventory;
@@ -58,13 +58,13 @@ public class GM_StateManager : MonoBehaviour
         if (CanPlayerMove())
         {
             //player.GetComponent<Player_Movement>().enabled = true;
-            player.GetComponent<Player_Movement>().SetCanMove(true);
+            player.GetComponent<Player_Actions>().SetCanMove(true);
             player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = true;
         }
         else
         {
             //player.GetComponent<Player_Movement>().enabled = false;
-            player.GetComponent<Player_Movement>().SetCanMove(false);
+            player.GetComponent<Player_Actions>().SetCanMove(false);
             player.transform.Find("Orbiter").GetComponent<OrbitController>().enabled = false;
         }
 

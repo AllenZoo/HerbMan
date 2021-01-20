@@ -60,8 +60,10 @@ public class Player_Collision : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
+        collectableRef = null;
+        interactableRef = null;
         enemy_Base = null;
         isTouchingTrader = false;
         isTouchingInteractable = false;

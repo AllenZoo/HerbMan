@@ -19,7 +19,6 @@ public class Player_Stats : MonoBehaviour
     private float maxHealth = 100;
     private float maxStamina = 100;
     private float maxMana = 100;
-    private float level = 1;
     private float experience = 0;
 
     public Attribute[] attributes;
@@ -63,7 +62,6 @@ public class Player_Stats : MonoBehaviour
         RefillBars();
         OnHealthChanged += Player_Stats_OnHealthChanged;
         OnStaminaUsed += Player_Stats_OnStaminaChanged;
-        OnLevelUp += Player_Stats_OnLevelUp;
     }
 
     public void OnBeforeSlotUpdate(InventorySlot _slot)
@@ -275,34 +273,11 @@ public class Player_Stats : MonoBehaviour
         }
     }
 
-    public float GetLevel()
-    {
-        return level;
-    }
-    public void LevelUp()
-    {
-        LevelUp(1);
-    }
-    public void LevelUp(float num)
-    {
-        level += num;
-        ResetExperienceBar();
-        OnLevelUp?.Invoke(this, EventArgs.Empty);
-    }
-    public void ResetExperienceBar()
-    {
-        experience = 0;
-    }
-
     private void Player_Stats_OnHealthChanged(object sender, EventArgs e)
     {
         CheckForDeath();
     }
     private void Player_Stats_OnStaminaChanged(object sender, EventArgs e)
-    {
-
-    }
-    private void Player_Stats_OnLevelUp(object sender, EventArgs e)
     {
 
     }

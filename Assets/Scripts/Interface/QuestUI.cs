@@ -101,8 +101,7 @@ public class QuestUI : MonoBehaviour
     }
 
     public void HideAllUI()
-    {
-        Debug.Log("Hiding all UI");
+    { 
         SetTitle(null);
         SetSummary(null, null);
         SetObjective(null, null, null);
@@ -130,9 +129,16 @@ public class QuestUI : MonoBehaviour
     {
         this.transform.Find("CollectRewardButton").gameObject.SetActive(true);
     }
+    public void HideUICloseButton()
+    {
+        this.transform.parent.Find("QuestCloseButton").gameObject.SetActive(false);
+    }
+    public void ShowUICloseButton()
+    {
+        this.transform.parent.Find("QuestCloseButton").gameObject.SetActive(true);
+    }
     public void HideCheckBox()
     {
-        Debug.Log("Hiding Checkbox");
         this.transform.Find("Status").Find("checkbox").gameObject.SetActive(false);
     }
     public void ShowCheckBox()

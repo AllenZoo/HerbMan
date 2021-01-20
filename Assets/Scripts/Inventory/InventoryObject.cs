@@ -113,10 +113,13 @@ public class InventoryObject : ScriptableObject
         {
             if (GetSlots[i].item.name == _item.name)
             {
-                for (int j = 0; j < GetSlots[i].amount; j++)
+                var tempAmount = GetSlots[i].amount;
+                for (int j = 0; j < tempAmount; j++)
                 {
+                    Debug.Log("itemsToRemove: " + itemsToRemove  + "Slot amount: " + GetSlots[i].amount);
                     if(itemsToRemove == 0)
                     {
+                        Debug.Log("returning from remove item");
                         return;
                     }
 

@@ -10,20 +10,13 @@ public class Player_Animation : MonoBehaviour
     private Animator animator;
 
     private string currentAnimationState;
-    public enum AnimationState
-    {
-        Attack,
-        Walk,
-        Run,
-        Dash,
-    }
 
     //Animation States
     private const string PLAYER_ATTACK = "Player_Attack";
     private const string PLAYER_IDLE = "Player_Idle";
-    private const string PLAYER_WALK = "Player_Walk";
+    private const string PLAYER_MOVING = "Player_Moving";
     private const string PLAYER_RUN = "Player_Run";
-
+    
     private void Awake()
     {
         player = GetComponent<Player>();
@@ -62,6 +55,62 @@ public class Player_Animation : MonoBehaviour
 
         currentAnimationState = newState;
     }
-    
-    
+    public void ChangeAnimationState(ActionType actionType)
+    {
+        if (currentAnimationState == GetStateFromActionType(actionType))
+        {
+            return;
+        }
+
+        switch (actionType)
+        {
+            case ActionType.Idle:
+                animator.Play(PLAYER_IDLE);
+                currentAnimationState = PLAYER_IDLE;
+                break;
+            case ActionType.Attack:
+                animator.Play(PLAYER_ATTACK);
+                currentAnimationState = PLAYER_ATTACK;
+                break;
+            case ActionType.Moving:
+                animator.Play(PLAYER_MOVING);
+                currentAnimationState = PLAYER_MOVING;
+                break;
+            case ActionType.Run:
+                break;
+            case ActionType.Dash:
+                break;
+            
+            default:
+                break;
+        }
+    }
+
+    public string GetStateFromActionType(ActionType actionType)
+    {
+        switch (actionType)
+        {
+            case ActionType.Idle:
+                return PLAYER_IDLE;
+            case ActionType.Attack:
+                return PLAYER_ATTACK;
+            case ActionType.Moving:
+                return PLAYER_MOVING;
+            case ActionType.Run:
+                break;
+            case ActionType.Dash:
+                break;
+            default:
+                break;
+        }
+        return "";
+    }
+}
+public enum ActionType
+{
+    Attack,
+    Moving,
+    Run,
+    Dash,
+    Idle,
 }
