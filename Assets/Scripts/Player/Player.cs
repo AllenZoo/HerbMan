@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     internal Player_Animation player_Animation;
     internal Player_Stats player_Stats;
     internal Player_Collision player_Collision;
-    internal Player_Actions player_Movement;
+    internal Player_Actions player_Actions;
     internal Player_Input player_Input;
     internal Player_Equipment player_Equipment;
     internal Player_Quest player_Quest;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         player_Animation = GetComponent<Player_Animation>();
         player_Stats = GetComponent<Player_Stats>();
         player_Collision = GetComponent<Player_Collision>();
-        player_Movement = GetComponent<Player_Actions>();
+        player_Actions = GetComponent<Player_Actions>();
         player_Input = GetComponent<Player_Input>();
         player_Equipment = GetComponent<Player_Equipment>();
         player_Quest = GetComponent<Player_Quest>();
@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         level = new Level(1, OnLevelUp, OnExpChange);
+        player_Event.InvokeOnLeveledUp();
     }
 
     public void TakeDamage(float num)

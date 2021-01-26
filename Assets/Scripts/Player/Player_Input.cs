@@ -103,7 +103,7 @@ public class Player_Input : MonoBehaviour
         //Test Input
         if (Input.GetKeyDown(KeyCode.M))
         {
-            player.level.AddExp(999);
+            player.level.AddExp(9);
         }
     }
 

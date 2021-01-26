@@ -14,9 +14,14 @@ public class Enemy_Base : MonoBehaviour
     {
         return health;
     }
-    public void SubtractHealth(float num)
+    public void TakeDamage(float num)
     {
         this.health -= num;
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     public void AddHealth(float num)
     {

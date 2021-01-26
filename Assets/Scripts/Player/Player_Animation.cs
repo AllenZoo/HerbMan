@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player_Animation : MonoBehaviour
 {
     [SerializeField] Player player;
-    private Animator animator;
+    internal Animator animator;
 
     private string currentAnimationState;
 
@@ -65,23 +65,23 @@ public class Player_Animation : MonoBehaviour
         switch (actionType)
         {
             case ActionType.Idle:
-                animator.Play(PLAYER_IDLE);
-                currentAnimationState = PLAYER_IDLE;
+                ChangeAnimationState(PLAYER_IDLE);
                 break;
             case ActionType.Attack:
-                animator.Play(PLAYER_ATTACK);
-                currentAnimationState = PLAYER_ATTACK;
+                ChangeAnimationState(PLAYER_ATTACK);
                 break;
             case ActionType.Moving:
-                animator.Play(PLAYER_MOVING);
-                currentAnimationState = PLAYER_MOVING;
+                ChangeAnimationState(PLAYER_MOVING);
                 break;
             case ActionType.Run:
+                Debug.Log("Animation has not been assigned");
                 break;
             case ActionType.Dash:
+                Debug.Log("Animation has not been assigned");
                 break;
             
             default:
+                Debug.Log("Animation has not been assigned");
                 break;
         }
     }

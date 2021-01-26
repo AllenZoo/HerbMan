@@ -51,7 +51,7 @@ public class Player_Collision : MonoBehaviour
         else if(other.tag == "Enemy")
         {
             enemy_Base = other.GetComponent<Enemy_Base>();
-            player.player_Movement.KnockedBack(enemy_Base.GetKnockbackAmount(), other.gameObject);
+            player.player_Actions.KnockedBack(enemy_Base.GetKnockbackAmount(), other.gameObject);
             player.TakeDamage(enemy_Base.GetCollsionDamage());
         }
         else if(other.tag == "NPC_Trader")
@@ -75,22 +75,6 @@ public class Player_Collision : MonoBehaviour
         {
             interactableRef.Interact(player);
         }
-    }
-    public void RegisterCollectedCollectableEvent(CollisionEvent method)
-    {
-        CollectedCollectable += method;
-    }
-    public void UnregisterCollectedCollectableEvent(CollisionEvent method)
-    {
-        CollectedCollectable -= method;
-    }
-    public void RegisterInteractedInteractableEvent(CollisionEvent method)
-    {
-        InteractedInteracatable += method;
-    }
-    public void RegisterInteractedInteractablEvent(CollisionEvent method)
-    {
-        InteractedInteracatable -= method;
     }
 
 }

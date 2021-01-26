@@ -8,13 +8,10 @@ public class Player_Actions : MonoBehaviour
     [SerializeField] internal Player player;
 
     [SerializeField] private LayerMask dashLayerMask;
+    [SerializeField] private LayerMask attackLayerMask;
     [SerializeField] private UI_Manager uI_Manager;
 
     private float moveSpeed;
-
-
-    //private Player_Animation playerAnimation;
-    //private Player_Base playerBase;
 
     private Vector3 moveDir;
     private Vector3 lastMoveDir;
@@ -29,7 +26,9 @@ public class Player_Actions : MonoBehaviour
     private bool canMove = true;
     private bool outOfStamina = false;
 
-    private float attackDelay = 0.2f;
+    private bool canAttack = true;
+    [SerializeField] private float attackDelay = 1.2f;
+    [SerializeField] private float attackRange = 300f;
 
     private Rigidbody2D rb;
 
@@ -53,6 +52,11 @@ public class Player_Actions : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             player.player_Animation.ChangeAnimationState(ActionType.Idle);
         }
+        if (isAttacking && player.player_Input.isAttackButtonDown)
+        {
+            HandleAttack();
+        }
+
     }
     private void FixedUpdate()
     {
@@ -76,7 +80,7 @@ public class Player_Actions : MonoBehaviour
             HandleLongDash();
             player.player_Animation.ChangeAnimationState(ActionType.Moving);
         }
-        
+
         //ATTACKING
         if (player.player_Input.isAttackButtonDown && isAttacking == false)
         {
@@ -95,24 +99,24 @@ public class Player_Actions : MonoBehaviour
         this.canMove = canMove;
         if (!canMove)
         {
-            player.player_Animation.PlayerMoveAnim(new Vector3(0,0,0));
+            player.player_Animation.PlayerMoveAnim(new Vector3(0, 0, 0));
         }
     }
     public void KnockedBack(float amount, GameObject enemy)
     {
-        Debug.Log("getting knocked back");
+        //Debug.Log("Player pos: " + this.transform.position + "Enemy pos: " + enemy.transform.position);
         Vector2 knockbackDir = (transform.position - enemy.transform.position).normalized;
         Vector2 knockbackPosition = new Vector2(transform.position.x + knockbackDir.x, transform.position.y + knockbackDir.y);
 
 
-        RaycastHit2D raycastHid2d = Physics2D.Raycast(transform.position, knockbackDir, amount, dashLayerMask);
-        if (raycastHid2d.collider != null)
-        {
-            knockbackPosition = raycastHid2d.point;
-        }
+        //RaycastHit2D raycastHid2d = Physics2D.Raycast(transform.position, knockbackDir, amount, dashLayerMask);
+        //if (raycastHid2d.collider != null)
+        //{
+        //    knockbackPosition = raycastHid2d.point;
+        //}
 
         transform.position = knockbackPosition;
-        //rb.MovePosition(knockbackPosition * amount);
+        rb.MovePosition(knockbackPosition * amount);
     }
 
     private void HandleMovement()
@@ -122,7 +126,7 @@ public class Player_Actions : MonoBehaviour
 
         moveDir = new Vector3(movement.x, movement.y).normalized;
 
-        if(movement.x != 0 || movement.y != 0)
+        if (movement.x != 0 || movement.y != 0)
         {
             //Not idle
             lastMoveDir = moveDir;
@@ -169,12 +173,37 @@ public class Player_Actions : MonoBehaviour
             rb.MovePosition(dashPosition);
             StartCoroutine(StartLongDashCD(longDashCooldown));
         }
-        else if(player.player_Input.isLongDashButtonDown && isLongDashCD)
+        else if (player.player_Input.isLongDashButtonDown && isLongDashCD)
         {
             Debug.Log("Long dash is on cooldown!");
         }
 
     }
+    private void HandleAttack()
+    {
+
+        Vector2 dir;
+        RaycastHit2D hit;
+
+        //var dir = lastMoveDir;
+        dir = new Vector2(player.player_Animation.animator.GetFloat("LastMoveX"), player.player_Animation.animator.GetFloat("LastMoveY"));
+        hit = Physics2D.Raycast(transform.position, transform.TransformDirection(dir), attackRange, attackLayerMask);
+
+        if(hit.collider != null && canAttack)
+        {
+            Debug.Log("Attacked");
+            Enemy_Base enemy = hit.collider.GetComponent<Enemy_Base>();
+            enemy.TakeDamage(1);
+            canAttack = false;
+            Invoke("ResetAttack", attackDelay); 
+        }
+        //Debug.Log("Hitting: " + hit.collider?.name);
+        //Debug.DrawRay(transform.position, dir, Color.red, attackRange);
+
+        
+
+    }
+
     private void HandleOrbitTeleport()
     {
         //if (isOrbitDashButtonDown)
@@ -195,11 +224,21 @@ public class Player_Actions : MonoBehaviour
         yield return new WaitForSeconds(time);
         isLongDashCD = false;
     }
-   
-  
+
+
     private void AttackComplete()
     {
         isAttacking = false;
     }
-   
+
+    private void ResetAttack()
+    {
+        canAttack = true;
+    }
+
+    private void ChangeBool(ref bool _bool, bool _output)
+    {
+        _bool = _output;
+    }
+
 }

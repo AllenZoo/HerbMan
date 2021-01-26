@@ -1,84 +1,120 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy_Stipp_Controller))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy_Stipp_Movement : MonoBehaviour
 {
-    [SerializeField] private float escapeRange = 10;
-    [SerializeField] private float aggroRange = 5;
+    [SerializeField] public float escapeRange = 10;
+    [SerializeField] public float aggroRange = 5;
+
     [SerializeField] private bool inMenu = false;
 
-    private float moveSpeed;
+    private Rigidbody2D rb;
+    internal Enemy_Stipp_Controller controller;
 
     private Transform player;
-    private Transform lastPlayerPosition;
-    private Enemy_Stipp_Animation stippAnimation;
+    private float moveSpeed;
 
-    private float dist;
-    private bool isAggro;
-    private bool canJump;
+    [SerializeField] private float jumpAnimTime;
+    public bool isJumping;
+    private Vector3 jumpDir;
 
+    public bool isFollowing;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        lastPlayerPosition = player.transform;
+        rb = GetComponent<Rigidbody2D>();
+        controller = GetComponent<Enemy_Stipp_Controller>();
+        controller.stats = GetComponent<Enemy_Base>();
+        moveSpeed = controller.stats.GetMoveSpeed();
+    }
 
-        stippAnimation = GetComponent<Enemy_Stipp_Animation>();
-        moveSpeed = GetComponent<Enemy_Base>().GetMoveSpeed();
-        isAggro = false;
-        canJump = true;
+    private void FixedUpdate()
+    {
+        HandleJumping();
     }
 
     private void Update()
     {
-        dist = Vector2.Distance(transform.position, player.position);
-        if (dist <= aggroRange && !isAggro)
-        {
-            isAggro = true;
-
-        }
-        if (isAggro)
-        {
-            if (canJump)
-            {
-                StartCoroutine(Jump());
-            }
-
-            if (dist >= escapeRange)
-            {
-                isAggro = false;
-            }
-        }
+        //Jitters if put into Fixed Update
+        HandleFollowing();
     }
 
-    private IEnumerator Jump()
+    #region Idle
+    public void Idle()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-        stippAnimation.StippJumpAnim(true);
-
-        yield return new WaitForSeconds(1);
-
-        stippAnimation.StippJumpAnim(false);
-        StopAllCoroutines();
-
-        StartCoroutine(StartCooldown("Jump", 2));
+        rb.velocity = new Vector2(0, 0);
+        isJumping = false;
+        isFollowing = false;
     }
-    private IEnumerator StartCooldown(string action, float seconds)
+    #endregion
+
+    #region Jump
+    public void Jump()
     {
-        ActionHandler(action, false);
-        Debug.Log(canJump);
-        yield return new WaitForSeconds(seconds);
-        ActionHandler(action, true);
-        Debug.Log(canJump);
+        var tempDir = (player.transform.position - this.transform.position).normalized;
+        SetJumpDir(tempDir);
+        StartCoroutine(JumpTimer(0));
     }
-    private void ActionHandler(string action, bool state)
+    public void Jump(float transitionTime)
     {
-        switch (action)
+        var tempDir = (player.transform.position - this.transform.position).normalized;
+        SetJumpDir(tempDir);
+        StartCoroutine(JumpTimer(transitionTime));
+    }
+    public IEnumerator JumpTimer(float transitionTime)
+    {
+        Debug.Log("In jump timer");
+        //controller.animatorController.ChangeState(Enemy_Stipp_Animation.ActionState.Frozen);
+        yield return new WaitForSeconds(transitionTime);
+        isJumping = true;
+        yield return new WaitForSeconds(jumpAnimTime);
+        isJumping = false;
+    }
+    public void SetJumpDir(Vector3 dir)
+    {
+        jumpDir = dir;
+    }
+    private void HandleJumping()
+    {
+        if (isJumping)
         {
-            case "Jump":
-                canJump = state;
-                break;
+            this.transform.position = Vector2.MoveTowards(this.transform.position, this.transform.position + jumpDir, moveSpeed * Time.deltaTime);
         }
     }
+
+    #endregion
+
+    #region Follow
+    public void Follow()
+    {
+        StartCoroutine(FollowTimer(0));
+    }
+    public void Follow(float transitionTime)
+    {
+        StartCoroutine(FollowTimer(transitionTime));
+    }
+    public IEnumerator FollowTimer(float transitionTime)
+    {
+        isFollowing = false;
+        yield return new WaitForSeconds(transitionTime);
+        isFollowing = true;
+    }
+    private void HandleFollowing()
+    {
+        if (isFollowing)
+        {
+            this.transform.position = Vector2.MoveTowards(this.transform.position, player.position, moveSpeed * Time.deltaTime);
+        }
+    }
+    #endregion
 }

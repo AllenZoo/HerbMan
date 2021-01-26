@@ -28,7 +28,6 @@ public class Player_Events : MonoBehaviour
 
     public void RegisterItemAddedToInventory(ItemAdded method)
     {
-        Debug.Log("Registered method");
         OnItemAddedToInventory += method;
     }
     public void InvokeItemAddedToInventory(ItemObject itemObject)
@@ -38,7 +37,6 @@ public class Player_Events : MonoBehaviour
     }
     public void RegisterQuestCompleted(QuestCompleted method)
     {
-        Debug.Log("Registered method to Quest Completed");
         OnQuestCompleted += method;
     }
     public void InvokeQuestCompleted(Quest quest)
