@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f9c7cf1d52b634e8d4d78c6b48aa54, type: 3}
   m_Name: MATERIAL_ORE_IRON
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  isStackable: 0
+  sprite: {fileID: 21300000, guid: 5ee286f8c383c5c42a02c99a4c07372b, type: 3}
+  isStackable: 1
   itemType: 12
   description: 
   data:
     name: 
-    id: 10
+    id: 6
+    tier: 0
     buffs: []

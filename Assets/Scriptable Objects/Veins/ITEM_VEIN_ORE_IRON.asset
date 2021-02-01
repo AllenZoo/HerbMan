@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b8587b7274e7041a9e9d0503408a49, type: 3}
+  m_Name: ITEM_VEIN_ORE_IRON
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 4184a67eaf7b21a4c888fe2430f75254, type: 2}
+  animation:
+  - {fileID: 408628165829449828, guid: 5c87f25f0a70e2541a5aa5c451e6a62c, type: 3}
+  - {fileID: 6945219387760695017, guid: 5c87f25f0a70e2541a5aa5c451e6a62c, type: 3}
+  - {fileID: -5248281308961018928, guid: 5c87f25f0a70e2541a5aa5c451e6a62c, type: 3}
+  - {fileID: 8448500925977479844, guid: 5c87f25f0a70e2541a5aa5c451e6a62c, type: 3}
+  tierRequired: 2
+  toolRequired: 7
