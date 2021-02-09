@@ -12,17 +12,31 @@ public class Player_Input : MonoBehaviour
 
     //Inputs
     internal bool isAttackButtonDown = false; //SPACE
+    internal KeyCode AttackButtonInput = KeyCode.Space;
 
     internal bool isSprintButtonDown = false; //SHIFT
+    internal KeyCode SprintButtonInput = KeyCode.LeftShift;
+
     internal bool isLongDashButtonDown = false; //T
+    internal KeyCode LongDashInput = KeyCode.T;
 
     internal bool isRightButtonDown = false;
+    internal KeyCode RightButtonInput = KeyCode.D;
+
     internal bool isLeftButtonDown = false;
+    internal KeyCode LeftButtonInput = KeyCode.D;
+
     internal bool isUpButtonDown = false;
+    internal KeyCode UpButtonInput = KeyCode.W;
+
     internal bool isDownButtonDown = false;
+    internal KeyCode DownButtonInput = KeyCode.S;
 
     internal bool isHorizontalMovementButtonDown = false; //A, D
-    internal bool isVerticalMovementButtonDown = false; //W,S
+    internal bool isVerticalMovementButtonDown = false; //W, S
+
+    internal float axisInputX;
+    internal float axisInputY;
 
     internal bool isKeycodeFDown = false;
 
@@ -44,6 +58,21 @@ public class Player_Input : MonoBehaviour
         return Input.GetKeyDown(keyCode);
     }
 
+    public bool IsKeyReleased(KeyCode keyCode)
+    {
+        return Input.GetKeyUp(keyCode);
+    }
+
+    public bool IsMovementKeyPressed()
+    {
+        return axisInputX != 0 || axisInputY != 0;
+    }
+
+    public bool IsMovementKeyReleased()
+    {
+        return axisInputX == 0 && axisInputY == 0;
+    }
+
     private void HandleInput()
     {
         //Interaction Button
@@ -62,8 +91,7 @@ public class Player_Input : MonoBehaviour
             isAttackButtonDown = true;
         }
         else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Debug.Log("Space button up");
+        { 
             isAttackButtonDown = false;
         }
 
@@ -105,12 +133,14 @@ public class Player_Input : MonoBehaviour
         {
             player.level.AddExp(9);
         }
+
+        axisInputX = Input.GetAxisRaw("Horizontal");
+        axisInputY = Input.GetAxisRaw("Vertical");
     }
 
     private void RegularMovement()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+
 
         if (movement.x == 1)
         {

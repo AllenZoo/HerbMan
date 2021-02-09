@@ -9,6 +9,7 @@ public class Enemy_Base : MonoBehaviour
     [SerializeField] private float collisionDamage;
     [SerializeField] private float projectileDamage;
     [SerializeField] private float knockbackAmount;
+    [SerializeField] private int expValue;
 
     public float GetHealth()
     {
@@ -21,8 +22,23 @@ public class Enemy_Base : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().level.AddExp(expValue);
         }
     }
+    public void TakeDamage(float num, string tagOfDamager)
+    {
+        this.health -= num;
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+            if(tagOfDamager == "Player")
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().level.AddExp(expValue);
+            }
+        }
+    }
+
     public void AddHealth(float num)
     {
         this.health += num;

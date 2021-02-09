@@ -31118,8 +31118,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2859860413199137247, guid: 3c9c9d60042f2594fb666ac4479e243c,
         type: 3}
+      propertyPath: health
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859860413199137247, guid: 3c9c9d60042f2594fb666ac4479e243c,
+        type: 3}
+      propertyPath: expValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859860413199137247, guid: 3c9c9d60042f2594fb666ac4479e243c,
+        type: 3}
       propertyPath: moveSpeed
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2859860413199137247, guid: 3c9c9d60042f2594fb666ac4479e243c,
         type: 3}
@@ -34714,6 +34724,7 @@ MonoBehaviour:
   collisionDamage: 0
   projectileDamage: 0
   knockbackAmount: 0
+  expValue: 0
 --- !u!4 &1141573795
 Transform:
   m_ObjectHideFlags: 0
@@ -42825,7 +42836,7 @@ PrefabInstance:
     - target: {fileID: 3714683933418387590, guid: 51b504d498b98c34d91be7d68b8372e4,
         type: 3}
       propertyPath: attackDelay
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3714683933418387590, guid: 51b504d498b98c34d91be7d68b8372e4,
         type: 3}

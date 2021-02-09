@@ -6,6 +6,7 @@ public class Player_Actions : MonoBehaviour
 {
 
     [SerializeField] internal Player player;
+    private Player_Input player_Input;
 
     [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private LayerMask attackLayerMask;
@@ -20,14 +21,21 @@ public class Player_Actions : MonoBehaviour
     private bool isLongDashCD = false;
     private float longDashCooldown = 5f;
 
+    //Non-Action States
+    private bool isIdling = true;
 
+    //Action States
+    //private bool inActionState = false;
     private bool isMoving = false;
+    private bool isSprinting = false;
     private bool isAttacking = false;
+
+
     private bool canMove = true;
     private bool outOfStamina = false;
 
     private bool canAttack = true;
-    [SerializeField] private float attackDelay = 1.2f;
+    [SerializeField] private float attackDelay = 2f;
     [SerializeField] private float attackRange = 300f;
 
     private Rigidbody2D rb;
@@ -35,6 +43,7 @@ public class Player_Actions : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        player_Input = player.player_Input;
     }
     private void Start()
     {
@@ -44,53 +53,113 @@ public class Player_Actions : MonoBehaviour
     {
         if (canMove)
         {
-            HandleMovement();
-            HandleOrbitTeleport();
+            movement.x = player.player_Input.axisInputX;
+            movement.y = player.player_Input.axisInputY;
+        }
+
+        //IDLE
+        if ((!isSprinting && !isMoving && !isAttacking) || !canMove)
+        {
+            isIdling = true;
+            player.player_Animation.ChangeAnimationState(ActionType.Idle);
         }
         else
         {
-            rb.velocity = new Vector2(0, 0);
-            player.player_Animation.ChangeAnimationState(ActionType.Idle);
-        }
-        if (isAttacking && player.player_Input.isAttackButtonDown)
-        {
-            HandleAttack();
+            isIdling = false;
         }
 
+        if (!isAttacking)
+        {
+            //MOVING
+            //Debug.Log(movement + " " + (movement != new Vector2(0,0)));
+            if (!isMoving && canMove && player_Input.IsMovementKeyPressed())
+            {
+                isMoving = true;
+                //player.player_Animation.ChangeAnimationState(ActionType.Moving);
+            }
+            else if (player_Input.IsMovementKeyReleased())
+            {
+                isMoving = false;
+            }
+            if (isMoving)
+            {
+                player.player_Animation.ChangeAnimationState(ActionType.Moving);
+            }
+
+            //SPRINT
+            if (!isSprinting && player_Input.IsKeyPressed(player_Input.SprintButtonInput))
+            {
+                isSprinting = true;
+            }
+            else if (player_Input.IsKeyReleased(player_Input.SprintButtonInput))
+            {
+                isSprinting = false;
+            }
+
+            if (isSprinting)
+            {
+                player.player_Animation.ChangeAnimationState(ActionType.Moving);
+            }
+
+        }
+
+        //ATTACK
+        if (!isAttacking && player_Input.IsKeyPressed(player_Input.AttackButtonInput))
+        {
+            isAttacking = true;
+
+            if (isAttacking)
+            {
+                player.player_Animation.ChangeAnimationState(ActionType.Attack);
+            }
+            StopCoroutine(AttackDelay());
+            StartCoroutine(AttackDelay());
+        }
+
+        //HANDLES ANIMATION DIRECTION
+        if (CanChangeDirection())
+        {
+            player.player_Animation.PlayerMoveAnim(moveDir);
+        }
     }
     private void FixedUpdate()
     {
-        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Debug.Log("X: " + mousePosition.x + " Y: "+ mousePosition.y +" Z: "+ mousePosition.z+" Magnitude: "+ mousePosition.magnitude);
-
-        //rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
-
         //IDLE
-        if (!isMoving && !isAttacking)
+        if (isIdling)
         {
             rb.velocity = new Vector2(0, 0);
-            player.player_Animation.ChangeAnimationState(ActionType.Idle);
         }
 
         //MOVING
+
+
         if (isMoving && canMove && !isAttacking)
         {
             rb.velocity = moveDir * moveSpeed;
+
+            //HandleLongDash();
+            //player.player_Animation.ChangeAnimationState(ActionType.Moving);
+        }
+
+        if (isMoving)
+        {
+            HandleMovement();
+        }
+
+        if (isSprinting)
+        {
             HandleSprint();
-            HandleLongDash();
-            player.player_Animation.ChangeAnimationState(ActionType.Moving);
         }
 
         //ATTACKING
-        if (player.player_Input.isAttackButtonDown && isAttacking == false)
+        if (isAttacking == true)
         {
             //Stop moving
             rb.velocity = new Vector2(0, 0);
 
             //Attack
-            isAttacking = true;
-            player.player_Animation.ChangeAnimationState(ActionType.Attack);
-            Invoke("AttackComplete", attackDelay);
+            HandleAttack();
+
         }
     }
 
@@ -121,41 +190,30 @@ public class Player_Actions : MonoBehaviour
 
     private void HandleMovement()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
+        moveSpeed = 7;
         moveDir = new Vector3(movement.x, movement.y).normalized;
-
-        if (movement.x != 0 || movement.y != 0)
-        {
-            //Not idle
-            lastMoveDir = moveDir;
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-        }
-
-        player.player_Animation.PlayerMoveAnim(moveDir);
     }
-
     private void HandleSprint()
     {
+        //Runs only when Sprint ButtonInput is pressed.
+
+        //Check for stamina amount
         if (player.player_Stats.GetStamina() < 1)
         {
             //Stop sprinting
             moveSpeed = 7;
         }
-        else if (player.player_Input.isSprintButtonDown && isMoving)
+
+        else //if (isMoving)
         {
             moveSpeed = 10;
             player.player_Stats.UseStamina(1);
         }
-        else
-        {
-            moveSpeed = 7;
-        }
+
+        //else
+        //{
+        //    moveSpeed = 7;
+        //}
     }
     private void HandleLongDash()
     {
@@ -193,7 +251,7 @@ public class Player_Actions : MonoBehaviour
         {
             Debug.Log("Attacked");
             Enemy_Base enemy = hit.collider.GetComponent<Enemy_Base>();
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(1, "Player");
             canAttack = false;
             Invoke("ResetAttack", attackDelay); 
         }
@@ -203,21 +261,6 @@ public class Player_Actions : MonoBehaviour
         
 
     }
-
-    private void HandleOrbitTeleport()
-    {
-        //if (isOrbitDashButtonDown)
-        //{
-        //    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    Vector3 newMousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
-        //    //Vector2 mouseMovement = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
-        //    //rb.velocity = new Vector2(mouseMovement.x * ORBIT_DASH_SPEED, mouseMovement.y * ORBIT_DASH_SPEED);
-        //    //transform.position = new Vector2(mouseMovement.x * ORBIT_DASH_AMOUNT, mouseMovement.y * ORBIT_DASH_AMOUNT);
-        //    //transform.position = new Vector2(transform.position.x + newMousePosition.x, transform.position.y + newMousePosition.y);
-
-        //    isOrbitDashButtonDown = false;
-        //}
-    }
     private IEnumerator StartLongDashCD(float time)
     {
         isLongDashCD = true;
@@ -226,6 +269,13 @@ public class Player_Actions : MonoBehaviour
     }
 
 
+    private IEnumerator AttackDelay()
+    {
+        Debug.Log("Is Attacking : " + isAttacking);
+        yield return new WaitForSeconds(attackDelay);
+        isAttacking = false;
+        Debug.Log("Is Attacking : " + isAttacking);
+    }
     private void AttackComplete()
     {
         isAttacking = false;
@@ -236,9 +286,21 @@ public class Player_Actions : MonoBehaviour
         canAttack = true;
     }
 
-    private void ChangeBool(ref bool _bool, bool _output)
+    private bool CanChangeDirection()
     {
-        _bool = _output;
-    }
+        if(isAttacking == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
+    }
+    private bool CheckForIdle()
+    {
+        Debug.Log(!isSprinting && !isMoving && !isAttacking);
+        return (!isSprinting && !isMoving && !isAttacking);
+    }
 }

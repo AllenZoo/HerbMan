@@ -15,7 +15,7 @@ public class Player_Animation : MonoBehaviour
     private const string PLAYER_ATTACK = "Player_Attack";
     private const string PLAYER_IDLE = "Player_Idle";
     private const string PLAYER_MOVING = "Player_Moving";
-    private const string PLAYER_RUN = "Player_Run";
+    private const string PLAYER_SPRINT = "Player_Sprint";
     
     private void Awake()
     {
@@ -73,8 +73,8 @@ public class Player_Animation : MonoBehaviour
             case ActionType.Moving:
                 ChangeAnimationState(PLAYER_MOVING);
                 break;
-            case ActionType.Run:
-                Debug.Log("Animation has not been assigned");
+            case ActionType.Sprinting:
+                ChangeAnimationState(PLAYER_SPRINT);
                 break;
             case ActionType.Dash:
                 Debug.Log("Animation has not been assigned");
@@ -96,8 +96,8 @@ public class Player_Animation : MonoBehaviour
                 return PLAYER_ATTACK;
             case ActionType.Moving:
                 return PLAYER_MOVING;
-            case ActionType.Run:
-                break;
+            case ActionType.Sprinting:
+                return PLAYER_SPRINT;
             case ActionType.Dash:
                 break;
             default:
@@ -110,7 +110,7 @@ public enum ActionType
 {
     Attack,
     Moving,
-    Run,
+    Sprinting,
     Dash,
     Idle,
 }
