@@ -9,6 +9,7 @@ public class Enemy_Stipp_Animation : MonoBehaviour
     private const string STIPP_JUMP = "Stipp_Jump";
     private const string STIPP_FOLLOW = "Stipp_Follow";
     private const string STIPP_FROZEN = "Stipp_Frozen";
+    private const string STIPP_DAMAGED = "Stipp_Damaged";
 
     public enum ActionState 
     {
@@ -16,6 +17,7 @@ public class Enemy_Stipp_Animation : MonoBehaviour
         Jumping,
         Following,
         Frozen,
+        Damaged,
     }
 
     private ActionState actionState;
@@ -47,6 +49,9 @@ public class Enemy_Stipp_Animation : MonoBehaviour
                 break;
             case ActionState.Frozen:
                 animator.Play(STIPP_FROZEN);
+                break;
+            case ActionState.Damaged:
+                animator.Play(STIPP_DAMAGED);
                 break;
             default:
                 break;

@@ -91,6 +91,11 @@ public class Enemy_Stipp_Movement : MonoBehaviour
             this.transform.position = Vector2.MoveTowards(this.transform.position, this.transform.position + jumpDir, moveSpeed * Time.deltaTime);
         }
     }
+    private void StopJumping()
+    {
+        StopCoroutine(JumpTimer(0));
+        isJumping = false;
+    }
 
     #endregion
 
@@ -115,6 +120,40 @@ public class Enemy_Stipp_Movement : MonoBehaviour
         {
             this.transform.position = Vector2.MoveTowards(this.transform.position, player.position, moveSpeed * Time.deltaTime);
         }
+    }
+    private void StopFollowing()
+    {
+        StopCoroutine(FollowTimer(0));
+        isFollowing = false;
+    }
+    #endregion
+
+    #region Damaged
+    public void Damaged()
+    {
+        KnockBack();
+        StartCoroutine(DamagedTimer(0, 2));
+    }
+    public void Damaged(float transitionTime, float stunTime)
+    {
+        KnockBack();
+        StartCoroutine(DamagedTimer(transitionTime, stunTime));
+    }
+    public IEnumerator DamagedTimer(float transitionTime, float stunTime)
+    {
+        yield return new WaitForSeconds(transitionTime);
+        Idle();
+        yield return new WaitForSeconds(stunTime);
+        controller.StartFollowState();
+    }
+
+    private void KnockBack()
+    {
+        Vector2 knockbackDir = (transform.position - player.transform.position).normalized;
+        Vector2 knockbackPosition = new Vector2(transform.position.x + knockbackDir.x, transform.position.y + knockbackDir.y);
+
+        transform.position = knockbackPosition;
+        rb.MovePosition(knockbackPosition * rb.mass);
     }
     #endregion
 }

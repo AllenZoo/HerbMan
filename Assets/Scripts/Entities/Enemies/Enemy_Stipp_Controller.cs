@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,8 +32,11 @@ public class Enemy_Stipp_Controller : MonoBehaviour
         RefreshStats();
     }
 
+    private void Start()
+    {
+        stats.RegisterOnDamaged(StartDamagedState);
+    }
 
-    
     private void RefreshStats()
     {
         health = enemyBase.GetHealth();
@@ -65,6 +69,12 @@ public class Enemy_Stipp_Controller : MonoBehaviour
     {
         animatorController.ChangeState(Enemy_Stipp_Animation.ActionState.Idle);
         movementController.Idle();
+    }
+
+    public void StartDamagedState(object sender, EventArgs e)
+    {
+        animatorController.ChangeState(Enemy_Stipp_Animation.ActionState.Damaged);
+        movementController.Damaged();
     }
 
 }

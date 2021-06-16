@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Entities\NPC\UI_TraderQuest.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\CameraFollowSetup.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\CameraFollow.cs" />
+    <Compile Include="Assets\Enemy_Stipp_DamagedBehaviour.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\Scripts\Managers\UI_QuestManager.cs" />
     <Compile Include="Assets\Scripts\InteractableSystems\CraftingSystem\CraftingRecipe.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Assets\Scripts\InteractableSystems\Dialogue\DialogueTrigger.cs" />
     <Compile Include="Assets\Scripts\Entities\Enemies\Enemy_Gunner_Shooting.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\MonoBehaviours\ComponentActions.cs" />
+    <Compile Include="Assets\Enemy_Effects.cs" />
     <Compile Include="Assets\Scripts\Entities\Enemies\Enemy_Gunner_Animation.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\ItemObject.cs" />
     <Compile Include="Assets\Scripts\Entities\Enemies\Enemy_Base.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Assets\Scripts\DisplaySystems\StatBars\StatBar.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\CMDebug.cs" />
     <Compile Include="Assets\Imports\CodeMonkey\Utils\FunctionPeriodic.cs" />
+    <Compile Include="Assets\ShopUI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Imports\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class Enemy_Base : MonoBehaviour
     [SerializeField] private float knockbackAmount;
     [SerializeField] private int expValue;
 
+    public EventHandler OnDamaged;
     public float GetHealth()
     {
         return health;
@@ -28,6 +30,7 @@ public class Enemy_Base : MonoBehaviour
     public void TakeDamage(float num, string tagOfDamager)
     {
         this.health -= num;
+        OnDamaged?.Invoke(this, EventArgs.Empty);
 
         if(health <= 0)
         {
@@ -37,6 +40,11 @@ public class Enemy_Base : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().level.AddExp(expValue);
             }
         }
+    }
+
+    public void RegisterOnDamaged(EventHandler method)
+    {
+        OnDamaged += method;
     }
 
     public void AddHealth(float num)

@@ -256,7 +256,7 @@ public class Player_Actions : MonoBehaviour
             Invoke("ResetAttack", attackDelay); 
         }
         //Debug.Log("Hitting: " + hit.collider?.name);
-        //Debug.DrawRay(transform.position, dir, Color.red, attackRange);
+        Debug.DrawRay(transform.position, dir, Color.red, attackRange);
 
         
 
