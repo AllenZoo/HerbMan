@@ -17,6 +17,8 @@ public class UI_Manager_ButtonScript : MonoBehaviour
         CloseCrafting,
         OpenQuest,
         CloseQuest,
+        OpenShop,
+        CloseShop,
     }
 
     private void Awake()
@@ -38,6 +40,8 @@ public class UI_Manager_ButtonScript : MonoBehaviour
             case ButtonType.OpenQuest: system = "Quest"; isOpen = true; break;
             case ButtonType.CloseQuest: system = "Quest"; isOpen = false; break;
 
+            case ButtonType.OpenShop: system = "Shop"; isOpen = true; break;
+            case ButtonType.CloseShop: system = "Shop"; isOpen = false; break;
         }
 
         FindObjectOfType<UI_Manager>()?.GetComponent<UI_Manager>().SetButton(this.gameObject.GetComponent<Button>(), isOpen, system);

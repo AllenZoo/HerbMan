@@ -10,11 +10,12 @@ public class UI_Manager : MonoBehaviour
     public Player player;
     private GameObject gameManager;
 
-    private GameObject uiInventoryGameObject;
-    private GameObject uiCraftingGameObject;
-    private GameObject uiEquipmentGameObject;
-    private GameObject uiQuestGameObject;
-    private GameObject uiStatsGameObject;
+    private GameObject ui_InventoryGameObject;
+    private GameObject ui_CraftingGameObject;
+    private GameObject ui_EquipmentGameObject;
+    private GameObject ui_QuestGameObject;
+    private GameObject ui_StatsGameObject;
+    private GameObject ui_shopGameObject;
 
     private Button openButtonInventory;
     private Button closeButtonInventory;
@@ -22,6 +23,8 @@ public class UI_Manager : MonoBehaviour
     private Button closeButtonCrafting;
     private Button openButtonQG;
     private Button closeButtonQG;
+    private Button openShop;
+    private Button closeShop;
 
     private Quest curQuest;
     private Sprite questPortrait;
@@ -36,22 +39,22 @@ public class UI_Manager : MonoBehaviour
     {
         //Closing inventory and crafting and quest systems after everything is initialized
 
-        if (uiInventoryGameObject)
+        if (ui_InventoryGameObject)
         {
             Invoke("CloseInventoryWindow", 1/100);
         }
 
-        if (uiCraftingGameObject)
+        if (ui_CraftingGameObject)
         {
             Invoke("CloseCraftingWindow", 1 / 100);
         }
 
-        if (uiQuestGameObject)
+        if (ui_QuestGameObject)
         {
             Invoke("CloseQuestWindow", 1 / 100);
         }
 
-        if (uiStatsGameObject)
+        if (ui_StatsGameObject)
         {
             Invoke("CloseStatsWindow", 1 / 100);
         }
@@ -62,23 +65,27 @@ public class UI_Manager : MonoBehaviour
     #region Setters
     public void SetUIInventory(GameObject uiInventory)
     {
-        this.uiInventoryGameObject = uiInventory;
+        this.ui_InventoryGameObject = uiInventory;
     }
     public void SetUIEquipment(GameObject uiEquipment)
     {
-        this.uiEquipmentGameObject = uiEquipment;
+        this.ui_EquipmentGameObject = uiEquipment;
     }
     public void SetUICrafting(GameObject uiCraftingSystem)
     {
-        this.uiCraftingGameObject = uiCraftingSystem;
+        this.ui_CraftingGameObject = uiCraftingSystem;
     }
     public void SetUIQuest(GameObject uiQuestInterface)
     {
-        this.uiQuestGameObject = uiQuestInterface;
+        this.ui_QuestGameObject = uiQuestInterface;
     }
     public void SetUIStats(GameObject uiStats)
     {
-        this.uiStatsGameObject = uiStats;
+        this.ui_StatsGameObject = uiStats;
+    }
+    public void SetUIShop(GameObject uiShop)
+    {
+        this.ui_shopGameObject = uiShop;
     }
     public void SetButton(Button button, bool isOpen, string system)
     {
@@ -110,6 +117,92 @@ public class UI_Manager : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region UI
+
+    #region Inventory
+    public void OpenInventoryUI()
+    {
+        ui_InventoryGameObject.SetActive(true);
+        UpdateButtonStatus();
+    }
+    public void CloseInventoryUI()
+    {
+        ui_InventoryGameObject.SetActive(false);
+        UpdateButtonStatus();
+    }
+    #endregion
+
+    #region Equipment
+    public void OpenEquipmentUI()
+    {
+        ui_EquipmentGameObject?.SetActive(true);
+        UpdateButtonStatus();
+    }
+    public void CloseEquipmentUI()
+    {
+        ui_EquipmentGameObject?.SetActive(false);
+        UpdateButtonStatus();
+    }
+    #endregion
+
+    #region Crafting
+    public void OpenCraftingUI()
+    {
+        ui_CraftingGameObject?.SetActive(true);
+        UpdateButtonStatus();
+    }
+    public void CloseCraftingUI()
+    {
+        ui_CraftingGameObject?.SetActive(false);
+        UpdateButtonStatus();
+    }
+    #endregion
+
+    #region Quest
+    public GameObject GetQuestUI()
+    {
+        return ui_QuestGameObject;
+    }
+
+    public void OpenQuestUI()
+    {
+        ui_QuestGameObject?.SetActive(true);
+        UpdateButtonStatus();
+    }
+    public void CloseQuestUI()
+    {
+        ui_QuestGameObject?.SetActive(false);
+        UpdateButtonStatus();
+    }
+    #endregion
+
+    #region Shop
+    public void OpenShopUI()
+    {
+        ui_shopGameObject.SetActive(true);
+        UpdateButtonStatus();
+    }
+    public void CloseShopUI()
+    {
+        ui_shopGameObject.SetActive(false);
+        UpdateButtonStatus();
+    }
+    #endregion
+
+    #region Stats
+    public void OpenStatsUI()
+    {
+        ui_StatsGameObject?.SetActive(true);
+    }
+
+    public void CloseStatsUI()
+    {
+        ui_StatsGameObject?.SetActive(false);
+    }
+    #endregion
+
     #endregion
 
     #region Actions
@@ -185,83 +278,10 @@ public class UI_Manager : MonoBehaviour
 
     #endregion
 
-    #region UI
-
-    #region Inventory
-    public void OpenInventoryUI()
-    {
-        uiInventoryGameObject.SetActive(true);
-        UpdateButtonStatus();
-    }
-    public void CloseInventoryUI()
-    {
-        uiInventoryGameObject.SetActive(false);
-        UpdateButtonStatus();
-    }
-    #endregion
-
-    #region Equipment
-    public void OpenEquipmentUI()
-    {
-        uiEquipmentGameObject.SetActive(true);
-        UpdateButtonStatus();
-    }
-    public void CloseEquipmentUI()
-    {
-        uiEquipmentGameObject.SetActive(false);
-        UpdateButtonStatus();
-    }
-    #endregion
-
-    #region Crafting
-    public void OpenCraftingUI()
-    {
-        uiCraftingGameObject.SetActive(true);
-        UpdateButtonStatus();
-    }
-    public void CloseCraftingUI()
-    {
-        uiCraftingGameObject.SetActive(false);
-        UpdateButtonStatus();
-    }
-    #endregion
-
-    #region Quest
-    public GameObject GetQuestUI()
-    {
-        return uiQuestGameObject;
-    }
-
-    public void OpenQuestUI()
-    {
-        uiQuestGameObject.SetActive(true);
-        UpdateButtonStatus();
-    }
-    public void CloseQuestUI()
-    {
-        uiQuestGameObject.SetActive(false);
-        UpdateButtonStatus();
-    }
-    #endregion
-
-    #region Stats
-    public void OpenStatsUI()
-    {
-        uiStatsGameObject.SetActive(true);
-    }
-
-    public void CloseStatsUI()
-    {
-        uiStatsGameObject.SetActive(false);
-    }
-    #endregion
-
-    #endregion
-
     public void UpdateButtonStatus()
     {
         #region Inventory
-        if (uiInventoryGameObject != null && uiInventoryGameObject.gameObject.activeInHierarchy)
+        if (ui_InventoryGameObject != null && ui_InventoryGameObject.gameObject.activeInHierarchy)
         {
             //Inventory UI is open.
             openButtonInventory?.gameObject.SetActive(false);
@@ -278,7 +298,7 @@ public class UI_Manager : MonoBehaviour
         #endregion
 
         #region Equipment
-        if (uiEquipmentGameObject != null && uiEquipmentGameObject.gameObject.activeInHierarchy)
+        if (ui_EquipmentGameObject != null && ui_EquipmentGameObject.gameObject.activeInHierarchy)
         {
             //Equipment UI is open.
             gameManager.GetComponent<GM_StateManager>().SetStatus("Equipment", true);
@@ -291,7 +311,7 @@ public class UI_Manager : MonoBehaviour
         #endregion
 
         #region Crafting
-        if (uiCraftingGameObject != null && uiCraftingGameObject.gameObject.activeInHierarchy)
+        if (ui_CraftingGameObject != null && ui_CraftingGameObject.gameObject.activeInHierarchy)
         {
             //Crafting UI is open.
             openButtonCrafting?.gameObject.SetActive(false);
@@ -308,7 +328,7 @@ public class UI_Manager : MonoBehaviour
         #endregion
 
         #region Quest
-        if (uiQuestGameObject != null && uiQuestGameObject.gameObject.activeInHierarchy)
+        if (ui_QuestGameObject != null && ui_QuestGameObject.gameObject.activeInHierarchy)
         {
             //Quest UI is open.
             openButtonQG?.gameObject.SetActive(false);
@@ -327,6 +347,6 @@ public class UI_Manager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        rewardInventory.Clear();
+        //rewardInventory.Clear();
     }
 }

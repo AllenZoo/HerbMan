@@ -176,6 +176,8 @@ public class Inventory
 {
     public InventorySlot[] slots = new InventorySlot[24];
 
+    private int numSlots;
+
     public void Clear()
     {
         for (int i = 0; i < slots.Length; i++)
@@ -183,6 +185,26 @@ public class Inventory
             slots[i].RemoveItem();
         }
     }
+
+    public void SetSlots(int amt)
+    {
+        numSlots = amt;
+        ReInitialize();
+    }
+
+    public void ReInitialize()
+    {
+        InventorySlot[] oldVals = (InventorySlot[]) slots.Clone();
+
+        slots = new InventorySlot[numSlots];
+        for (int i = 0; i < slots.Length - 1; i++){
+            slots[i] = oldVals[i];
+        }
+        slots[numSlots - 1] = new InventorySlot();
+        slots[numSlots - 1].item.id = -1;
+
+    }
+
 }
 
 public delegate void SlotUpdated(InventorySlot _slot);
