@@ -14,6 +14,7 @@ public class GM_StateManager : MonoBehaviour
     public bool inCrafting;
     public bool inQuest;
     public bool inDialogue;
+    public bool inShop;
 
     public enum GameState
     {
@@ -21,6 +22,7 @@ public class GM_StateManager : MonoBehaviour
         inDialogue,
         inInventory_inCrafting,
         inQuest,
+        inShop,
     }
     private void Awake()
     {
@@ -49,6 +51,7 @@ public class GM_StateManager : MonoBehaviour
             case "Crafting": inCrafting = isOpen; break;
             case "Quest": inQuest = isOpen; break;
             case "Dialogue": inDialogue = isOpen; break;
+            case "Shop": inShop = isOpen; break;
         }
         RefreshFunctions();
     }

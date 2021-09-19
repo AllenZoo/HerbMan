@@ -9,6 +9,7 @@ public class Enemy_Stipp_Movement : MonoBehaviour
 {
     [SerializeField] public float escapeRange = 10;
     [SerializeField] public float aggroRange = 5;
+    [SerializeField] public float knockBackTime = 1;
 
     [SerializeField] private bool inMenu = false;
 
@@ -132,7 +133,7 @@ public class Enemy_Stipp_Movement : MonoBehaviour
     public void Damaged()
     {
         KnockBack();
-        StartCoroutine(DamagedTimer(0, 2));
+        StartCoroutine(DamagedTimer(0, knockBackTime));
     }
     public void Damaged(float transitionTime, float stunTime)
     {

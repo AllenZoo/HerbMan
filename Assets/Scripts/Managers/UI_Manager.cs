@@ -23,8 +23,8 @@ public class UI_Manager : MonoBehaviour
     private Button closeButtonCrafting;
     private Button openButtonQG;
     private Button closeButtonQG;
-    private Button openShop;
-    private Button closeShop;
+    private Button openShopButton;
+    private Button closeShopButton;
 
     private Quest curQuest;
     private Sprite questPortrait;
@@ -59,6 +59,13 @@ public class UI_Manager : MonoBehaviour
             Invoke("CloseStatsWindow", 1 / 100);
         }
 
+        if (ui_shopGameObject)
+        {
+            Invoke("CloseShopWindow", 1 / 100);
+        }
+
+        //Invoke("UpdateButtonStatus", 2);
+        
         UpdateButtonStatus();
     }
 
@@ -99,6 +106,8 @@ public class UI_Manager : MonoBehaviour
                     break;
                 case "Quest": openButtonQG = button; openButtonQG.onClick.AddListener(OpenQuestWindow);
                     break;
+                case "Shop": openShopButton = button; openShopButton.onClick.AddListener(OpenShopWindow);
+                    break;
             }
         }
         else
@@ -114,6 +123,9 @@ public class UI_Manager : MonoBehaviour
                 case "Quest":
                     closeButtonQG = button; closeButtonQG.onClick.AddListener(CloseQuestWindow);
                     break;
+                case "Shop":
+                    closeShopButton = button; closeShopButton.onClick.AddListener(CloseShopWindow);
+                    break;
             }
         }
     }
@@ -121,7 +133,7 @@ public class UI_Manager : MonoBehaviour
 
     #region UI
 
-    #region Inventory
+        #region Inventory
     public void OpenInventoryUI()
     {
         ui_InventoryGameObject.SetActive(true);
@@ -134,7 +146,7 @@ public class UI_Manager : MonoBehaviour
     }
     #endregion
 
-    #region Equipment
+        #region Equipment
     public void OpenEquipmentUI()
     {
         ui_EquipmentGameObject?.SetActive(true);
@@ -147,7 +159,7 @@ public class UI_Manager : MonoBehaviour
     }
     #endregion
 
-    #region Crafting
+        #region Crafting
     public void OpenCraftingUI()
     {
         ui_CraftingGameObject?.SetActive(true);
@@ -160,7 +172,7 @@ public class UI_Manager : MonoBehaviour
     }
     #endregion
 
-    #region Quest
+        #region Quest
     public GameObject GetQuestUI()
     {
         return ui_QuestGameObject;
@@ -178,7 +190,7 @@ public class UI_Manager : MonoBehaviour
     }
     #endregion
 
-    #region Shop
+        #region Shop
     public void OpenShopUI()
     {
         ui_shopGameObject.SetActive(true);
@@ -191,7 +203,7 @@ public class UI_Manager : MonoBehaviour
     }
     #endregion
 
-    #region Stats
+        #region Stats
     public void OpenStatsUI()
     {
         ui_StatsGameObject?.SetActive(true);
@@ -207,7 +219,7 @@ public class UI_Manager : MonoBehaviour
 
     #region Actions
 
-    #region Inventory
+        #region Inventory
     public void OpenInventoryWindow()
     {
         OpenInventoryUI();
@@ -221,9 +233,9 @@ public class UI_Manager : MonoBehaviour
         CloseCraftingUI();
         CloseStatsUI();
     }
-    #endregion
+        #endregion
 
-    #region Crafting
+        #region Crafting
     public void OpenCraftingWindow()
     {
         OpenCraftingUI();
@@ -233,9 +245,9 @@ public class UI_Manager : MonoBehaviour
     {
         CloseCraftingUI();
     }
-    #endregion
+        #endregion
 
-    #region Equipment
+        #region Equipment
     public void OpenEquipmentWindow()
     {
         OpenEquipmentUI();
@@ -244,9 +256,9 @@ public class UI_Manager : MonoBehaviour
     {
         CloseEquipmentUI();
     }
-    #endregion
+        #endregion
 
-    #region Quest
+        #region Quest
     public void OpenQuestWindow()
     {
         OpenQuestUI();
@@ -263,9 +275,9 @@ public class UI_Manager : MonoBehaviour
 
         gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", false);
     }
-    #endregion
+        #endregion
 
-    #region Stats
+        #region Stats
     public void OpenStatsWindow()
     {
         OpenStatsUI();
@@ -274,7 +286,18 @@ public class UI_Manager : MonoBehaviour
     {
         CloseStatsUI();
     }
-    #endregion
+        #endregion
+
+        #region Shop
+    public void OpenShopWindow()
+    {
+        OpenShopUI();
+    }
+    public void CloseShopWindow()
+    {
+        CloseShopUI();
+    }
+        #endregion
 
     #endregion
 
@@ -342,6 +365,24 @@ public class UI_Manager : MonoBehaviour
             closeButtonQG?.gameObject.SetActive(false);
             gameManager.GetComponent<GM_StateManager>().SetStatus("Quest", false);
         }
+        #endregion
+
+        #region Shop
+        if(ui_shopGameObject != null && ui_shopGameObject.gameObject.activeInHierarchy)
+        {
+            //Shop UI is open
+            openShopButton?.gameObject.SetActive(false);
+            closeShopButton?.gameObject.SetActive(true);
+            gameManager.GetComponent<GM_StateManager>().SetStatus("Shop", true);
+        }
+        else
+        {
+            //Shop UI is closed
+            openShopButton?.gameObject.SetActive(true);
+            closeShopButton?.gameObject.SetActive(false);
+            gameManager.GetComponent<GM_StateManager>().SetStatus("Shop", false);
+        }
+
         #endregion
     }
 
