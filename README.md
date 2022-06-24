@@ -6,7 +6,7 @@ Topdown Gathering Game made with the Unity Engine 2D (C#).
 
 ## Level Progression
 ![Alt text](HerbManPreview/PreviewPic3.PNG?raw=true "Preview Picture 3")
-- Top right level bar displays percentage to next level.
+- Top left level bar displays percentage to next level.
 
 ## Inventory & Equipment
 ![Alt text](HerbManPreview/PreviewPic2.PNG?raw=true "Preview Picture 2")
