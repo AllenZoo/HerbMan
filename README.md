@@ -1,6 +1,9 @@
 # HerbMan
 Topdown Gathering Game made with the Unity Engine 2D (C#). 
 
+## Packages used
+-2d extras master
+
 ## Game Preview
 ![Alt text](HerbManPreview/PreviewPic1.PNG?raw=true "Preview Picture 1")
 
